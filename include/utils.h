@@ -3,6 +3,12 @@
 
 #include <cstdio>
 
+// Definimos o callback para impressão de erros da GLFW no terminal
+void ErrorCallback(int error, const char* description)
+{
+    fprintf(stderr, "ERROR: GLFW: %s\n", description);
+}
+
 static GLenum glCheckError_(const char *file, int line)
 {
     GLenum errorCode;
