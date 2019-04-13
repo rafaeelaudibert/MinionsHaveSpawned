@@ -59,7 +59,7 @@
 			<Add option="lib\libglfw3.a -lgdi32 -lopengl32" />
 			<Add directory="lib" />
 		</Linker>
-		<Unit filename="Laboratorio_2.depend" />
+		<Unit filename="TowerDefender.depend" />
 		<Unit filename="Makefile" />
 		<Unit filename="Makefile.macOS" />
 		<Unit filename="README.md" />
