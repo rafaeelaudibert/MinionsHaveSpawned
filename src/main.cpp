@@ -13,10 +13,10 @@
 #include "utils.h"
 
 // Activate NVIDIA off-board GPU, only if needed
-extern "C"
-{
-    _declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-}
+// extern "C"
+// {
+//    _declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+// }
 
 // GLFW function declarations
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
@@ -122,6 +122,7 @@ int main(int argc, char *argv[])
         // Calculate delta time
         GLfloat currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
+        printf("FPS: %.6f", 1.0 / deltaTime);
         lastFrame = currentFrame;
         glfwPollEvents();
 
