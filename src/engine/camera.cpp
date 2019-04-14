@@ -1,5 +1,6 @@
 #include "engine\camera.hpp"
 #include "engine\matrices.hpp"
+#include "utils\helpers.hpp"
 
 glm::mat4 Camera::get_view_matrix()
 {
@@ -33,10 +34,7 @@ void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean cons
     // Make sure that when pitch is out of bounds, screen doesn't get flipped
     if (constrain_pitch)
     {
-        if (pitch > 89.0f)
-            pitch = 89.0f;
-        if (pitch < -89.0f)
-            pitch = -89.0f;
+        pitch = utils::clamping(pitch, 89.0f, -89.0f);
     }
 
     // Update Front, Right and Up Vectors using the updated Euler angles
@@ -45,13 +43,7 @@ void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean cons
 
 void Camera::process_mouse_scroll(float yoffset)
 {
-    if (zoom >= 1.0f && zoom <= 45.0f)
-        zoom -= yoffset;
-
-    if (zoom <= 1.0f)
-        zoom = 1.0f;
-    if (zoom >= 45.0f)
-        zoom = 45.0f;
+    zoom = utils::clamping(zoom - yoffset, 45.0f, 1.0f);
 }
 
 void Camera::update_camera_vectors()
