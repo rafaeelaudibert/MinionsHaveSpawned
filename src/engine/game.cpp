@@ -19,7 +19,7 @@ void Game::init()
     // Initialize shaders
     ResourceManager::load_shader("../../src/cubes.vs", "../../src/cubes.fs", nullptr, "cubes");
 
-    GLfloat vertex[] =
+    GLfloat vertexes[] =
     {
         //    X      Y     Z     W
         -0.5f, 0.5f, 0.5f, 1.0f,
@@ -40,13 +40,13 @@ void Game::init()
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexes), vertexes, GL_STATIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
 
-    GLuint indices[] =
+    GLuint indexes[] =
     {
         // We define de vertex indexes which define the cube faces using
         // 12 triangles which will be drawn with the GL_TRIANGLES renderization technique
@@ -67,10 +67,10 @@ void Game::init()
     // We create an OpenGL bugger to store the indexes above
     // We "turn on" the buffer. Notice that we use GL_ELEMENT_ARRAY_BUFFER now.
     // We allocate memory to the buffer, and copy the data to it.
-    GLuint indices_id;
-    glGenBuffers(1, &indices_id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    GLuint indexes_id;
+    glGenBuffers(1, &indexes_id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexes_id);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
 
     objects.emplace_back(GameObject("cubes", VAO));
     ResourceManager::get_shader("cubes").use();
