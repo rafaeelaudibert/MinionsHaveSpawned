@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "engine/camera.hpp"
+
 // Represents the current state of the game
 enum GameState
 {
@@ -23,6 +25,9 @@ public:
     GLboolean keys[1024];
     GLuint width, height;
     float screen_ratio;
+
+    // Objects
+    Camera camera;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);
