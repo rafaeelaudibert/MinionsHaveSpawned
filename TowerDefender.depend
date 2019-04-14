@@ -906,14 +906,18 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1555204694 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1555213393 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/game.hpp"
 	"engine/matrices.hpp"
+	"engine/resource_manager.hpp"
+	"model/base.hpp"
 
-1555204666 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1555213350 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
-	"engine/camera.hpp"
+	<map>
+	"engine\camera.hpp"
+	"model\base.hpp"
 
 1554904293 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glfw\glfw3.h
 	<stddef.h>
@@ -987,29 +991,23 @@
 	<sstream>
 	<fstream>
 
-1555204760 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
-	<cmath>
-	<cstdio>
-	<cstdlib>
-	<map>
-	<string>
-	<limits>
-	<fstream>
-	<sstream>
+1555211994 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	"engine\resource_manager.hpp"
 	"engine\matrices.hpp"
 	"engine\camera.hpp"
 	"engine\game.hpp"
+	"utils\helpers.hpp"
 	"utils.h"
 
 1555148601 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils.h
 	<cstdio>
 
-1555205963 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
+1555210553 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
 	"engine\camera.hpp"
 	"engine\matrices.hpp"
+	"utils\helpers.hpp"
 
 1555194936 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\camera.h
 	<glad/glad.h>
@@ -1043,4 +1041,19 @@
 
 1555206620 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\matrices.cpp
 	"engine\matrices.hpp"
+
+1555207590 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\utils\helpers.cpp
+	<cstdio>
+	<algorithm>
+	"utils\helpers.hpp"
+
+1555207229 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.h
+	<glad/glad.h>
+
+1555207229 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.hpp
+	<glad/glad.h>
+
+1555213410 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
+	<string>
+	<glad/glad.h>
 

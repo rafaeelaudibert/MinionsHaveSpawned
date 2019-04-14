@@ -3,8 +3,10 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <map>
 
-#include "engine/camera.hpp"
+#include "engine\camera.hpp"
+#include "model\base.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -21,13 +23,16 @@ class Game
 {
 public:
     // Variables
-    GameState state;
+    GameState state = GAME_ACTIVE;
     GLboolean keys[1024];
     GLuint width, height;
     float screen_ratio;
 
-    // Objects
+    // Camera
     Camera camera;
+
+    // Objects map
+    std::vector<GameObject> objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);
