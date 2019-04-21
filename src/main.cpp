@@ -122,7 +122,6 @@ int main(int argc, char *argv[])
         // Calculate delta time
         GLfloat currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
-        printf("FPS: %.6f", 1.0 / deltaTime);
         lastFrame = currentFrame;
         glfwPollEvents();
 

@@ -2,9 +2,10 @@
 #include "engine/matrices.hpp"
 #include "engine/resource_manager.hpp"
 #include "model/base.hpp"
+#include "utils/helpers.hpp"
 
 Game::Game(GLuint width, GLuint height)
-    : state(GAME_ACTIVE), keys(), width(width), height(height), screen_ratio((float)width / (float)height)
+    : state(GAME_ACTIVE), width(width), height(height), screen_ratio((float)width / (float)height)
 {
 }
 
@@ -78,19 +79,26 @@ void Game::init()
 
 void Game::update(GLfloat dt)
 {
+    y_speed = utils::clamping(y_speed + GRAVITY * dt, 100.0f, MAX_SPEED);
+
+    camera.position.y = utils::clamping(camera.position.y + y_speed * dt, 100.0f, 0.0f);
 }
 
 void Game::process_input(GLfloat dt)
 {
     // Movement
-    if (keys[GLFW_KEY_W] == true)
+    if (keys[GLFW_KEY_W] == GL_TRUE)
         camera.process_keyboard(FORWARD, dt);
-    if (keys[GLFW_KEY_S] == true)
+    if (keys[GLFW_KEY_S] == GL_TRUE)
         camera.process_keyboard(BACKWARD, dt);
-    if (keys[GLFW_KEY_A] == true)
+    if (keys[GLFW_KEY_A] == GL_TRUE)
         camera.process_keyboard(LEFT, dt);
-    if (keys[GLFW_KEY_D] == true)
+    if (keys[GLFW_KEY_D] == GL_TRUE)
         camera.process_keyboard(RIGHT, dt);
+
+    // Jump
+    if (keys[GLFW_KEY_SPACE] == GL_TRUE && camera.position.y <= 0.0f)
+        y_speed = JUMP_SPEED;
 }
 
 void Game::render()

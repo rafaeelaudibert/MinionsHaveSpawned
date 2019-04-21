@@ -10,6 +10,8 @@ glm::mat4 Camera::get_view_matrix()
 void Camera::process_keyboard(CameraMovement direction, float delta_time)
 {
     float velocity = movement_speed * delta_time;
+    float old_position_y = position.y;
+
     if (direction == FORWARD)
         position += front * velocity;
     if (direction == BACKWARD)
@@ -19,8 +21,8 @@ void Camera::process_keyboard(CameraMovement direction, float delta_time)
     if (direction == RIGHT)
         position += right * velocity;
 
-    // Make sure the user stays at the ground level
-    position.y = 0.0f; // <-- this one-liner keeps the user at the ground level (xz plane)
+    // Prevent jumps abusing from the front * velocity multiplication
+    position.y = old_position_y;
 }
 
 void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean constrain_pitch)
