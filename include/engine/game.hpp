@@ -22,11 +22,17 @@ enum GameState
 class Game
 {
 public:
-    // Variables
+    // GameState variables
     GameState state = GAME_ACTIVE;
-    GLboolean keys[1024];
+    GLboolean keys[1024] = {false};
     GLuint width, height;
     float screen_ratio;
+
+    // Mechanic variables
+    const GLfloat GRAVITY = -9.8f;
+    const GLfloat MAX_SPEED = -53.0f; // Maximum falling speed due to air resistance]
+    const GLfloat JUMP_SPEED = 2.5f;
+    GLfloat y_speed = 0;
 
     // Camera
     Camera camera;
