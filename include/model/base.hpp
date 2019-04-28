@@ -8,18 +8,30 @@
 class GameObject
 {
 public:
+    GameObject(std::string name) : name(name) { };
+
+    GameObject(std::string name, glm::vec4 position) :
+        name(name), position(position) { };
+
+    GameObject(std::string name, glm::vec4 position, glm::vec4 orientation, float angle) :
+        name(name), position(position), orientation(orientation), angle(angle) { };
+
+    virtual void render(glm::mat4 view, glm::mat4 projection) = 0;
+
+private:
+    virtual void build() = 0;
+
+protected:
     std::string name;
     GLuint VAO;
     Shader shader;
 
-    GameObject(std::string name) : name(name) { };
-
-    virtual void render(glm::mat4 view, glm::mat4 projection, int provisory) = 0;
-
-protected:
     GLenum drawMode;
     GLsizei indexesLength;
     GLvoid *indexesOffset;
+    glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    glm::vec4 orientation = glm::vec4(1.0f, 0.3f, 0.5f, 0.0f);
+    float angle = 0;
 };
 
 #endif // GAME_OBJECT_H_

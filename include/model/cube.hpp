@@ -3,9 +3,26 @@
 class Cube : public GameObject
 {
 public:
-    Cube(std::string name) : GameObject(name) {
+    Cube(std::string name) : GameObject(name)
+    {
+        this->build();
+    };
+
+    Cube(std::string name, glm::vec4 position) : GameObject(name, position)
+    {
+        this->build();
+    };
+
+    Cube(std::string name, glm::vec4 position, glm::vec4 orientation, float angle) :
+            GameObject(name, position, orientation, angle)
+    {
+        this->build();
+    };
+
+    void build()
+    {
         // Initialize shaders
-        this->shader = ResourceManager::load_shader("../../src/cubes.vs", "../../src/cubes.fs", nullptr, "cube");
+        this->shader = ResourceManager::load_shader("../../src/cubes.vs", "../../src/cubes.fs", nullptr, this->name);
 
         // Vertex definition
         GLfloat vertexes[] =
@@ -68,9 +85,10 @@ public:
         this->indexesOffset = 0;
 
         return;
-    };
+    }
 
-    void render(glm::mat4 view, glm::mat4 projection, int provisory) {
+    void render(glm::mat4 view, glm::mat4 projection)
+    {
 
         // Set to use this shader
         this->shader.use();
@@ -82,26 +100,10 @@ public:
         // Bind the VAO
         glBindVertexArray(this->VAO);
 
-        // PROVISIONAL
-        // world space positions of our cubes
-        glm::vec3 cubePositions[] =
-        {
-            glm::vec3(0.0f, 0.0f, 0.0f),
-            glm::vec3(2.0f, 5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3(2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f, 3.0f, -7.5f),
-            glm::vec3(1.3f, -2.0f, -2.5f),
-            glm::vec3(1.5f, 2.0f, -2.5f),
-            glm::vec3(1.5f, 0.2f, -1.5f),
-            glm::vec3(-1.3f, 1.0f, -1.5f)
-        };
-
         // Calculate the model matrix
         glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first
-        model *= matrix::translate_matrix(cubePositions[provisory]);
-        model *= matrix::rotate_matrix(provisory * glfwGetTime(), glm::vec4(1.0f, 0.3f, 0.5f, 0.0f));
+        model *= matrix::translate_matrix(this->position);
+        model *= matrix::rotate_matrix(this->angle, this->orientation);
         this->shader.set_matrix("model", model);
 
         // Draw the element
