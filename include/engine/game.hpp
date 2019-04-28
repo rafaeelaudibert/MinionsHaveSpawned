@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <string>
 #include <map>
 
 #include "engine\camera.hpp"
@@ -38,7 +39,7 @@ public:
     Camera camera;
 
     // Objects map
-    std::vector<GameObject> objects;
+    std::map<std::string, GameObject> objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);

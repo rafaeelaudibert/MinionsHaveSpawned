@@ -73,7 +73,7 @@ void Game::init()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexes_id);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
 
-    objects.emplace_back(GameObject("cubes", VAO));
+    objects.insert(std::map<std::string, GameObject>::value_type ("cubes", GameObject("cubes", VAO)));
     ResourceManager::get_shader("cubes").use();
 }
 
@@ -130,7 +130,7 @@ void Game::render()
     ResourceManager::get_shader("cubes").set_matrix("projection", projection);
 
     // render boxes
-    glBindVertexArray(objects.at(0).VAO);
+    glBindVertexArray(objects.find("cubes")->second.VAO);
     for (unsigned int i = 0; i < 10; i++)
     {
         // calculate the model matrix for each object and pass it to shader before drawing
