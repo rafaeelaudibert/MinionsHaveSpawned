@@ -330,6 +330,7 @@
 		<Unit filename="include/glm/vec4.hpp" />
 		<Unit filename="include/glm/vector_relational.hpp" />
 		<Unit filename="include/model/base.hpp" />
+		<Unit filename="include/model/cube.hpp" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="include/utils/helpers.hpp" />
 		<Unit filename="lib-linux/libglfw3.a" />
