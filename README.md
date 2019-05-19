@@ -47,7 +47,7 @@ Your application should include implementation of the following concepts of Comp
 - [ ] Control of virtual cameras.
     - [ ] At the very least your application should implement:
         - [ ] a **look-at camera**, and;
-        - [ ] a **free camera**.
+        - [x] a **free camera**.
 
 - [ ] At least one virtual object must be copied with two or more **instances**, that is, using two or more model matrix applied to the same set of vertices.
 
@@ -71,8 +71,8 @@ Your application should include implementation of the following concepts of Comp
 - [ ] **Bézier** curves.
     - [ ] **At least one** virtual object of your application must have its movement defined through a cubic Bezier curve. The object must move smoothly along space on a curved path (not straight).
 
-- [ ] **Motion animation based on time**.
-    - [ ] **All object movements** (including camera) must be computed based on time (ie, movements must always occur at the same speed regardless of the CPU speed where the program is running).
+- [x] **Motion animation based on time**.
+    - [x] **All object movements** (including camera) must be computed based on time (ie, movements must always occur at the same speed regardless of the CPU speed where the program is running).
 
 
 ### Extras
