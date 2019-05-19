@@ -3,6 +3,7 @@
 #include "engine/resource_manager.hpp"
 #include "model/base.hpp"
 #include "model/cube.hpp"
+#include "model/bunny.hpp"
 #include "utils/helpers.hpp"
 
 Game::Game(GLuint width, GLuint height)
@@ -21,7 +22,7 @@ void Game::init()
     // World space positions of our cubes
     glm::vec3 cubePositions[] =
     {
-        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(1.0f, 1.0f, 1.0f),
         glm::vec3(2.0f, 5.0f, -15.0f),
         glm::vec3(-1.5f, -2.2f, -2.5f),
         glm::vec3(-3.8f, -2.0f, -12.3f),
@@ -44,6 +45,10 @@ void Game::init()
         objects.insert(std::map<std::string, GameObject*>::value_type ("cube" + i, cube));
         printf("[GAME] Cube %d created\n", i);
     }
+
+    Bunny* bunny = new Bunny("bunny", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("bunny", bunny));
+    printf("[GAME] Bunny created\n");
 }
 
 void Game::new_frame(){

@@ -20,11 +20,13 @@ public:
 
     virtual void render(glm::mat4 view, glm::mat4 projection) = 0;
 
+
+    std::string name;
+
 private:
     virtual void build() = 0;
 
 protected:
-    std::string name;
     GLuint VAO;
     Shader shader;
 
