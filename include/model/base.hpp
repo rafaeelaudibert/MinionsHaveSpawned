@@ -3,7 +3,9 @@
 
 #include <string>
 #include <glad/glad.h>
+#include <tiny_obj_loader.h>
 #include "engine/shader.hpp"
+#include "model/obj_model.hpp"
 
 class GameObject
 {
