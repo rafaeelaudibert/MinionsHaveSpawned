@@ -22,7 +22,7 @@ public:
     void build()
     {
         // Initialize shaders
-        this->shader = ResourceManager::load_shader("../../src/cubes.vs", "../../src/cubes.fs", nullptr, this->name);
+        this->shader = ResourceManager::load_shader("../../src/shaders/cubes.vs", "../../src/shaders/cubes.fs", nullptr, this->name);
 
         // Vertex definition
         GLfloat vertexes[] =
