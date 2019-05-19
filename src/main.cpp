@@ -100,6 +100,9 @@ int main(int argc, char *argv[])
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     // Imprimimos no terminal informações sobre a GPU do sistema
     utils::print_gpu_info();
