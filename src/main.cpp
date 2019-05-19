@@ -24,18 +24,9 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
-// The Width of the screen
-const GLuint SCREEN_WIDTH = 800;
-// The height of the screen
-const GLuint SCREEN_HEIGHT = 600;
-
-// DeltaTime variables
-GLfloat deltaTime = 0.0f;
-GLfloat lastFrame = 0.0f;
-
-float lastX = SCREEN_WIDTH / 2.0f;
-float lastY = SCREEN_HEIGHT / 2.0f;
-bool firstMouse = true;
+// Global Constants
+const GLuint SCREEN_WIDTH = 800; // width of the screen
+const GLuint SCREEN_HEIGHT = 600; // height of the screen
 
 Game TowerDefender = Game(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -65,10 +56,9 @@ int main(int argc, char *argv[])
     // funções modernas de OpenGL.
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Criamos uma janela do sistema operacional, com 800 colunas e 800 linhas
-    // de pixels, e com título "INF01047 ...".
+    // Criamos uma janela do sistema operacional, com o tamanho pré-definido acima
     GLFWwindow *window;
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "INF01047 - 00287695 - Rafael Baldasso Audibert", NULL, NULL);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Tower Defender", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -93,7 +83,7 @@ int main(int argc, char *argv[])
     // redimensionada, por consequência alterando o tamanho do "framebuffer"
     // (região de memória onde são armazenados os pixels da imagem).
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetWindowSize(window, SCREEN_WIDTH, SCREEN_HEIGHT); // Forçamos a chamada do callback acima, para definir g_ScreenRatio.
+    glfwSetWindowSize(window, SCREEN_WIDTH, SCREEN_HEIGHT); // Forçamos a chamada do callback acima, para definir os valores de resolução do jogo.
 
     // Indicamos que as chamadas OpenGL deverão renderizar nesta janela
     glfwMakeContextCurrent(window);
@@ -117,19 +107,20 @@ int main(int argc, char *argv[])
     // Initialize game
     TowerDefender.init();
 
+    // Game main loop
     while (!glfwWindowShouldClose(window))
     {
-        // Calculate delta time
-        GLfloat currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        // Fetch window events
         glfwPollEvents();
 
+        // Inform we are in a new frame
+        TowerDefender.new_frame();
+
         // Manage user input
-        TowerDefender.process_input(deltaTime);
+        TowerDefender.process_input();
 
         // Update Game state
-        TowerDefender.update(deltaTime);
+        TowerDefender.update();
 
         // Render
         TowerDefender.render();
@@ -137,7 +128,7 @@ int main(int argc, char *argv[])
         glfwSwapBuffers(window);
     }
 
-    // Delete all resources as loaded using the resource manager
+    // Delete all resources loaded using the resource manager
     ResourceManager::clear();
 
     glfwTerminate();
@@ -186,6 +177,10 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 // -------------------------------------------------------
 void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
+    static float lastX = SCREEN_WIDTH / 2.0f;
+    static float lastY = SCREEN_HEIGHT / 2.0f;
+    static bool firstMouse = true;
+
     if (firstMouse)
     {
         lastX = xpos;

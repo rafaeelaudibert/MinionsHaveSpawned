@@ -35,6 +35,10 @@ public:
     const GLfloat JUMP_SPEED = 2.5f;
     GLfloat y_speed = 0;
 
+    // Time variables
+    GLfloat lastFrame = 0.0f;
+    GLfloat deltaTime = 0.0f;
+
     // Camera
     Camera camera;
 
@@ -49,8 +53,9 @@ public:
     void init();
 
     // GameLoop helpers
-    void process_input(GLfloat dt);
-    void update(GLfloat dt);
+    void new_frame();
+    void process_input();
+    void update();
     void render();
 };
 

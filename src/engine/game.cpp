@@ -33,8 +33,8 @@ void Game::init()
         glm::vec3(-1.3f, 1.0f, -1.5f)
     };
 
+    /* GAME OBJECTS CREATION */
     for (int i = 0; i < 10; i++){
-        /* GAME OBJECTS CREATION */
         Cube* cube = new Cube("cube", glm::vec4(cubePositions[i], 1.0f), glm::vec4(1.0f, 0.4f, 2.14f, 0.0f), i * 22.5f);
 
         /* GAME OBJECTS INSERTION TO THE GAME OBJECTS MAP */
@@ -46,24 +46,30 @@ void Game::init()
     }
 }
 
-void Game::update(GLfloat dt)
-{
-    y_speed = utils::clamping(y_speed + GRAVITY * dt, 100.0f, MAX_SPEED);
-
-    camera.position.y = utils::clamping(camera.position.y + y_speed * dt, 100.0f, 0.0f);
+void Game::new_frame(){
+        GLfloat currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
 }
 
-void Game::process_input(GLfloat dt)
+void Game::update()
+{
+    y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
+
+    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, 100.0f, 0.0f);
+}
+
+void Game::process_input()
 {
     // Movement
     if (keys[GLFW_KEY_W] == GL_TRUE)
-        camera.process_keyboard(FORWARD, dt);
+        camera.process_keyboard(FORWARD, this->deltaTime);
     if (keys[GLFW_KEY_S] == GL_TRUE)
-        camera.process_keyboard(BACKWARD, dt);
+        camera.process_keyboard(BACKWARD, this->deltaTime);
     if (keys[GLFW_KEY_A] == GL_TRUE)
-        camera.process_keyboard(LEFT, dt);
+        camera.process_keyboard(LEFT, this->deltaTime);
     if (keys[GLFW_KEY_D] == GL_TRUE)
-        camera.process_keyboard(RIGHT, dt);
+        camera.process_keyboard(RIGHT, this->deltaTime);
 
     // Jump
     if (keys[GLFW_KEY_SPACE] == GL_TRUE && camera.position.y <= 0.0f)
