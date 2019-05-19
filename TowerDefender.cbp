@@ -330,7 +330,9 @@
 		<Unit filename="include/glm/vec4.hpp" />
 		<Unit filename="include/glm/vector_relational.hpp" />
 		<Unit filename="include/model/base.hpp" />
+		<Unit filename="include/model/bunny.hpp" />
 		<Unit filename="include/model/cube.hpp" />
+		<Unit filename="include/model/obj_model.hpp" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="include/utils/helpers.hpp" />
 		<Unit filename="lib-linux/libglfw3.a" />
@@ -338,8 +340,6 @@
 		<Unit filename="lib/libglfw3.a" />
 		<Unit filename="lib/libglfw3dll.a" />
 		<Unit filename="obj/Debug/src/glad.o" />
-		<Unit filename="src/cubes.fs" />
-		<Unit filename="src/cubes.vs" />
 		<Unit filename="src/engine/camera.cpp" />
 		<Unit filename="src/engine/game.cpp" />
 		<Unit filename="src/engine/matrices.cpp" />
@@ -347,6 +347,14 @@
 		<Unit filename="src/engine/shader.cpp" />
 		<Unit filename="src/engine/texture.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/objects/bunny.obj" />
+		<Unit filename="src/objects/plane.obj" />
+		<Unit filename="src/objects/sphere.obj" />
+		<Unit filename="src/shaders/bunny.fs" />
+		<Unit filename="src/shaders/bunny.vs" />
+		<Unit filename="src/shaders/cubes.fs" />
+		<Unit filename="src/shaders/cubes.vs" />
+		<Unit filename="src/tiny_obj_loader.cpp" />
 		<Unit filename="src/utils/helpers.cpp" />
 		<Extensions>
 			<code_completion />
