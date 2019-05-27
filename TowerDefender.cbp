@@ -333,6 +333,7 @@
 		<Unit filename="include/model/bunny.hpp" />
 		<Unit filename="include/model/cube.hpp" />
 		<Unit filename="include/model/obj_model.hpp" />
+		<Unit filename="include/stb_image.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="include/utils/helpers.hpp" />
 		<Unit filename="lib-linux/libglfw3.a" />
@@ -354,6 +355,7 @@
 		<Unit filename="src/shaders/bunny.vs" />
 		<Unit filename="src/shaders/cubes.fs" />
 		<Unit filename="src/shaders/cubes.vs" />
+		<Unit filename="src/stb_image.cpp" />
 		<Unit filename="src/tiny_obj_loader.cpp" />
 		<Unit filename="src/utils/helpers.cpp" />
 		<Extensions>
