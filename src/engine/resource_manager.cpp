@@ -24,9 +24,9 @@ Shader ResourceManager::get_shader(std::string name)
 
 
 
-Texture2D ResourceManager::load_texture(const GLchar *file, std::string name)
+Texture2D ResourceManager::load_texture(const GLchar *file, GLboolean alpha, std::string name)
 {
-    textures[name] = load_texture_from_file(file);
+    textures[name] = load_texture_from_file(file, alpha);
     return textures[name];
 }
 
@@ -86,21 +86,26 @@ Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const G
     return shader;
 }
 
-Texture2D ResourceManager::load_texture_from_file(const GLchar *filename)
+Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLboolean alpha)
 {
     // Create Texture object
     Texture2D texture;
 
     printf("Loading image \"%s\"... ", filename);
 
+    if (alpha) {
+        texture.internal_format = GL_RGBA;
+        texture.image_format = GL_RGBA;
+    }
+
     // Primeiro fazemos a leitura da imagem do disco
     stbi_set_flip_vertically_on_load(true);
     int width;
     int height;
     int channels;
-    unsigned char *data = stbi_load(filename, &width, &height, &channels, 3);
+    unsigned char *image = stbi_load(filename, &width, &height, &channels, 3);
 
-    if ( data == NULL )
+    if ( image == NULL )
     {
         fprintf(stderr, "ERROR: Cannot open image file \"%s\".\n", filename);
         std::exit(EXIT_FAILURE);
@@ -109,10 +114,10 @@ Texture2D ResourceManager::load_texture_from_file(const GLchar *filename)
     printf("OK (%dx%d).\n", width, height);
 
     // Now generate texture
-    texture.generate(width, height, textures.size(), data);
+    texture.generate(width, height, image);
 
-    // And finally free image data
-    stbi_image_free(data);
+    // And finally free image
+    stbi_image_free(image);
 
     return texture;
 }
@@ -125,5 +130,5 @@ void ResourceManager::clear()
 
     // (Properly) delete all textures
     for (auto iter : textures)
-        glDeleteTextures(1, &iter.second.texture_ID);
+        glDeleteTextures(1, &iter.second.ID);
 }
