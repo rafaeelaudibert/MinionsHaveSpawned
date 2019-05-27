@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 #include <tiny_obj_loader.h>
 #include "engine/shader.hpp"
+#include "engine/texture.hpp"
 #include "model/obj_model.hpp"
 
 class GameObject
@@ -29,6 +30,7 @@ private:
 protected:
     GLuint VAO;
     Shader shader;
+    Texture2D texture;
 
     GLenum drawMode;
     GLsizei indexesLength;

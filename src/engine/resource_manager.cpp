@@ -4,9 +4,8 @@
 #include <sstream>
 #include <fstream>
 
-/* LIBRARY FOR TEXTURES. CHECK WITH GASTAL WHICH ONE WE WILL USE TO LOAD TEXTURE FROM FILES
- * #include <SOIL.h>
- */
+// Texture library
+#include <stb_image.h>
 
 // Instantiate static variables
 std::map<std::string, Texture2D> ResourceManager::textures;
@@ -23,29 +22,17 @@ Shader ResourceManager::get_shader(std::string name)
     return shaders[name];
 }
 
-/*
- *
- * Texture2D ResourceManager::load_texture(const GLchar *file, GLboolean alpha, std::string name)
- * {
- *      textures[name] = load_texture_from_file(file, alpha);
- *      return textures[name];
- *  }
- *
- * Texture2D ResourceManager::get_texture(std::string name)
- * {
- *      return textures[name];
- * }
- */
 
-void ResourceManager::clear()
+
+Texture2D ResourceManager::load_texture(const GLchar *file, std::string name)
 {
-    // (Properly) delete all shaders
-    for (auto iter : shaders)
-        glDeleteProgram(iter.second.ID);
+    textures[name] = load_texture_from_file(file);
+    return textures[name];
+}
 
-    // (Properly) delete all textures
-    for (auto iter : textures)
-        glDeleteTextures(1, &iter.second.ID);
+Texture2D ResourceManager::get_texture(std::string name)
+{
+    return textures[name];
 }
 
 Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)
@@ -99,26 +86,44 @@ Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const G
     return shader;
 }
 
-/*
-Texture2D ResourceManager::load_texture_from_file(const GLchar *file, GLboolean alpha)
+Texture2D ResourceManager::load_texture_from_file(const GLchar *filename)
 {
     // Create Texture object
     Texture2D texture;
 
-    if (alpha)
+    printf("Loading image \"%s\"... ", filename);
+
+    // Primeiro fazemos a leitura da imagem do disco
+    stbi_set_flip_vertically_on_load(true);
+    int width;
+    int height;
+    int channels;
+    unsigned char *data = stbi_load(filename, &width, &height, &channels, 3);
+
+    if ( data == NULL )
     {
-        texture.internal_format = GL_RGBA;
-        texture.image_format = GL_RGBA;
+        fprintf(stderr, "ERROR: Cannot open image file \"%s\".\n", filename);
+        std::exit(EXIT_FAILURE);
     }
 
-    // Load image
-    int width, height;
-    unsigned char *image = SOIL_load_image(file, &width, &height, 0, texture.image_format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
+    printf("OK (%dx%d).\n", width, height);
 
     // Now generate texture
-    texture.Generate(width, height, image);
+    texture.generate(width, height, textures.size(), data);
 
     // And finally free image data
-    SOIL_free_image_data(image);
+    stbi_image_free(data);
+
     return texture;
-} */
+}
+
+void ResourceManager::clear()
+{
+    // (Properly) delete all shaders
+    for (auto iter : shaders)
+        glDeleteProgram(iter.second.ID);
+
+    // (Properly) delete all textures
+    for (auto iter : textures)
+        glDeleteTextures(1, &iter.second.texture_ID);
+}

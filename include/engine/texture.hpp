@@ -9,14 +9,14 @@ class Texture2D
 {
 public:
     // Holds the ID of the texture object, used for all texture operations to reference to this particlar texture
-    GLuint ID;
+    GLuint texture_ID;
+    GLuint sampler_ID;
+
+    // Holds the sampler index
+    GLuint sampler_index;
 
     // Texture image dimensions
     GLuint width, height; // Width and height of loaded image in pixels
-
-    // Texture Format
-    GLuint internal_format; // Format of texture object
-    GLuint image_format;    // Format of loaded image
 
     // Texture configuration
     GLuint wrap_s;     // Wrapping mode on S axis
@@ -28,7 +28,7 @@ public:
     Texture2D();
 
     // Generates texture from image data
-    void generate(GLuint width, GLuint height, unsigned char *data);
+    void generate(GLuint width, GLuint height, GLuint sampler_index, unsigned char *data);
 
     // Binds the texture as the current active GL_TEXTURE_2D texture object
     void bind() const;
