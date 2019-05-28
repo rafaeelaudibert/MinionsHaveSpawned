@@ -12,6 +12,7 @@
 #include "engine/cubemap_texture.hpp"
 #include "engine/shader.hpp"
 #include "model/base.hpp"
+#include "engine/matrices.hpp"
 
 // A static singleton ResourceManager class that hosts several
 // functions to load Textures and Shaders. Each loaded texture
@@ -69,6 +70,9 @@ private:
 
     // Loads 6 textures from a file, in a cubemapTexture2d form
     static CubemapTexture2D load_cubemap_texture_from_files(std::vector<std::string> files);
+
+    // Compute the normals for a ObjModel object, read from a .obj file
+    static void compute_normals(ObjModel* model);
 };
 
 #endif
