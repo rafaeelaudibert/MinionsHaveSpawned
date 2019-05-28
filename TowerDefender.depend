@@ -945,7 +945,7 @@
 	<GL/glext.h>
 	<GL/glu.h>
 
-1559018514 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
+1559020912 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
 	<map>
 	<string>
 	<vector>
@@ -955,6 +955,7 @@
 	"engine/cubemap_texture.hpp"
 	"engine/shader.hpp"
 	"model/base.hpp"
+	"engine/matrices.hpp"
 
 1559000806 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
 	<glad/glad.h>

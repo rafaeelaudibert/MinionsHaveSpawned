@@ -64,6 +64,7 @@
 		<Unit filename="include/KHR/khrplatform.h" />
 		<Unit filename="include/dejavufont.h" />
 		<Unit filename="include/engine/camera.hpp" />
+		<Unit filename="include/engine/cubemap_texture.hpp" />
 		<Unit filename="include/engine/game.hpp" />
 		<Unit filename="include/engine/matrices.hpp" />
 		<Unit filename="include/engine/resource_manager.hpp" />
@@ -333,6 +334,7 @@
 		<Unit filename="include/model/bunny.hpp" />
 		<Unit filename="include/model/cube.hpp" />
 		<Unit filename="include/model/obj_model.hpp" />
+		<Unit filename="include/model/skybox.hpp" />
 		<Unit filename="include/stb_image.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="include/utils/helpers.hpp" />
@@ -342,12 +344,16 @@
 		<Unit filename="lib/libglfw3dll.a" />
 		<Unit filename="obj/Debug/src/glad.o" />
 		<Unit filename="src/engine/camera.cpp" />
+		<Unit filename="src/engine/cubemap_texture.cpp" />
 		<Unit filename="src/engine/game.cpp" />
 		<Unit filename="src/engine/matrices.cpp" />
 		<Unit filename="src/engine/resource_manager.cpp" />
 		<Unit filename="src/engine/shader.cpp" />
 		<Unit filename="src/engine/texture.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/model/bunny.cpp" />
+		<Unit filename="src/model/cube.cpp" />
+		<Unit filename="src/model/skybox.cpp" />
 		<Unit filename="src/objects/bunny.obj" />
 		<Unit filename="src/objects/plane.obj" />
 		<Unit filename="src/objects/sphere.obj" />
@@ -355,6 +361,8 @@
 		<Unit filename="src/shaders/bunny.vs" />
 		<Unit filename="src/shaders/cubes.fs" />
 		<Unit filename="src/shaders/cubes.vs" />
+		<Unit filename="src/shaders/skybox.fs" />
+		<Unit filename="src/shaders/skybox.vs" />
 		<Unit filename="src/stb_image.cpp" />
 		<Unit filename="src/tiny_obj_loader.cpp" />
 		<Unit filename="src/utils/helpers.cpp" />
