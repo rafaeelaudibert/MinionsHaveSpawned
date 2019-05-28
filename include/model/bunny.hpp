@@ -14,7 +14,7 @@ public:
     };
 
     Bunny(std::string name, glm::vec4 position, glm::vec4 orientation, float angle) :
-            GameObject(name, position, orientation, angle)
+        GameObject(name, position, orientation, angle)
     {
         this->build();
     };

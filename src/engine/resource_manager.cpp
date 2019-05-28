@@ -105,7 +105,8 @@ Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLbool
 
     printf("Loading image \"%s\"... ", filename);
 
-    if (alpha) {
+    if (alpha)
+    {
         texture.internal_format = GL_RGBA;
         texture.image_format = GL_RGBA;
     }
@@ -134,7 +135,8 @@ Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLbool
     return texture;
 }
 
-CubemapTexture2D ResourceManager::load_cubemap_texture_from_files(std::vector<std::string> faces) {
+CubemapTexture2D ResourceManager::load_cubemap_texture_from_files(std::vector<std::string> faces)
+{
     CubemapTexture2D texture;
 
     texture.generate(faces);

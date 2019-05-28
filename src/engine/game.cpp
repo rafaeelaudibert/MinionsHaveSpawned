@@ -36,13 +36,14 @@ void Game::init()
     };
 
     /* GAME OBJECTS CREATION */
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++)
+    {
         Cube* cube = new Cube("cube", glm::vec4(cubePositions[i], 1.0f), glm::vec4(1.0f, 0.4f, 2.14f, 0.0f), i * 22.5f);
 
         /* GAME OBJECTS INSERTION TO THE GAME OBJECTS MAP */
-         // We might have some error here as we are adding the index to the string in a bad way,
-         // so sometimes we have some overflow, and some blocks don't render properly,
-         // but we just need a flush after it
+        // We might have some error here as we are adding the index to the string in a bad way,
+        // so sometimes we have some overflow, and some blocks don't render properly,
+        // but we just need a flush after it
         objects.insert(std::map<std::string, GameObject*>::value_type ("cube" + i, cube));
         printf("[GAME] Cube %d created\n", i);
     }
@@ -56,10 +57,11 @@ void Game::init()
     printf("[GAME] Skybox created\n");
 }
 
-void Game::new_frame(){
-        GLfloat currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+void Game::new_frame()
+{
+    GLfloat currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 }
 
 void Game::update()
