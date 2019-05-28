@@ -6,10 +6,12 @@
 #include <vector>
 
 #include <glad/glad.h>
+#include <tiny_obj_loader.h>
 
 #include "engine/texture.hpp"
 #include "engine/cubemap_texture.hpp"
 #include "engine/shader.hpp"
+#include "model/base.hpp"
 
 // A static singleton ResourceManager class that hosts several
 // functions to load Textures and Shaders. Each loaded texture
@@ -48,6 +50,9 @@ public:
 
     // Retrieves a stored cubemap texture
     static CubemapTexture2D get_cubemap_texture(std::string name);
+
+    // Loads an object from a .obj file and configure it
+    static ObjModel* load_object(const char* filename, GameObject* gameObject, std::string name);
 
     // Properly de-allocates all loaded resources
     static void clear();

@@ -9,9 +9,9 @@ struct ObjModel
 
     // This constructor reads a model from a file using the tinyobjloader library
     // See: https://github.com/syoyo/tinyobjloader
-    ObjModel(const char* filename, const char* basepath = NULL, bool triangulate = true)
+    ObjModel(const char* filename, const char* basepath = "../../src/objects/", bool triangulate = true)
     {
-        printf("Loading model \"%s\"... ", filename);
+        printf("[GAME] Loading model \"%s\"... ", filename);
 
         std::string err;
         bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename, basepath, triangulate);

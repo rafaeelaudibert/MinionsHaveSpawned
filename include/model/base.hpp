@@ -27,7 +27,8 @@ public:
 private:
     virtual void build() = 0;
 
-protected:
+// Public for now, should be protected
+public:
     GLuint VAO;
     Shader shader;
     Texture2D texture;
@@ -36,7 +37,7 @@ protected:
     GLsizei indexesLength;
     GLvoid *indexesOffset;
     glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    glm::vec4 orientation = glm::vec4(1.0f, 0.3f, 0.5f, 0.0f);
+    glm::vec4 orientation = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
     float angle = 0;
 };
 

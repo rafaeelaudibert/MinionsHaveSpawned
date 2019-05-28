@@ -906,7 +906,7 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1559013088 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1559017340 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/game.hpp"
 	"engine/matrices.hpp"
 	"engine/resource_manager.hpp"
@@ -945,14 +945,16 @@
 	<GL/glext.h>
 	<GL/glu.h>
 
-1559003945 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
+1559018514 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
 	<map>
 	<string>
 	<vector>
 	<glad/glad.h>
+	<tiny_obj_loader.h>
 	"engine/texture.hpp"
 	"engine/cubemap_texture.hpp"
 	"engine/shader.hpp"
+	"model/base.hpp"
 
 1559000806 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
 	<glad/glad.h>
@@ -992,14 +994,14 @@
 	"engine/shader.hpp"
 	<iostream>
 
-1559012424 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
+1559018989 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
 	"engine/resource_manager.hpp"
 	<iostream>
 	<sstream>
 	<fstream>
 	<stb_image.h>
 
-1559012364 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
+1559013175 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	"engine\resource_manager.hpp"
@@ -1060,10 +1062,10 @@
 1555207229 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.h
 	<glad/glad.h>
 
-1555207229 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.hpp
+1559017413 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.hpp
 	<glad/glad.h>
 
-1558926056 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
+1559018476 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
 	<string>
 	<glad/glad.h>
 	<tiny_obj_loader.h>
@@ -1071,10 +1073,10 @@
 	"engine/texture.hpp"
 	"model/obj_model.hpp"
 
-1559001522 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
+1559019280 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
 	"model\base.hpp"
 
-1558244308 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\obj_model.hpp
+1559019612 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\obj_model.hpp
 
 1557922189 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\tiny_obj_loader.h
 	<map>
@@ -1093,8 +1095,8 @@
 1558240286 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\tiny_obj_loader.cpp
 	"tiny_obj_loader.h"
 
-1558926207 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
-	"model\base.hpp"
+1559017655 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
+	"model/base.hpp"
 
 1558924293 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\stb_image.cpp
 	"stb_image.h"
@@ -1126,6 +1128,21 @@
 	<vector>
 	"engine/cubemap_texture.hpp"
 
-1559008371 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\skybox.hpp
+1559019545 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\skybox.hpp
 	"model\base.hpp"
+
+1559018836 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\bunny.cpp
+	"engine/resource_manager.hpp"
+	"engine/matrices.hpp"
+	"model/bunny.hpp"
+
+1559019456 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\cube.cpp
+	"engine/resource_manager.hpp"
+	"engine/matrices.hpp"
+	"model/cube.hpp"
+
+1559019586 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\skybox.cpp
+	"engine/resource_manager.hpp"
+	"engine/matrices.hpp"
+	"model/skybox.hpp"
 
