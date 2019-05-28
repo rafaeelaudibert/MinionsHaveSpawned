@@ -261,10 +261,10 @@ void ResourceManager::compute_normals(ObjModel* model)
     if ( !model->attrib.normals.empty() )
         return;
 
-    // Primeiro computamos as normais para todos os TRI�NGULOS.
-    // Segundo, computamos as normais dos V�RTICES atrav�s do m�todo proposto
-    // por Gourad, onde a normal de cada v�rtice vai ser a m�dia das normais de
-    // todas as faces que compartilham este v�rtice.
+    // First, we compute the normal for all the TRIANGLES.
+    // Second, we compute the vertex's normals using the method proposed
+    // by Gourad, where each vertex's normal will be the average from the normals of
+    // all the faces that share this vertex.
 
     size_t num_vertices = model->attrib.vertices.size() / 3;
 
@@ -289,11 +289,11 @@ void ResourceManager::compute_normals(ObjModel* model)
                 vertices[vertex] = glm::vec4(vx,vy,vz,1.0);
             }
 
-            const glm::vec4  a = vertices[0];
-            const glm::vec4  b = vertices[1];
-            const glm::vec4  c = vertices[2];
+            const glm::vec4 a = vertices[0];
+            const glm::vec4 b = vertices[1];
+            const glm::vec4 c = vertices[2];
 
-            const glm::vec4  n = matrix::crossproduct(b-a,c-a);
+            const glm::vec4 n = matrix::crossproduct(b-a, c-a);
 
             for (size_t vertex = 0; vertex < 3; ++vertex)
             {
