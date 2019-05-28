@@ -328,4 +328,8 @@ void ResourceManager::clear()
     // (Properly) delete all textures
     for (auto iter : textures)
         glDeleteTextures(1, &iter.second.ID);
+
+        // (Properly) delete all cubeMap textures
+    for (auto iter : cubemapTextures)
+        glDeleteTextures(1, &iter.second.ID);
 }
