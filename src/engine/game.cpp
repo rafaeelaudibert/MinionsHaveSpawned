@@ -4,6 +4,7 @@
 #include "model/base.hpp"
 #include "model/cube.hpp"
 #include "model/bunny.hpp"
+#include "model/skybox.hpp"
 #include "utils/helpers.hpp"
 
 Game::Game(GLuint width, GLuint height)
@@ -49,6 +50,10 @@ void Game::init()
     Bunny* bunny = new Bunny("bunny", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject*>::value_type ("bunny", bunny));
     printf("[GAME] Bunny created\n");
+
+    SkyBox* skybox = new SkyBox("skybox");
+    objects.insert(std::map<std::string, GameObject*>::value_type ("skybox", skybox));
+    printf("[GAME] Skybox created\n");
 }
 
 void Game::new_frame(){

@@ -9,6 +9,7 @@
 
 // Instantiate static variables
 std::map<std::string, Texture2D> ResourceManager::textures;
+std::map<std::string, CubemapTexture2D> ResourceManager::cubemapTextures;
 std::map<std::string, Shader> ResourceManager::shaders;
 
 Shader ResourceManager::load_shader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
@@ -33,6 +34,17 @@ Texture2D ResourceManager::load_texture(const GLchar *file, GLboolean alpha, std
 Texture2D ResourceManager::get_texture(std::string name)
 {
     return textures[name];
+}
+
+CubemapTexture2D ResourceManager::load_cubemap_texture(std::vector<std::string> files, std::string name)
+{
+    cubemapTextures[name] = load_cubemap_texture_from_files(files);
+    return cubemapTextures[name];
+}
+
+CubemapTexture2D ResourceManager::get_cubemap_texture(std::string name)
+{
+    return cubemapTextures[name];
 }
 
 Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)
@@ -103,7 +115,7 @@ Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLbool
     int width;
     int height;
     int channels;
-    unsigned char *image = stbi_load(filename, &width, &height, &channels, 3);
+    unsigned char *image = stbi_load(filename, &width, &height, &channels, 0);
 
     if ( image == NULL )
     {
@@ -118,6 +130,14 @@ Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLbool
 
     // And finally free image
     stbi_image_free(image);
+
+    return texture;
+}
+
+CubemapTexture2D ResourceManager::load_cubemap_texture_from_files(std::vector<std::string> faces) {
+    CubemapTexture2D texture;
+
+    texture.generate(faces);
 
     return texture;
 }

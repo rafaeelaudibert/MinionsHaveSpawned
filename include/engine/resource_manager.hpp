@@ -1,20 +1,14 @@
-/*******************************************************************
-** This code is part of Breakout.
-**
-** Breakout is free software: you can redistribute it and/or modify
-** it under the terms of the CC BY 4.0 license as published by
-** Creative Commons, either version 4 of the License, or (at your
-** option) any later version.
-******************************************************************/
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include <glad/glad.h>
 
 #include "engine/texture.hpp"
+#include "engine/cubemap_texture.hpp"
 #include "engine/shader.hpp"
 
 // A static singleton ResourceManager class that hosts several
@@ -28,6 +22,7 @@ public:
     // Resource storage
     static std::map<std::string, Shader> shaders;
     static std::map<std::string, Texture2D> textures;
+    static std::map<std::string, CubemapTexture2D> cubemapTextures;
 
     // Loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
     static Shader load_shader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name);
@@ -41,6 +36,19 @@ public:
     // Retrieves a stored texture
     static Texture2D get_texture(std::string name);
 
+    // Loads a cubemap texture from 6 individual texture faces
+    // order:
+    // +X (right)
+    // -X (left)
+    // +Y (top)
+    // -Y (bottom)
+    // +Z (front)
+    // -Z (back)
+    static CubemapTexture2D load_cubemap_texture(std::vector<std::string> files, std::string name);
+
+    // Retrieves a stored cubemap texture
+    static CubemapTexture2D get_cubemap_texture(std::string name);
+
     // Properly de-allocates all loaded resources
     static void clear();
 
@@ -53,6 +61,9 @@ private:
 
     // Loads a single texture from file
     static Texture2D load_texture_from_file(const GLchar *file, GLboolean alpha);
+
+    // Loads 6 textures from a file, in a cubemapTexture2d form
+    static CubemapTexture2D load_cubemap_texture_from_files(std::vector<std::string> files);
 };
 
 #endif

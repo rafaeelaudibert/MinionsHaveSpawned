@@ -28,6 +28,13 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 const GLuint SCREEN_WIDTH = 800; // width of the screen
 const GLuint SCREEN_HEIGHT = 600; // height of the screen
 
+/** TEMPORARY CODE **/
+#include <vector>
+#include <string>
+
+using namespace std;
+unsigned int loadCubemap(vector<std::string> faces);
+
 Game TowerDefender = Game(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(int argc, char *argv[])
@@ -113,10 +120,7 @@ int main(int argc, char *argv[])
     // Game main loop
     while (!glfwWindowShouldClose(window))
     {
-        // Fetch window events
-        glfwPollEvents();
-
-        // Inform we are in a new frame
+        // Tell the game we are in a new frame
         TowerDefender.new_frame();
 
         // Manage user input
@@ -125,10 +129,12 @@ int main(int argc, char *argv[])
         // Update Game state
         TowerDefender.update();
 
-        // Render
+        // Call render procedure
         TowerDefender.render();
 
+        // Swap the buffers (actually render the image in the window) and fetch window events
         glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
     // Delete all resources loaded using the resource manager
@@ -205,4 +211,44 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
     TowerDefender.camera.process_mouse_scroll(yoffset);
+}
+
+/** USING IT TEMPORARILY **/
+// loads a cubemap texture from 6 individual texture faces
+// order:
+// +X (right)
+// -X (left)
+// +Y (top)
+// -Y (bottom)
+// +Z (front)
+// -Z (back)
+// -------------------------------------------------------
+unsigned int loadCubemap(vector<std::string> faces)
+{
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            stbi_image_free(data);
+        }
+        else
+        {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+            stbi_image_free(data);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
 }

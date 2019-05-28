@@ -55,7 +55,7 @@ public:
         // Indexes definition
         GLuint indexes[] =
         {
-            // We define de vertex indexes which define the cube faces using
+            // We define the vertex indexes which define the cube faces using
             // 12 triangles which will be drawn with the GL_TRIANGLES rendering technique
             0, 1, 2,
             7, 6, 5,
