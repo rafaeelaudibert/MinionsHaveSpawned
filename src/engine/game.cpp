@@ -55,6 +55,10 @@ void Game::init()
     SkyBox* skybox = new SkyBox("skybox");
     objects.insert(std::map<std::string, GameObject*>::value_type ("skybox", skybox));
     printf("[GAME] Skybox created\n");
+
+    Cube* plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(200.0f, 0.01f, 200.0f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("plane", plane));
+    printf("[GAME] Plane created\n");
 }
 
 void Game::new_frame()
@@ -66,9 +70,11 @@ void Game::new_frame()
 
 void Game::update()
 {
+    // Update falling speed
     y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
 
-    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, 100.0f, 0.0f);
+    // Restrict camera position
+    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, MAX_HEIGHT, CHARACTER_HEIGHT);
 }
 
 void Game::process_input()
@@ -84,7 +90,7 @@ void Game::process_input()
         camera.process_keyboard(RIGHT, this->deltaTime);
 
     // Jump
-    if (keys[GLFW_KEY_SPACE] == GL_TRUE && camera.position.y <= 0.0f)
+    if (keys[GLFW_KEY_SPACE] == GL_TRUE && camera.position.y <= CHARACTER_HEIGHT)
         y_speed = JUMP_SPEED;
 }
 

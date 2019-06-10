@@ -5,7 +5,7 @@
 void Cube::build()
 {
     // Initialize shaders
-    this->shader = ResourceManager::load_shader("../../src/shaders/cubes.vs", "../../src/shaders/cubes.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/cube.vs", "../../src/shaders/cube.fs", nullptr, this->name);
 
     // Vertex definition
     GLfloat vertices[] =
@@ -84,7 +84,7 @@ void Cube::render(glm::mat4 view, glm::mat4 projection)
     glBindVertexArray(this->VAO);
 
     // Calculate the model matrix, initializing with
-    glm::mat4 model = matrix::translate_matrix(this->position) * matrix::rotate_matrix(this->angle, this->orientation);
+    glm::mat4 model = matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation);
     this->shader.set_matrix("model", model);
 
     // Draw the element

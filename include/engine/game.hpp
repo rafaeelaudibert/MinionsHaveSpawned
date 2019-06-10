@@ -30,9 +30,11 @@ public:
     float screen_ratio;
 
     // Mechanic variables
-    const GLfloat GRAVITY = -9.8f;
-    const GLfloat MAX_SPEED = -53.0f; // Maximum falling speed due to air resistance]
-    const GLfloat JUMP_SPEED = 2.5f;
+    const GLfloat GRAVITY = -9.8f;          // Gravity Force
+    const GLfloat MAX_SPEED = -53.0f;       // Maximum falling speed due to air resistance
+    const GLfloat JUMP_SPEED = 2.5f;        // Instantaneous jump speed
+    const GLfloat CHARACTER_HEIGHT = 1.7f;  // Height of the character, 1,70m
+    const GLfloat MAX_HEIGHT = 100.0f;      // Maximum height the character can possibly jump to
     GLfloat y_speed = 0;
 
     // Time variables
@@ -40,7 +42,7 @@ public:
     GLfloat deltaTime = 0.0f;
 
     // Camera
-    Camera camera;
+    Camera camera = Camera(glm::vec4(0.0f, CHARACTER_HEIGHT, 0.0f, 1.0f));
 
     // Objects map
     std::map<std::string, GameObject*> objects;

@@ -19,6 +19,12 @@ public:
         this->build();
     };
 
+    Cube(std::string name, glm::vec4 position, glm::vec4 orientation, float angle, glm::vec3 scale) :
+        GameObject(name, position, orientation, angle, scale)
+    {
+        this->build();
+    };
+
     void build();
 
     void render(glm::mat4 view, glm::mat4 projection);

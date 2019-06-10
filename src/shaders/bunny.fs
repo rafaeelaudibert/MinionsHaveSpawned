@@ -77,7 +77,6 @@ void main()
     // Final fragment color calculated with a combination of the diffuse, specular and ambiance terms.
     color = lambert_diffuse_term + ambient_term + phong_specular_term;
 
-
     // We need to make our gamma color correction, considering a sRGB display.
     // See https://en.wikipedia.org/w/index.php?title=Gamma_correction&oldid=751281772#Windows.2C_Mac.2C_sRGB_and_TV.2Fvideo_standard_gammas
     color = pow(color, vec3(1.0,1.0,1.0)/2.2);
