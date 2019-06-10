@@ -17,6 +17,14 @@ enum GameState
     GAME_WIN
 };
 
+// Represents the player status
+enum PlayerStatus
+{
+    STANDING,
+    CROUCHING,
+    UNCROUCHING,
+    JUMPING
+};
 // Game holds all game-related state and functionality.
 // Combines all game-related data into a single class for
 // easy access to each of the components and manageability.
@@ -30,12 +38,17 @@ public:
     float screen_ratio;
 
     // Mechanic variables
-    const GLfloat GRAVITY = -9.8f;          // Gravity Force
-    const GLfloat MAX_SPEED = -53.0f;       // Maximum falling speed due to air resistance
-    const GLfloat JUMP_SPEED = 2.5f;        // Instantaneous jump speed
-    const GLfloat CHARACTER_HEIGHT = 1.7f;  // Height of the character, 1,70m
-    const GLfloat MAX_HEIGHT = 100.0f;      // Maximum height the character can possibly jump to
+    const GLfloat GRAVITY = -9.8f;                      // Gravity Force
+    const GLfloat MAX_SPEED = -53.0f;                   // Maximum falling speed due to air resistance
+    const GLfloat CHARACTER_HEIGHT = 1.7f;              // Height of the character, in meters
+    const GLfloat JUMP_SPEED = 2.5f;                    // Instantaneous jump speed
+    const GLfloat MAX_HEIGHT = 100.0f;                  // Maximum height the character can possibly jump to
+    const GLfloat CHARACTER_CROUCHING_HEIGHT = 1.4f;    // Height of the character while crouching, in meters
+    const GLfloat CROUCHING_SPEED = -2.0f;              // Instantaneous crouching speed
+    const GLfloat CROUCHING_SPEED_MULTIPLIER = 0.4f;    // How much of the normal speed the player runs while crouching
+    PlayerStatus player_status = STANDING;              // Current player status
     GLfloat y_speed = 0;
+
 
     // Time variables
     GLfloat lastFrame = 0.0f;
