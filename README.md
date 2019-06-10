@@ -1,8 +1,10 @@
-# Final Assigment INF01047 - Fundamentals of Computer Graphics
+# Final Assigment INF01047 - Fundamentals of Computer Graphics - Minions Have Spawned
 
-The objective of this assignment is to consolidate the knowledge obtained in the subject taught by the professor [Eduardo Gastal] (https://inf.ufrgs.br/~eslgastal) - INF01047 - Fundamentals of Computer Graphics, within the scope of the Computer Science course, in the [INF] (https://inf.ufrgs.br) @ [UFRGS] (https://ufrgs.br)
+The objective of this assignment is to consolidate the knowledge obtained in the subject taught by the professor [Eduardo Gastal] (https://inf.ufrgs.br/~eslgastal) - INF01047 - Fundamentals of Computer Graphics, within the scope of the Computer Science course, in the [INF] (https://inf.ufrgs.br) @ [UFRGS] (https://ufrgs.br).
 
-This knowledge gained on concepts about the representation and visualization of two-dimensional (2D) and three-dimensional (3D) objects is consolidated through the development of a graphical application. The basic concepts of Computer Graphics, such as visualization in three-dimensional environments, interaction, collision detection, and use of textures, among others, were exercised.  
+This knowledge gained on concepts about the representation and visualization of two-dimensional (2D) and three-dimensional (3D) objects is consolidated through the development of a graphical application. The basic concepts of Computer Graphics, such as visualization in three-dimensional environments, interaction, collision detection, and use of textures, among others, were exercised.
+
+**This game is entitled Minions Have Spawned**
 
 ## Especification
 You must develop a graphical application of your choice that meets all the requirements described in the list below. The final grade of the work will be calculated based on these requirements, so it is important that you strive to achieve them.
