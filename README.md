@@ -39,9 +39,9 @@ Graphical application ideas:
 ### Requirements
 Your application should include implementation of the following concepts of Computer Graphics:
 
-- [ ] Virtual objects represented through **complex polygonal meshes** (triangle meshes).
-    - [ ] At a minimum your application should include a geometric model of complexity equal to or greater than the `cow.obj` template available at [this link](https://moodle.inf.ufrgs.br/mod/resource/view.php?id=81157).
-    - [ ] The greater the variety of geometric models, the better.
+- [x] Virtual objects represented through **complex polygonal meshes** (triangle meshes).
+    - [x] At a minimum your application should include a geometric model of complexity equal to or greater than the `cow.obj` template available at [this link](https://moodle.inf.ufrgs.br/mod/resource/view.php?id=81157).
+    - [x] The greater the variety of geometric models, the better.
 
 - [ ] **Geometric transformations** of virtual objects.
     - [ ] Through interaction with the keyboard and/or mouse, the user must be able to control geometric transformations applied to virtual objects (not just camera control).
@@ -61,11 +61,11 @@ Your application should include implementation of the following concepts of Comp
 
 - [ ] **Illumination** models of geometric objects.
     - [ ] **At a minimum** your application should include objects with the following lighting models:
-        - [ ] **diffuse** (Lambert), and;
+        - [x] **diffuse** (Lambert), and;
         - [ ] **Blinn-Phong**.
     - [ ] **At a minimum** your application should include objects with the following interpolation models for lighting:
         - [ ] **At least** one object with a **Gouraud** model: the lighting model is evaluated for each vertex using its normals, generating a color, which is interpolated for each pixel during the rasterization.
-        - [ ] **At least** one object with **Phong** model: the normals of each vertex are interpolated for each pixel during the rasterization, and the illumination model is evaluated for each pixel, using these interpolated normals.
+        - [x] **At least** one object with **Phong** model: the normals of each vertex are interpolated for each pixel during the rasterization, and the illumination model is evaluated for each pixel, using these interpolated normals.
 
 - [x] Mapping of **textures**.
     - [x] **At a minimum**, a virtual object of your application must have its color defined through a texture defined through an image.
