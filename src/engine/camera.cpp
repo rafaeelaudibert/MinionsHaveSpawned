@@ -10,19 +10,15 @@ glm::mat4 Camera::get_view_matrix()
 void Camera::process_keyboard(CameraMovement direction, float delta_time)
 {
     float velocity = movement_speed * delta_time;
-    float old_position_y = position.y;
 
     if (direction == FORWARD)
-        position += front * velocity;
+        position += matrix::crossproduct(up, right) * velocity;
     if (direction == BACKWARD)
-        position -= front * velocity;
+        position -= matrix::crossproduct(up, right) * velocity;
     if (direction == LEFT)
         position -= right * velocity;
     if (direction == RIGHT)
         position += right * velocity;
-
-    // Prevent jumps abusing from the front * velocity multiplication
-    position.y = old_position_y;
 }
 
 void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean constrain_pitch)
@@ -36,7 +32,7 @@ void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean cons
     // Make sure that when pitch is out of bounds, screen doesn't get flipped
     if (constrain_pitch)
     {
-        pitch = utils::clamping(pitch, 89.0f, -89.0f);
+        pitch = utils::clamping(pitch, 89.9f, -89.9f);
     }
 
     // Update Front, Right and Up Vectors using the updated Euler angles
@@ -59,8 +55,8 @@ void Camera::update_camera_vectors()
     front.w = 0.0f;
     this->front = normalize(front);
 
-    // Also re-calculate the Right and Up vector
-    // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+    // Also re-calculate the Right  vector
+    // Normalize the vector, because their length gets closer to 0 the more you look up or down which results in slower movement.
     this->right = matrix::normalize(matrix::crossproduct(this->front, this->world_up));
-    this->up = matrix::normalize(matrix::crossproduct(this->right, this->front));
+
 }
