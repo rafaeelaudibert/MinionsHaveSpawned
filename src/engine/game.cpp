@@ -21,24 +21,14 @@ void Game::init()
 {
     printf("[GAME] Game initialization\n");
 
-    Bunny* bunny = new Bunny("bunny", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("bunny", bunny));
-    printf("[GAME] Bunny created\n");
-
     SkyBox* skybox = new SkyBox("skybox");
     objects.insert(std::map<std::string, GameObject*>::value_type ("skybox", skybox));
     printf("[GAME] Skybox created\n");
 
-    Cube* plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(200.0f, 0.01f, 200.0f));
+    Cube* plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 0.01f, 80.0f), "../../src/textures/full_map.jpg", "full_map");
     objects.insert(std::map<std::string, GameObject*>::value_type ("plane", plane));
     printf("[GAME] Plane created\n");
 
-    /*Cube* walls = {
-        new Cube("wall_1", glm::vec4(-80.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f))
-        new Cube("wall_2", )
-        new Cube("wall_3", )
-        new Cube("wall_4", )
-    };*/
     Cube* wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
     objects.insert(std::map<std::string, GameObject*>::value_type ("wall_1", wall_1));
     printf("[GAME] Wall 1 created\n");
@@ -55,6 +45,7 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject*>::value_type ("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
+    // Magical number = 1.6
     Dummy* dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
     objects.insert(std::map<std::string, GameObject*>::value_type ("dummy", dummy));
     printf("[GAME] Dummy created\n");
@@ -63,7 +54,18 @@ void Game::init()
 void Game::new_frame()
 {
     GLfloat currentFrame = glfwGetTime();
+    static GLfloat FPS_COUNTER = currentFrame;
+    static int ITERATIONS = 0;
+    ITERATIONS++;
+
     deltaTime = currentFrame - lastFrame;
+
+    if (glfwGetTime() - FPS_COUNTER > 1) {
+        printf("[INFO] FPS: %d\n", ITERATIONS);
+        FPS_COUNTER = currentFrame;
+        ITERATIONS = 0;
+    }
+
     lastFrame = currentFrame;
 }
 
@@ -80,13 +82,13 @@ void Game::process_input()
 {
     // Movement
     if (keys[GLFW_KEY_W] == GL_TRUE)
-        camera.process_keyboard(FORWARD, this->deltaTime * (player_status == STANDING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(FORWARD, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_S] == GL_TRUE)
-        camera.process_keyboard(BACKWARD, this->deltaTime * (player_status == STANDING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(BACKWARD, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_A] == GL_TRUE)
-        camera.process_keyboard(LEFT, this->deltaTime * (player_status == STANDING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(LEFT, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_D] == GL_TRUE)
-        camera.process_keyboard(RIGHT, this->deltaTime * (player_status == STANDING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(RIGHT, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
 
     // Stopped uncrouching
     if (camera.position.y >= CHARACTER_HEIGHT && player_status == UNCROUCHING) {
@@ -119,7 +121,7 @@ void Game::process_input()
 
     // Uncrouching
     if (keys[GLFW_KEY_LEFT_SHIFT] == GL_FALSE && player_status == CROUCHING) {
-        y_speed = 2 * JUMP_SPEED;
+        y_speed = JUMP_SPEED;
         player_status = UNCROUCHING;
         printf("[GAME] Started uncrouching\n");
     }
@@ -133,7 +135,7 @@ void Game::render()
 
     /* Calculate the view and projection matrices */
     glm::mat4 view = this->camera.get_view_matrix();
-    glm::mat4 projection = matrix::perspective_matrix(glm::radians(this->camera.zoom), screen_ratio, -0.1f, -100.0f);
+    glm::mat4 projection = matrix::perspective_matrix(glm::radians(this->camera.zoom), screen_ratio, -0.1f, -125.0f);
 
     // Render objects
     for (const auto& object : this->objects)

@@ -25,7 +25,14 @@ public:
         this->build();
     };
 
+    Cube(std::string name, glm::vec4 position, glm::vec4 orientation, float angle, glm::vec3 scale, const GLchar* texture_path, const GLchar* texture_name) :
+        GameObject(name, position, orientation, angle, scale)
+    {
+        this->build(texture_path, texture_name);
+    };
+
     void build();
+    void build(const GLchar* texture_path, const GLchar* texture_name);
 
     void render(glm::mat4 view, glm::mat4 projection);
 };

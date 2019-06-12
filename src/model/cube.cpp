@@ -4,9 +4,26 @@
 
 void Cube::build()
 {
-    // Initialize shaders
-    this->shader = ResourceManager::load_shader("../../src/shaders/default_lightning.vs", "../../src/shaders/default_lightning.fs", nullptr, this->name);
+    // Load object
     ResourceManager::load_object("../../src/objects/cube.obj", this, this->name);
+
+    // Initialize shaders
+    this->shader = ResourceManager::load_shader("../../src/shaders/default_lighting.vs", "../../src/shaders/default_lighting.fs", nullptr, this->name);
+    this->shader.use();
+
+    return;
+}
+
+void Cube::build(const GLchar* texture_path, const GLchar* texture_name) {
+    // Load object
+    ResourceManager::load_object("../../src/objects/cube.obj", this, this->name);
+
+    // Initialize shaders
+    this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
+    this->shader.use();
+
+    // Adds texture
+    this->texture = ResourceManager::load_texture(texture_path, texture_name);
 
     return;
 }
@@ -22,6 +39,10 @@ void Cube::render(glm::mat4 view, glm::mat4 projection)
 
     // Bind the VAO
     glBindVertexArray(this->VAO);
+
+    // Bind textures
+    if (&this->texture != NULL)
+        this->texture.bind();
 
     // Calculate the model matrix, initializing with
     glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first
