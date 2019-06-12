@@ -17,10 +17,10 @@ struct ObjModel
         bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename, basepath, triangulate);
 
         if (!err.empty())
-            fprintf(stderr, "\n%s\n", err.c_str());
+            fprintf(stderr, "\n[WARN] %s\n [GAME]", err.c_str());
 
         if (!ret)
-            throw std::runtime_error("Error when trying to load the model.");
+            throw std::runtime_error("[ERROR] Error when trying to load the model.");
 
         printf("OK.\n");
     }
