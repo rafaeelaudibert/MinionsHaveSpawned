@@ -6,7 +6,7 @@ void Dummy::build()
 {
     // Initialize object, shaders, and textures
     ResourceManager::load_object("../../src/objects/dummy.obj", this, this->name);
-    this->shader = ResourceManager::load_shader("../../src/shaders/dummy.vs", "../../src/shaders/dummy.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
     this->shader.use();
 
     this->texture = ResourceManager::load_texture("../../src/textures/practicetool_targetdummy_red_tx_cm.jpg", this->name);

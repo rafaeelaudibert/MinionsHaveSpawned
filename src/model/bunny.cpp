@@ -5,7 +5,7 @@
 void Bunny::build()
 {
     // Initialize shaders
-    this->shader = ResourceManager::load_shader("../../src/shaders/bunny.vs", "../../src/shaders/bunny.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/default_lightning.vs", "../../src/shaders/default_lightning.fs", nullptr, this->name);
     ResourceManager::load_object("../../src/objects/bunny.obj", this, "bunny");
 
     return;

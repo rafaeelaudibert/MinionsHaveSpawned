@@ -33,6 +33,28 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject*>::value_type ("plane", plane));
     printf("[GAME] Plane created\n");
 
+    /*Cube* walls = {
+        new Cube("wall_1", glm::vec4(-80.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f))
+        new Cube("wall_2", )
+        new Cube("wall_3", )
+        new Cube("wall_4", )
+    };*/
+    Cube* wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_1", wall_1));
+    printf("[GAME] Wall 1 created\n");
+
+    Cube* wall_2 = new Cube("wall_2", glm::vec4(40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_2", wall_2));
+    printf("[GAME] Wall 2 created\n");
+
+    Cube* wall_3 = new Cube("wall_3", glm::vec4(0.0f, 1.5f, -40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_3", wall_3));
+    printf("[GAME] Wall 3 created\n");
+
+    Cube* wall_4 = new Cube("wall_4", glm::vec4(0.0f, 1.5f, 40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
+    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_4", wall_4));
+    printf("[GAME] Wall 4 created\n");
+
     Dummy* dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
     objects.insert(std::map<std::string, GameObject*>::value_type ("dummy", dummy));
     printf("[GAME] Dummy created\n");
