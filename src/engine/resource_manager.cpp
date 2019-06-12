@@ -23,11 +23,9 @@ Shader ResourceManager::get_shader(std::string name)
     return shaders[name];
 }
 
-
-
-Texture2D ResourceManager::load_texture(const GLchar *file, GLboolean alpha, std::string name)
+Texture2D ResourceManager::load_texture(const GLchar *file, std::string name)
 {
-    textures[name] = load_texture_from_file(file, alpha);
+    textures[name] = load_texture_from_file(file);
     return textures[name];
 }
 
@@ -210,39 +208,13 @@ Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const G
     return shader;
 }
 
-Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLboolean alpha)
+Texture2D ResourceManager::load_texture_from_file(const GLchar *filename)
 {
     // Create Texture object
     Texture2D texture;
 
-    printf("Loading image \"%s\"... ", filename);
-
-    if (alpha)
-    {
-        texture.internal_format = GL_RGBA;
-        texture.image_format = GL_RGBA;
-    }
-
-    // Primeiro fazemos a leitura da imagem do disco
-    stbi_set_flip_vertically_on_load(true);
-    int width;
-    int height;
-    int channels;
-    unsigned char *image = stbi_load(filename, &width, &height, &channels, 0);
-
-    if ( image == NULL )
-    {
-        fprintf(stderr, "ERROR: Cannot open image file \"%s\".\n", filename);
-        std::exit(EXIT_FAILURE);
-    }
-
-    printf("OK (%dx%d).\n", width, height);
-
-    // Now generate texture
-    texture.generate(width, height, image);
-
-    // And finally free image
-    stbi_image_free(image);
+    // Now generate texture, passing the filename
+    texture.generate(filename);
 
     return texture;
 }
