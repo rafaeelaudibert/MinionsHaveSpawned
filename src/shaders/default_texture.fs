@@ -6,7 +6,7 @@
 in vec4 position_world;
 in vec4 normal;
 
-// Posição do vértice atual no sistema de coordenadas local do modelo.
+// Posiï¿½ï¿½o do vï¿½rtice atual no sistema de coordenadas local do modelo.
 in vec4 position_model;
 
 // Current vertex position in the world coordinates system
@@ -17,7 +17,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-// Variáveis para acesso das imagens de textura
+// Variï¿½veis para acesso das imagens de textura
 uniform sampler2D texture_1;
 
 // The Fragment Shader output is the final fragment color
@@ -55,7 +55,7 @@ void main()
     float q = 5.0; // Specular exponent for Phong's illumination model
 
     // Parameters which define the illumination spectrum
-    vec4 I  = vec4(3.0, 3.0, 3.0, 1.0); // Light source spectrum
+    vec4 I  = vec4(2.0, 2.0, 2.0, 1.0); // Light source spectrum
     vec4 Ia = vec4(0.4, 0.4, 0.4, 1.0); // Ambient source light spectrum
 
     // Diffuse term used in Lambert's cosine law
