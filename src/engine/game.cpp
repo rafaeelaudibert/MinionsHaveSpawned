@@ -5,6 +5,7 @@
 #include "model/cube.hpp"
 #include "model/bunny.hpp"
 #include "model/dummy.hpp"
+#include "model/dragon.hpp"
 #include "model/skybox.hpp"
 #include "utils/helpers.hpp"
 
