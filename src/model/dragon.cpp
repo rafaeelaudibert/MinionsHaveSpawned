@@ -12,23 +12,23 @@ void Dragon::build()
     {
     case DragonType::AIR:
         ResourceManager::load_object("../../src/objects/dragon.obj", this, this->name);
-        this->texture = ResourceManager::load_texture("../../src/textures/sru_dragon_air_tx_cm.jpg", this->name);
+        this->texture = ResourceManager::load_texture("../../src/textures/dragon_air.jpg", this->name);
         break;
     case DragonType::EARTH:
         ResourceManager::load_object("../../src/objects/dragon.obj", this, this->name);
-        this->texture = ResourceManager::load_texture("../../src/textures/sru_dragon_earth_tx_cm.jpg", this->name);
+        this->texture = ResourceManager::load_texture("../../src/textures/dragon_earth.jpg", this->name);
         break;
     case DragonType::FIRE:
         ResourceManager::load_object("../../src/objects/dragon.obj", this, this->name);
-        this->texture = ResourceManager::load_texture("../../src/textures/sru_dragon_fire_tx_cm.jpg", this->name);
+        this->texture = ResourceManager::load_texture("../../src/textures/dragon_fire.jpg", this->name);
         break;
     case DragonType::WATER:
         ResourceManager::load_object("../../src/objects/dragon.obj", this, this->name);
-        this->texture = ResourceManager::load_texture("../../src/textures/sru_dragon_water_tx_cm.jpg", this->name);
+        this->texture = ResourceManager::load_texture("../../src/textures/dragon_water.jpg", this->name);
         break;
     case DragonType::ELDER:
         ResourceManager::load_object("../../src/objects/elder_dragon.obj", this, this->name);
-        this->texture = ResourceManager::load_texture("../../src/textures/sru_dragon_elder_tx_cm.jpg", this->name);
+        this->texture = ResourceManager::load_texture("../../src/textures/dragon_elder.jpg", this->name);
         break;
     default:
         throw std::runtime_error("[ERROR] Error when trying to load the Dragon model - Non existent DragonType.");

@@ -9,7 +9,7 @@ void Dummy::build()
     this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
     this->shader.use();
 
-    this->texture = ResourceManager::load_texture("../../src/textures/practicetool_targetdummy_blue_tx_cm.jpg", this->name);
+    this->texture = ResourceManager::load_texture("../../src/textures/dummy_blue.jpg", this->name);
 
     return;
 }
