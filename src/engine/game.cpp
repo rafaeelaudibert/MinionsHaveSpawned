@@ -75,54 +75,54 @@ void Game::update()
     y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
 
     // Restrict camera position
-    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, MAX_HEIGHT, player_status == STANDING ? CHARACTER_HEIGHT : CHARACTER_CROUCHING_HEIGHT);
+    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, MAX_HEIGHT, player_status == PlayerStatus::STANDING ? CHARACTER_HEIGHT : CHARACTER_CROUCHING_HEIGHT);
 }
 
 void Game::process_input()
 {
     // Movement
     if (keys[GLFW_KEY_W] == GL_TRUE)
-        camera.process_keyboard(FORWARD, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(FORWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_S] == GL_TRUE)
-        camera.process_keyboard(BACKWARD, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(BACKWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_A] == GL_TRUE)
-        camera.process_keyboard(LEFT, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(LEFT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
     if (keys[GLFW_KEY_D] == GL_TRUE)
-        camera.process_keyboard(RIGHT, this->deltaTime * (player_status == STANDING || player_status == JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_keyboard(RIGHT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
 
     // Stopped uncrouching
-    if (camera.position.y >= CHARACTER_HEIGHT && player_status == UNCROUCHING) {
-        player_status = STANDING;
+    if (camera.position.y >= CHARACTER_HEIGHT && player_status == PlayerStatus::UNCROUCHING) {
+        player_status = PlayerStatus::STANDING;
         camera.position.y = CHARACTER_HEIGHT;
         y_speed = MAX_SPEED;
         printf("[GAME] Back to standing\n");
     }
 
     // Stopped jumping
-    if (camera.position.y <= CHARACTER_HEIGHT && player_status == JUMPING) {
-        player_status = STANDING;
+    if (camera.position.y <= CHARACTER_HEIGHT && player_status == PlayerStatus::JUMPING) {
+        player_status = PlayerStatus::STANDING;
         camera.position.y = CHARACTER_HEIGHT;
         printf("[GAME] Back to standing\n");
     }
 
     // Jump
-    if (keys[GLFW_KEY_SPACE] == GL_TRUE && player_status == STANDING) {
+    if (keys[GLFW_KEY_SPACE] == GL_TRUE && player_status == PlayerStatus::STANDING) {
         y_speed = JUMP_SPEED;
-        player_status = JUMPING;
+        player_status = PlayerStatus::JUMPING;
         printf("[GAME] Started jumping\n");
     }
 
     // Crouching
-    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_TRUE && player_status == STANDING) {
+    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_TRUE && player_status == PlayerStatus::STANDING) {
         y_speed = CROUCHING_SPEED;
-        player_status = CROUCHING;
+        player_status = PlayerStatus::CROUCHING;
         printf("[GAME] Started crouching\n");
     }
 
     // Uncrouching
-    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_FALSE && player_status == CROUCHING) {
+    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_FALSE && player_status == PlayerStatus::CROUCHING) {
         y_speed = JUMP_SPEED;
-        player_status = UNCROUCHING;
+        player_status = PlayerStatus::UNCROUCHING;
         printf("[GAME] Started uncrouching\n");
     }
 
