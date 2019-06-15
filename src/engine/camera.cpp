@@ -58,5 +58,4 @@ void Camera::update_camera_vectors()
     // Also re-calculate the Right  vector
     // Normalize the vector, because their length gets closer to 0 the more you look up or down which results in slower movement.
     this->right = matrix::normalize(matrix::crossproduct(this->front, this->world_up));
-
 }

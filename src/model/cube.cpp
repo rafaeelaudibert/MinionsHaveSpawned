@@ -14,7 +14,8 @@ void Cube::build()
     return;
 }
 
-void Cube::build(const GLchar* texture_path, const GLchar* texture_name) {
+void Cube::build(const GLchar *texture_path, const GLchar *texture_name)
+{
     // Load object
     ResourceManager::load_object("../../src/objects/cube.obj", this, this->name);
 
@@ -56,5 +57,4 @@ void Cube::render(glm::mat4 view, glm::mat4 projection)
 
     // Unbind the VAO to prevent bugs
     glBindVertexArray(0);
-
 }

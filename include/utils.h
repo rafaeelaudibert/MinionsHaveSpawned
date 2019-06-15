@@ -3,8 +3,8 @@
 
 #include <cstdio>
 
-// Definimos o callback para impressão de erros da GLFW no terminal
-void ErrorCallback(int error, const char* description)
+// We define the callback for GLFW errors terminal printing
+void ErrorCallback(int error, const char *description)
 {
     fprintf(stderr, "ERROR: GLFW: %s\n", description);
 }

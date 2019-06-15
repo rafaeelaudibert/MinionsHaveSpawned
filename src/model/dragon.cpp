@@ -8,7 +8,7 @@ void Dragon::build()
     this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
     this->shader.use();
 
-    switch(this->type)
+    switch (this->type)
     {
     case DragonType::AIR:
         ResourceManager::load_object("../../src/objects/dragon.obj", this, this->name);
@@ -65,6 +65,4 @@ void Dragon::render(glm::mat4 view, glm::mat4 projection)
 
     // Unbind the VAO to prevent bugs
     glBindVertexArray(0);
-
 }
-

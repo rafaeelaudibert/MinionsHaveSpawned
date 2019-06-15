@@ -38,17 +38,16 @@ public:
     float screen_ratio;
 
     // Mechanic variables
-    const GLfloat GRAVITY = -26.0f;                         // Gravity Force
-    const GLfloat MAX_SPEED = -180.0f;                      // Maximum falling speed due to air resistance
-    const GLfloat CHARACTER_HEIGHT = 3.0f;                  // Height of the character, in meters
-    const GLfloat JUMP_SPEED = 7.5f;                        // Instantaneous jump speed
-    const GLfloat MAX_HEIGHT = 100.0f;                      // Maximum height the character can possibly jump to
-    const GLfloat CHARACTER_CROUCHING_HEIGHT = 2.3f;        // Height of the character while crouching, in meters
-    const GLfloat CROUCHING_SPEED = -3.5f;                  // Instantaneous crouching speed
-    const GLfloat CROUCHING_SPEED_MULTIPLIER = 0.4f;        // How much of the normal speed the player runs while crouching
-    PlayerStatus player_status = PlayerStatus::STANDING;    // Current player status
+    const GLfloat GRAVITY = -26.0f;                      // Gravity Force
+    const GLfloat MAX_SPEED = -180.0f;                   // Maximum falling speed due to air resistance
+    const GLfloat CHARACTER_HEIGHT = 3.0f;               // Height of the character, in meters
+    const GLfloat JUMP_SPEED = 7.5f;                     // Instantaneous jump speed
+    const GLfloat MAX_HEIGHT = 100.0f;                   // Maximum height the character can possibly jump to
+    const GLfloat CHARACTER_CROUCHING_HEIGHT = 2.3f;     // Height of the character while crouching, in meters
+    const GLfloat CROUCHING_SPEED = -3.5f;               // Instantaneous crouching speed
+    const GLfloat CROUCHING_SPEED_MULTIPLIER = 0.4f;     // How much of the normal speed the player runs while crouching
+    PlayerStatus player_status = PlayerStatus::STANDING; // Current player status
     GLfloat y_speed = 0;
-
 
     // Time variables
     GLfloat lastFrame = 0.0f;
@@ -58,7 +57,7 @@ public:
     Camera camera = Camera(glm::vec4(0.0f, CHARACTER_HEIGHT, 0.0f, 1.0f));
 
     // Objects map
-    std::map<std::string, GameObject*> objects;
+    std::map<std::string, GameObject *> objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);

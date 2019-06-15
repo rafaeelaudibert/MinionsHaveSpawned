@@ -53,7 +53,7 @@ public:
     static CubemapTexture2D get_cubemap_texture(std::string name);
 
     // Loads an object from a .obj file and configure it
-    static ObjModel* load_object(const char* filename, GameObject* gameObject, std::string name);
+    static ObjModel *load_object(const char *filename, GameObject *gameObject, std::string name);
 
     // Properly de-allocates all loaded resources
     static void clear();
@@ -72,7 +72,7 @@ private:
     static CubemapTexture2D load_cubemap_texture_from_files(std::vector<std::string> files);
 
     // Compute the normals for a ObjModel object, read from a .obj file
-    static void compute_normals(ObjModel* model);
+    static void compute_normals(ObjModel *model);
 };
 
 #endif

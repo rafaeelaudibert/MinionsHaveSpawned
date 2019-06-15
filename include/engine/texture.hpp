@@ -25,7 +25,7 @@ public:
 
     // Generates texture from image data
     //void generate(GLuint width, GLuint height, unsigned char *data);
-    void generate(const GLchar* filename);
+    void generate(const GLchar *filename);
 
     // Binds the texture as the current active GL_TEXTURE_2D texture object
     void bind() const;

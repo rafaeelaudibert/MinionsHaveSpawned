@@ -42,5 +42,4 @@ void Dummy::render(glm::mat4 view, glm::mat4 projection)
 
     // Unbind the VAO to prevent bugs
     glBindVertexArray(0);
-
 }

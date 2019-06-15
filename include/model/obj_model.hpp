@@ -3,13 +3,13 @@
 // We use tiny_obj_loader. See at https://github.com/syoyo/tinyobjloader
 struct ObjModel
 {
-    tinyobj::attrib_t                 attrib;
-    std::vector<tinyobj::shape_t>     shapes;
-    std::vector<tinyobj::material_t>  materials;
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
 
     // This constructor reads a model from a file using the tinyobjloader library
     // See: https://github.com/syoyo/tinyobjloader
-    ObjModel(const char* filename, const char* basepath = "../../src/objects/", bool triangulate = true)
+    ObjModel(const char *filename, const char *basepath = "../../src/objects/", bool triangulate = true)
     {
         printf("[GAME] Loading model \"%s\"... ", filename);
 

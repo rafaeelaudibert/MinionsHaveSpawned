@@ -1,7 +1,7 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-#include <glad/glad.h>  // Criação de contexto OpenGL 3.3
+#include <glad/glad.h> // OpenGL 3.3 Context Creation
 
 namespace utils
 {
@@ -13,5 +13,6 @@ double clamping(double value, double maximum, double minimum);
 
 // Prints information about the current GPU
 void print_gpu_info();
-}
+} // namespace utils
+
 #endif // UTILS_H_

@@ -25,7 +25,7 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 // Global Constants
-const GLuint SCREEN_WIDTH = 800; // width of the screen
+const GLuint SCREEN_WIDTH = 800;  // width of the screen
 const GLuint SCREEN_HEIGHT = 600; // height of the screen
 
 using namespace std;

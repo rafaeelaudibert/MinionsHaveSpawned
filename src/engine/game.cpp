@@ -22,33 +22,32 @@ void Game::init()
 {
     printf("[GAME] Game initialization\n");
 
-    SkyBox* skybox = new SkyBox("skybox");
-    objects.insert(std::map<std::string, GameObject*>::value_type ("skybox", skybox));
+    SkyBox *skybox = new SkyBox("skybox");
+    objects.insert(std::map<std::string, GameObject *>::value_type("skybox", skybox));
     printf("[GAME] Skybox created\n");
 
-    Cube* plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 0.01f, 80.0f), "../../src/textures/full_map.jpg", "full_map");
-    objects.insert(std::map<std::string, GameObject*>::value_type ("plane", plane));
+    Cube *plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 0.01f, 80.0f), "../../src/textures/full_map.jpg", "full_map");
+    objects.insert(std::map<std::string, GameObject *>::value_type("plane", plane));
     printf("[GAME] Plane created\n");
 
-    Cube* wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_1", wall_1));
+    Cube *wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("wall_1", wall_1));
     printf("[GAME] Wall 1 created\n");
 
-    Cube* wall_2 = new Cube("wall_2", glm::vec4(40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_2", wall_2));
+    Cube *wall_2 = new Cube("wall_2", glm::vec4(40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("wall_2", wall_2));
     printf("[GAME] Wall 2 created\n");
 
-    Cube* wall_3 = new Cube("wall_3", glm::vec4(0.0f, 1.5f, -40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_3", wall_3));
+    Cube *wall_3 = new Cube("wall_3", glm::vec4(0.0f, 1.5f, -40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("wall_3", wall_3));
     printf("[GAME] Wall 3 created\n");
 
-    Cube* wall_4 = new Cube("wall_4", glm::vec4(0.0f, 1.5f, 40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("wall_4", wall_4));
+    Cube *wall_4 = new Cube("wall_4", glm::vec4(0.0f, 1.5f, 40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
-    // Magical number = 1.6
-    Dummy* dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
-    objects.insert(std::map<std::string, GameObject*>::value_type ("dummy", dummy));
+    Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
     printf("[GAME] Dummy created\n");
 }
 
@@ -61,7 +60,8 @@ void Game::new_frame()
 
     deltaTime = currentFrame - lastFrame;
 
-    if (glfwGetTime() - FPS_COUNTER > 1) {
+    if (glfwGetTime() - FPS_COUNTER > 1)
+    {
         printf("[INFO] FPS: %d\n", ITERATIONS);
         FPS_COUNTER = currentFrame;
         ITERATIONS = 0;
@@ -92,7 +92,8 @@ void Game::process_input()
         camera.process_keyboard(RIGHT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
 
     // Stopped uncrouching
-    if (camera.position.y >= CHARACTER_HEIGHT && player_status == PlayerStatus::UNCROUCHING) {
+    if (camera.position.y >= CHARACTER_HEIGHT && player_status == PlayerStatus::UNCROUCHING)
+    {
         player_status = PlayerStatus::STANDING;
         camera.position.y = CHARACTER_HEIGHT;
         y_speed = MAX_SPEED;
@@ -100,33 +101,36 @@ void Game::process_input()
     }
 
     // Stopped jumping
-    if (camera.position.y <= CHARACTER_HEIGHT && player_status == PlayerStatus::JUMPING) {
+    if (camera.position.y <= CHARACTER_HEIGHT && player_status == PlayerStatus::JUMPING)
+    {
         player_status = PlayerStatus::STANDING;
         camera.position.y = CHARACTER_HEIGHT;
         printf("[GAME] Back to standing\n");
     }
 
     // Jump
-    if (keys[GLFW_KEY_SPACE] == GL_TRUE && player_status == PlayerStatus::STANDING) {
+    if (keys[GLFW_KEY_SPACE] == GL_TRUE && player_status == PlayerStatus::STANDING)
+    {
         y_speed = JUMP_SPEED;
         player_status = PlayerStatus::JUMPING;
         printf("[GAME] Started jumping\n");
     }
 
     // Crouching
-    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_TRUE && player_status == PlayerStatus::STANDING) {
+    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_TRUE && player_status == PlayerStatus::STANDING)
+    {
         y_speed = CROUCHING_SPEED;
         player_status = PlayerStatus::CROUCHING;
         printf("[GAME] Started crouching\n");
     }
 
     // Uncrouching
-    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_FALSE && player_status == PlayerStatus::CROUCHING) {
+    if (keys[GLFW_KEY_LEFT_SHIFT] == GL_FALSE && player_status == PlayerStatus::CROUCHING)
+    {
         y_speed = JUMP_SPEED;
         player_status = PlayerStatus::UNCROUCHING;
         printf("[GAME] Started uncrouching\n");
     }
-
 }
 
 void Game::render()
@@ -139,9 +143,8 @@ void Game::render()
     glm::mat4 projection = matrix::perspective_matrix(glm::radians(this->camera.zoom), screen_ratio, -0.1f, -125.0f);
 
     // Render objects
-    for (const auto& object : this->objects)
+    for (const auto &object : this->objects)
     {
         object.second->render(view, projection);
     }
-
 }
