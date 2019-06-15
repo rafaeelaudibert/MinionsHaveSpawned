@@ -4,11 +4,18 @@
 #include "model/base.hpp"
 #include "model/cube.hpp"
 #include "model/bunny.hpp"
-#include "model/enemy.hpp"
 #include "model/dummy.hpp"
 #include "model/dragon.hpp"
 #include "model/skybox.hpp"
 #include "utils/helpers.hpp"
+#include "model/enemy/order_melee.hpp"
+#include "model/enemy/order_ranged.hpp"
+#include "model/enemy/order_siege.hpp"
+#include "model/enemy/order_super.hpp"
+#include "model/enemy/chaos_melee.hpp"
+#include "model/enemy/chaos_ranged.hpp"
+#include "model/enemy/chaos_siege.hpp"
+#include "model/enemy/chaos_super.hpp"
 
 Game::Game(GLuint width, GLuint height)
     : state(GAME_ACTIVE), width(width), height(height), screen_ratio((float)width / (float)height)
@@ -50,6 +57,38 @@ void Game::init()
     Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
     printf("[GAME] Dummy created\n");
+
+    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("om", om));
+    printf("[GAME] OrderMelee created\n");
+
+    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(3.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("org", org));
+    printf("[GAME] OrderRanged created\n");
+
+    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(5.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("osg", osg));
+    printf("[GAME] OrderSiege created\n");
+
+    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(7.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("osp", osp));
+    printf("[GAME] OrderSuper created\n");
+
+    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(9.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("cm", cm));
+    printf("[GAME] ChaosMelee created\n");
+
+    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(11.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
+    printf("[GAME] ChaosRanged created\n");
+
+    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("csg", csg));
+    printf("[GAME] ChaosSiege created\n");
+
+    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(15.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    objects.insert(std::map<std::string, GameObject *>::value_type("csp", csp));
+    printf("[GAME] ChaosSuper created\n");
 }
 
 void Game::new_frame()
