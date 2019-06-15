@@ -25,8 +25,9 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 // Global Constants
-const GLuint SCREEN_WIDTH = 800;  // width of the screen
-const GLuint SCREEN_HEIGHT = 600; // height of the screen
+const GLuint SCREEN_WIDTH = 1920;   // Width of the screen
+const GLuint SCREEN_HEIGHT = 1080;  // Height of the screen
+const GLboolean FULLSCREEN = false; // Should we render fullscreen or not
 
 using namespace std;
 
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
 
     // Criamos uma janela do sistema operacional, com o tamanho pré-definido acima
     GLFWwindow *window;
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Minions Have Spawned - FCG 2019/1", NULL, NULL);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Minions Have Spawned - FCG 2019/1", FULLSCREEN ? glfwGetPrimaryMonitor() : NULL, NULL);
     if (!window)
     {
         glfwTerminate();
