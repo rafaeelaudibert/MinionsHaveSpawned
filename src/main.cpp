@@ -25,9 +25,11 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 // Global Constants
-const GLuint SCREEN_WIDTH = 1920;   // Width of the screen
-const GLuint SCREEN_HEIGHT = 1080;  // Height of the screen
-const GLboolean FULLSCREEN = false; // Should we render fullscreen or not
+const GLuint SCREEN_WIDTH = 1920;       // Width of the screen
+const GLuint SCREEN_HEIGHT = 1080;      // Height of the screen
+const GLboolean FULLSCREEN = false;     // Should we render fullscreen or not
+const GLboolean ANTIALIASING = false;   // Should we use antialiasing or not
+const GLuint ANTIALIASING_QUALITY = 4;  // Antialiasing level, if ANTIALIASING is set to true
 
 using namespace std;
 
@@ -58,6 +60,10 @@ int main(int argc, char *argv[])
     // Pedimos para utilizar o perfil "core", isto é, utilizaremos somente as
     // funções modernas de OpenGL.
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // Pedimos para utilizar mais samplers para termos MSAA, se utilizado
+    if (ANTIALIASING)
+        glfwWindowHint(GLFW_SAMPLES, ANTIALIASING_QUALITY);
 
     // Criamos uma janela do sistema operacional, com o tamanho pré-definido acima
     GLFWwindow *window;
@@ -102,10 +108,11 @@ int main(int argc, char *argv[])
 
     // configure global opengl state
     // -----------------------------
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
+    glEnable(GL_DEPTH_TEST);        // Depth testing
+    glEnable(GL_MULTISAMPLE);       // Antialiasing multisample
+    glEnable(GL_CULL_FACE);         // Backface culling
+    glCullFace(GL_BACK);            // Configuring culling to back
+    glFrontFace(GL_CCW);            // Configuring front face with counter-clockwise orientation
 
     // Imprimimos no terminal informações sobre a GPU do sistema
     utils::print_gpu_info();
