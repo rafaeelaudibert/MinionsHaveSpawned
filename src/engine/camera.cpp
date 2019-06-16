@@ -26,15 +26,8 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
         new_position.y = utils::clamping(new_position.y + falling_velocity, game.MAX_HEIGHT, game.player_status == PlayerStatus::STANDING ? game.CHARACTER_HEIGHT : game.CHARACTER_CROUCHING_HEIGHT);
 
     // Check collision
-    glm::vec3 camera_bbox_min = glm::vec3(new_position.x - 0.2f, new_position.y - game.CHARACTER_HEIGHT, new_position.z - 0.2f);
-    glm::vec3 camera_bbox_max = glm::vec3(new_position.x + 0.2f, new_position.y + 0.5f, new_position.z + 0.2f);
-
-    if (!std::any_of(collisive_objects.begin(),
-                     collisive_objects.end(),
-                     [camera_bbox_min, camera_bbox_max](std::pair<std::string, Collisive *> entry) {
-                         return entry.second->collide(camera_bbox_min, camera_bbox_max);
-                     }))
-    {
+    bool collision = check_collision(new_position, game, collisive_objects);
+    if (!collision) {
         position = new_position;
         return true;
     }
@@ -79,4 +72,15 @@ void Camera::update_camera_vectors()
     // Also re-calculate the Right  vector
     // Normalize the vector, because their length gets closer to 0 the more you look up or down which results in slower movement.
     this->right = matrix::normalize(matrix::crossproduct(this->front, this->world_up));
+}
+
+bool Camera::check_collision(glm::vec4 position, const Game &game, std::map<std::string, Collisive *> collisive_objects) {
+    glm::vec3 camera_bbox_min = glm::vec3(position.x - 0.2f, position.y - game.CHARACTER_HEIGHT, position.z - 0.2f);
+    glm::vec3 camera_bbox_max = glm::vec3(position.x + 0.2f, position.y + 0.5f, position.z + 0.2f);
+
+    return std::any_of(collisive_objects.begin(),
+                       collisive_objects.end(),
+                       [camera_bbox_min, camera_bbox_max](std::pair<std::string, Collisive *> entry) {
+                           return entry.second->collide(camera_bbox_min, camera_bbox_max);
+                       });
 }

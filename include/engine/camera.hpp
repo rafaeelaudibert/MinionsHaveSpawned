@@ -90,6 +90,9 @@ public:
 private:
     // Calculates the front vector from the Camera's (updated) Euler Angles
     void update_camera_vectors();
+
+    // Check if the camera collided with something
+    bool check_collision(glm::vec4, const Game&, std::map<std::string, Collisive *>);
 };
 
 // Game include down here to satisfy forward referencing
