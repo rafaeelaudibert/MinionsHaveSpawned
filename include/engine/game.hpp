@@ -8,6 +8,7 @@
 
 #include "engine\camera.hpp"
 #include "model\base.hpp"
+#include "model\collisive.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -58,6 +59,9 @@ public:
 
     // Objects map
     std::map<std::string, GameObject *> objects;
+
+    // Collisive objects map
+    std::map<std::string, Collisive *> collisive_objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);

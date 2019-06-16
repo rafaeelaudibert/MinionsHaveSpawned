@@ -70,6 +70,13 @@ ObjModel* ResourceManager::load_object(const char* filename, GameObject* gameObj
     // If we need to add this, we might compare the code below with the Lab4 one
     size_t num_triangles = model->shapes[0].mesh.num_face_vertices.size();
 
+    // Variables and constants to calculate the bbox_min and bbox_max
+    const float minval = std::numeric_limits<float>::min();
+    const float maxval = std::numeric_limits<float>::max();
+
+    glm::vec3 bbox_min = glm::vec3(maxval,maxval,maxval);
+    glm::vec3 bbox_max = glm::vec3(minval,minval,minval);
+
     for (size_t triangle = 0; triangle < num_triangles; ++triangle)
     {
         assert(model->shapes[0].mesh.num_face_vertices[triangle] == 3);
@@ -80,10 +87,24 @@ ObjModel* ResourceManager::load_object(const char* filename, GameObject* gameObj
 
             indexes.push_back(3*triangle + vertex);
 
-            model_coefficients.push_back( model->attrib.vertices[3*idx.vertex_index + 0] ); // X
-            model_coefficients.push_back( model->attrib.vertices[3*idx.vertex_index + 1] ); // Y
-            model_coefficients.push_back( model->attrib.vertices[3*idx.vertex_index + 2] ); // Z
-            model_coefficients.push_back( 1.0f ); // W
+            // Calculate x, y and z vertex
+            const float vx = model->attrib.vertices[3*idx.vertex_index + 0];
+            const float vy = model->attrib.vertices[3*idx.vertex_index + 1];
+            const float vz = model->attrib.vertices[3*idx.vertex_index + 2];
+
+            // Append them to the model_coefficients vector
+            model_coefficients.push_back(vx); // X
+            model_coefficients.push_back(vy); // Y
+            model_coefficients.push_back(vz); // Z
+            model_coefficients.push_back(1.0f); // W
+
+            // Update the bbox
+            bbox_min.x = std::min(bbox_min.x, vx);
+            bbox_min.y = std::min(bbox_min.y, vy);
+            bbox_min.z = std::min(bbox_min.z, vz);
+            bbox_max.x = std::max(bbox_max.x, vx);
+            bbox_max.y = std::max(bbox_max.y, vy);
+            bbox_max.z = std::max(bbox_max.z, vz);
 
             // We check if there are normals in the object, if there are, we save them
             if ( idx.normal_index != -1 )
@@ -153,6 +174,8 @@ ObjModel* ResourceManager::load_object(const char* filename, GameObject* gameObj
     gameObject->drawMode = GL_TRIANGLES;
     gameObject->indexesLength = indexes.size();
     gameObject->indexesOffset = 0;
+    gameObject->bbox_min = bbox_min;
+    gameObject->bbox_max = bbox_max;
 
     return model;
 }

@@ -1,6 +1,7 @@
 #include "engine/game.hpp"
 #include "engine/matrices.hpp"
 #include "engine/resource_manager.hpp"
+#include "engine/camera.hpp"
 #include "model/base.hpp"
 #include "model/cube.hpp"
 #include "model/bunny.hpp"
@@ -58,52 +59,60 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
     printf("[GAME] Dummy created\n");
 
-    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("om", om));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("om", om));
     printf("[GAME] OrderMelee created\n");
 
-    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(3.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("org", org));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("org", org));
     printf("[GAME] OrderRanged created\n");
 
-    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(5.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("osg", osg));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osg", osg));
     printf("[GAME] OrderSiege created\n");
 
-    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(7.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("osp", osp));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osp", osp));
     printf("[GAME] OrderSuper created\n");
 
-    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(9.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("cm", cm));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cm", cm));
     printf("[GAME] ChaosMelee created\n");
 
-    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(11.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
     printf("[GAME] ChaosRanged created\n");
 
-    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csg", csg));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csg", csg));
     printf("[GAME] ChaosSiege created\n");
 
-    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(15.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csp", csp));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csp", csp));
     printf("[GAME] ChaosSuper created\n");
 }
 
 void Game::new_frame()
 {
     GLfloat currentFrame = glfwGetTime();
-    static GLfloat FPS_COUNTER = currentFrame;
+    static GLfloat LAST_FRAME_COUNTER = currentFrame;
     static int ITERATIONS = 0;
     ITERATIONS++;
 
     deltaTime = currentFrame - lastFrame;
 
-    if (glfwGetTime() - FPS_COUNTER > 1)
+    if (glfwGetTime() - LAST_FRAME_COUNTER > 1)
     {
         printf("[INFO] FPS: %d\n", ITERATIONS);
-        FPS_COUNTER = currentFrame;
+        LAST_FRAME_COUNTER = currentFrame;
         ITERATIONS = 0;
     }
 
@@ -112,31 +121,37 @@ void Game::new_frame()
 
 void Game::update()
 {
-    // Update falling speed
-    y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
 
-    // Restrict camera position
-    camera.position.y = utils::clamping(camera.position.y + y_speed * this->deltaTime, MAX_HEIGHT, player_status == PlayerStatus::STANDING ? CHARACTER_HEIGHT : CHARACTER_CROUCHING_HEIGHT);
+    // Updates the falling speed, only if we are falling and not colliding with something
+    if(camera.process_movement(CameraMovement::DOWN, this->deltaTime, collisive_objects, *this)) {
+        y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
+    } else {
+        y_speed = 0;
+
+        // Makes the character stop falling if it hit the top of an object
+        if (player_status == PlayerStatus::JUMPING)
+            player_status = PlayerStatus::STANDING;
+    }
+
 }
 
 void Game::process_input()
 {
     // Movement
     if (keys[GLFW_KEY_W] == GL_TRUE)
-        camera.process_keyboard(FORWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_movement(CameraMovement::FORWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER), collisive_objects, *this);
     if (keys[GLFW_KEY_S] == GL_TRUE)
-        camera.process_keyboard(BACKWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_movement(CameraMovement::BACKWARD, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER), collisive_objects, *this);
     if (keys[GLFW_KEY_A] == GL_TRUE)
-        camera.process_keyboard(LEFT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_movement(CameraMovement::LEFT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER), collisive_objects, *this);
     if (keys[GLFW_KEY_D] == GL_TRUE)
-        camera.process_keyboard(RIGHT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER));
+        camera.process_movement(CameraMovement::RIGHT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER), collisive_objects, *this);
 
     // Stopped uncrouching
     if (camera.position.y >= CHARACTER_HEIGHT && player_status == PlayerStatus::UNCROUCHING)
     {
         player_status = PlayerStatus::STANDING;
-        camera.position.y = CHARACTER_HEIGHT;
-        y_speed = MAX_SPEED;
+        y_speed = 0;
         printf("[GAME] Back to standing\n");
     }
 
@@ -144,7 +159,6 @@ void Game::process_input()
     if (camera.position.y <= CHARACTER_HEIGHT && player_status == PlayerStatus::JUMPING)
     {
         player_status = PlayerStatus::STANDING;
-        camera.position.y = CHARACTER_HEIGHT;
         printf("[GAME] Back to standing\n");
     }
 

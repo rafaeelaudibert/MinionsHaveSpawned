@@ -6,8 +6,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
+#include <string>
+#include <map>
 
 #include "engine/matrices.hpp"
+#include "model/collisive.hpp"
+
+// Forward referencing class Game (including "engine/game.hpp" at the end of this file)
+class Game;
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum CameraMovement
@@ -15,7 +21,8 @@ enum CameraMovement
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    DOWN
 };
 
 // Default camera values
@@ -71,7 +78,8 @@ public:
     glm::mat4 get_view_matrix();
 
     // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    void process_keyboard(CameraMovement direction, float delta_time);
+    // Returns if it really occured a movement or not
+    bool process_movement(CameraMovement direction, float delta_time, std::map<std::string, Collisive *> collisive_objects, const Game& game);
 
     // Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void process_mouse_movement(float xoffset, float yoffset, GLboolean constrain_pitch = GL_TRUE);
@@ -83,4 +91,7 @@ private:
     // Calculates the front vector from the Camera's (updated) Euler Angles
     void update_camera_vectors();
 };
+
+// Game include down here to satisfy forward referencing
+#include "engine/game.hpp"
 #endif
