@@ -55,9 +55,9 @@ Your application should include implementation of the following concepts of Comp
 
 - [ ] **Intersection tests between virtual objects**.
     - [ ] **At a minimum** your application should use **three types** of intersection test):
-        - [ ] TODO
-        - [ ] TODO
-        - [ ] TODO
+        - [x] Cube-Cube test
+        - [ ] Cube-Sphere test
+        - [ ] Cube-Point test
 
 - [ ] **Illumination** models of geometric objects.
     - [ ] **At a minimum** your application should include objects with the following lighting models:
