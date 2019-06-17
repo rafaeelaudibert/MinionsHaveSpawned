@@ -11,7 +11,6 @@ glm::mat4 Camera::get_view_matrix()
 bool Camera::process_movement(CameraMovement direction, float delta_time, std::map<std::string, Collisive *> collisive_objects, const Game &game)
 {
     float velocity = movement_speed * delta_time;
-    float falling_velocity = game.y_speed * delta_time;
     glm::vec4 new_position = position;
     glm::vec4 old_position = position;
 
@@ -24,7 +23,7 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     if (direction == RIGHT)
         new_position += right * velocity;
     if (direction == DOWN)
-        new_position.y = utils::clamping(new_position.y + falling_velocity, game.MAX_HEIGHT, game.player_status == PlayerStatus::STANDING ? game.CHARACTER_HEIGHT : game.CHARACTER_CROUCHING_HEIGHT);
+        new_position.y = new_position.y + game.y_speed * delta_time;
 
     // Update camera bbox to collision checking
     set_bbox(new_position);
@@ -91,6 +90,6 @@ bool Camera::check_collision(Collisive * object) {
 }
 
 void Camera::set_bbox(glm::vec4 position) {
-    this->camera_bbox_min = glm::vec3(position.x - CAMERA_WIDTH, position.y - Game::CHARACTER_HEIGHT, position.z - CAMERA_DEPTH);
+    this->camera_bbox_min = glm::vec3(position.x - CAMERA_WIDTH, position.y - Game::character_height, position.z - CAMERA_DEPTH);
     this->camera_bbox_max = glm::vec3(position.x + CAMERA_WIDTH, position.y + CAMERA_HEIGHT, position.z + CAMERA_DEPTH);
 }

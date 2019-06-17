@@ -40,23 +40,24 @@ public:
     float screen_ratio;
 
     // Mechanic variables
-    const GLfloat GRAVITY = -26.0f;                      // Gravity Force
-    const GLfloat MAX_SPEED = -180.0f;                   // Maximum falling speed due to air resistance
-    static constexpr float CHARACTER_HEIGHT = 3.0f;               // Height of the character, in meters
-    const GLfloat JUMP_SPEED = 12.5f;                     // Instantaneous jump speed
-    const GLfloat MAX_HEIGHT = 100.0f;                   // Maximum height the character can possibly jump to
-    const GLfloat CHARACTER_CROUCHING_HEIGHT = 2.3f;     // Height of the character while crouching, in meters
-    const GLfloat CROUCHING_SPEED = -3.5f;               // Instantaneous crouching speed
-    const GLfloat CROUCHING_SPEED_MULTIPLIER = 0.4f;     // How much of the normal speed the player runs while crouching
-    PlayerStatus player_status = PlayerStatus::STANDING; // Current player status
-    GLfloat y_speed = 0;
+    const GLfloat GRAVITY = -26.0f;                             // Gravity Force
+    const GLfloat MAX_SPEED = -180.0f;                          // Maximum falling speed due to air resistance
+    static float character_height;                              // Height of the character, in meters
+    const GLfloat JUMP_SPEED = 12.5f;                           // Instantaneous jump speed
+    const GLfloat MAX_HEIGHT = 100.0f;                          // Maximum height the character can possibly jump to
+    static float constexpr CHARACTER_STANDING_HEIGHT = 3.0f;    // Hiehgt of the character while standing, in meters
+    const GLfloat CHARACTER_CROUCHING_HEIGHT = 2.3f;            // Height of the character while crouching, in meters
+    const GLfloat CROUCHING_SPEED = -3.5f;                      // Instantaneous crouching speed
+    const GLfloat CROUCHING_SPEED_MULTIPLIER = 0.4f;            // How much of the normal speed the player runs while crouching
+    PlayerStatus player_status = PlayerStatus::STANDING;        // Current player status
+    GLfloat y_speed = 0;                                        // Current character falling velocity
 
     // Time variables
     GLfloat lastFrame = 0.0f;
     GLfloat deltaTime = 0.0f;
 
     // Camera
-    Camera camera = Camera(glm::vec4(0.0f, CHARACTER_HEIGHT, 0.0f, 1.0f));
+    Camera camera = Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
 
     // Objects map
     std::map<std::string, GameObject *> objects;

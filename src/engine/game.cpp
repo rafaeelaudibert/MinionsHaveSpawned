@@ -27,6 +27,8 @@ Game::~Game()
 {
 }
 
+float Game::character_height = Game::CHARACTER_STANDING_HEIGHT;
+
 void Game::init()
 {
     printf("[GAME] Game initialization\n");
@@ -136,15 +138,28 @@ void Game::update()
 {
 
     // Updates the falling speed, only if we are falling and not colliding with something
-    if(camera.process_movement(CameraMovement::DOWN, this->deltaTime, collisive_objects, *this)) {
+    if(camera.process_movement(CameraMovement::DOWN, this->deltaTime, collisive_objects, *this))
+    {
         y_speed = utils::clamping(y_speed + GRAVITY * this->deltaTime, 100.0f, MAX_SPEED);
-    } else {
-        y_speed = 0;
-
+    }
+    else
+    {
         // Makes the character stop falling if it hit the top of an object
         if (player_status == PlayerStatus::JUMPING)
+        {
             player_status = PlayerStatus::STANDING;
+            printf("[GAME] Back to standing\n");
+        }
     }
+
+    // Update character height for crouching
+    if (player_status == PlayerStatus::CROUCHING)
+        this->character_height = utils::clamping(this->character_height + this->y_speed * this->deltaTime, CHARACTER_STANDING_HEIGHT, CHARACTER_CROUCHING_HEIGHT);
+
+
+    // Update charachter height for uncrouching
+    if (player_status == PlayerStatus::UNCROUCHING)
+        this->character_height = utils::clamping(this->character_height + this->y_speed * this->deltaTime, CHARACTER_STANDING_HEIGHT, CHARACTER_CROUCHING_HEIGHT);
 
     // Update objects
     for (const auto &object : this->enemy_objects)
@@ -167,17 +182,10 @@ void Game::process_input()
         camera.process_movement(CameraMovement::RIGHT, this->deltaTime * (player_status == PlayerStatus::STANDING || player_status == PlayerStatus::JUMPING ? 1 : CROUCHING_SPEED_MULTIPLIER), collisive_objects, *this);
 
     // Stopped uncrouching
-    if (camera.position.y >= CHARACTER_HEIGHT && player_status == PlayerStatus::UNCROUCHING)
+    if (character_height >= CHARACTER_STANDING_HEIGHT && player_status == PlayerStatus::UNCROUCHING)
     {
         player_status = PlayerStatus::STANDING;
         y_speed = 0;
-        printf("[GAME] Back to standing\n");
-    }
-
-    // Stopped jumping
-    if (camera.position.y <= CHARACTER_HEIGHT && player_status == PlayerStatus::JUMPING)
-    {
-        player_status = PlayerStatus::STANDING;
         printf("[GAME] Back to standing\n");
     }
 
