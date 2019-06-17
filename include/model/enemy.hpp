@@ -3,7 +3,7 @@
 
 #ifndef ENEMY_H
 #define ENEMY_H
-enum EnemyColor {
+enum class EnemyColor {
     RED,
     BLUE
 };

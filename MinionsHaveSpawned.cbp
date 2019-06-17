@@ -64,6 +64,7 @@
 		<Unit filename="include/KHR/khrplatform.h" />
 		<Unit filename="include/dejavufont.h" />
 		<Unit filename="include/engine/camera.hpp" />
+		<Unit filename="include/engine/constants.hpp" />
 		<Unit filename="include/engine/cubemap_texture.hpp" />
 		<Unit filename="include/engine/game.hpp" />
 		<Unit filename="include/engine/matrices.hpp" />
@@ -347,6 +348,14 @@
 		<Unit filename="include/model/enemy/order_super.hpp" />
 		<Unit filename="include/model/obj_model.hpp" />
 		<Unit filename="include/model/skybox.hpp" />
+		<Unit filename="include/model/turret.hpp" />
+		<Unit filename="include/model/turret/bilgerwater_chaos.hpp" />
+		<Unit filename="include/model/turret/bilgerwater_order.hpp" />
+		<Unit filename="include/model/turret/howling_chaos.hpp" />
+		<Unit filename="include/model/turret/howling_order.hpp" />
+		<Unit filename="include/model/turret/siege_chaos.hpp" />
+		<Unit filename="include/model/turret/summoners_chaos.hpp" />
+		<Unit filename="include/model/turret/summoners_order.hpp" />
 		<Unit filename="include/stb_image.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="include/utils/helpers.hpp" />
@@ -368,6 +377,7 @@
 		<Unit filename="src/model/cube.cpp" />
 		<Unit filename="src/model/dragon.cpp" />
 		<Unit filename="src/model/dummy.cpp" />
+		<Unit filename="src/model/enemy.cpp" />
 		<Unit filename="src/model/enemy/chaos_melee.cpp" />
 		<Unit filename="src/model/enemy/chaos_ranged.cpp" />
 		<Unit filename="src/model/enemy/chaos_siege.cpp" />
@@ -377,6 +387,14 @@
 		<Unit filename="src/model/enemy/order_siege.cpp" />
 		<Unit filename="src/model/enemy/order_super.cpp" />
 		<Unit filename="src/model/skybox.cpp" />
+		<Unit filename="src/model/turret.cpp" />
+		<Unit filename="src/model/turret/bilgerwater_chaos.cpp" />
+		<Unit filename="src/model/turret/bilgerwater_order.cpp" />
+		<Unit filename="src/model/turret/howling_chaos.cpp" />
+		<Unit filename="src/model/turret/howling_order.cpp" />
+		<Unit filename="src/model/turret/siege_chaos.cpp" />
+		<Unit filename="src/model/turret/summoners_chaos.cpp" />
+		<Unit filename="src/model/turret/summoners_order.cpp" />
 		<Unit filename="src/objects/bunny.obj" />
 		<Unit filename="src/objects/plane.obj" />
 		<Unit filename="src/objects/sphere.obj" />

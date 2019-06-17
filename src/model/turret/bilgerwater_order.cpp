@@ -1,30 +1,28 @@
 #include "engine/resource_manager.hpp"
 #include "engine/matrices.hpp"
-#include "model/enemy/order_super.hpp"
+#include "model/turret/bilgerwater_order.hpp"
 
-void OrderSuper::build()
+void BilgerwaterOrder::build()
 {
     // Initialize object, shaders, and textures
-    ResourceManager::load_object("../../src/objects/order_minion_super.obj", this, this->name);
+    ResourceManager::load_object("../../src/objects/bw_order_turret.obj", this, this->name);
     this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
     this->shader.use();
 
     switch (this->color)
     {
-    case EnemyColor::RED:
-        this->texture = ResourceManager::load_texture("../../src/textures/order_minion_super_red.jpg", this->name);
-        break;
-    case EnemyColor::BLUE:
-        this->texture = ResourceManager::load_texture("../../src/textures/order_minion_super_blue.jpg", this->name);
+    case TurretColor::RED:
+    case TurretColor::BLUE:
+        this->texture = ResourceManager::load_texture("../../src/textures/bw_order_turret.jpg", this->name);
         break;
     default:
-        throw std::runtime_error("[ERROR] Error when trying to load the OrderSuper model - Non existent EnemyColor.");
+        throw std::runtime_error("[ERROR] Error when trying to load the BilgerwaterOrder model - Non existent TurretColor.");
     }
 
     return;
 }
 
-void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
+void BilgerwaterOrder::render(glm::mat4 view, glm::mat4 projection)
 {
 
     // Set to use this shader
@@ -54,6 +52,3 @@ void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
     glBindVertexArray(0);
 }
 
-void OrderSuper::update(float delta_time, Camera *camera) {
-    // this->position.y += 0.1 * delta_time;
-}

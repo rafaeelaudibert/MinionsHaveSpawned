@@ -18,6 +18,13 @@
 #include "model/enemy/chaos_ranged.hpp"
 #include "model/enemy/chaos_siege.hpp"
 #include "model/enemy/chaos_super.hpp"
+#include "model/turret/bilgerwater_chaos.hpp"
+#include "model/turret/bilgerwater_order.hpp"
+#include "model/turret/summoners_chaos.hpp"
+#include "model/turret/summoners_order.hpp"
+#include "model/turret/howling_chaos.hpp"
+#include "model/turret/howling_order.hpp"
+#include "model/turret/siege_chaos.hpp"
 
 Game::Game(GLuint width, GLuint height)
     : state(GAME_ACTIVE), width(width), height(height), screen_ratio((float)width / (float)height)
@@ -67,53 +74,88 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
     printf("[GAME] Dummy created\n");
 
-    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("om", om));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("om", om));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("om", om));
     printf("[GAME] OrderMelee created\n");
 
-    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("org", org));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("org", org));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("org", org));
     printf("[GAME] OrderRanged created\n");
 
-    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("osg", osg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osg", osg));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osg", osg));
     printf("[GAME] OrderSiege created\n");
 
-    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(1.5f, 1.5f, 1.5f));
     objects.insert(std::map<std::string, GameObject *>::value_type("osp", osp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osp", osp));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osp", osp));
     printf("[GAME] OrderSuper created\n");
 
-    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("cm", cm));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cm", cm));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cm", cm));
     printf("[GAME] ChaosMelee created\n");
 
-    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
+    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cr", cr));
     printf("[GAME] ChaosRanged created\n");
 
-    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csg", csg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csg", csg));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csg", csg));
     printf("[GAME] ChaosSiege created\n");
 
-    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csp", csp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csp", csp));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csp", csp));
     printf("[GAME] ChaosSuper created\n");
+
+    Turret *bc = new BilgerwaterChaos("bc", TurretColor::RED, 2.0f, glm::vec4(1.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("bc", bc));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bc", bc));
+    printf("[GAME] BilgerwaterChaos created\n");
+
+    Turret *bo = new BilgerwaterOrder("bo", TurretColor::RED, 2.0f, glm::vec4(5.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("bo", bo));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bo", bo));
+    printf("[GAME] BilgerwaterOrder created\n");
+
+    Turret *sc = new SummonersChaos("sc", TurretColor::BLUE, 2.0f, glm::vec4(9.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("sc", sc));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sc", sc));
+    printf("[GAME] SummonersChaos created\n");
+
+    Turret *so = new SummonersOrder("so", TurretColor::RED, 2.0f, glm::vec4(13.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("so", so));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("so", so));
+    printf("[GAME] SummonersOrder created\n");
+
+    Turret *hc = new HowlingChaos("hc", TurretColor::BLUE, 2.0f, glm::vec4(17.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("hc", hc));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("hc", hc));
+    printf("[GAME] HowlingChaos created\n");
+
+    Turret *ho = new HowlingOrder("ho", TurretColor::RED, 2.0f, glm::vec4(21.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("ho", ho));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("ho", ho));
+    printf("[GAME] HowlingOrder created\n");
+
+    Turret *sgc = new SiegeChaos("sgc", TurretColor::RED, 2.0f, glm::vec4(25.0f, 0.0f, -5.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("sgc", sgc));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sgc", sgc));
+    printf("[GAME] SiegeChaos created\n");
 }
 
 void Game::new_frame()
