@@ -11,6 +11,7 @@
 
 #include "engine/matrices.hpp"
 #include "model/collisive.hpp"
+#include "engine/constants.hpp"
 
 // Forward referencing class Game (including "engine/game.hpp" at the end of this file)
 class Game;
@@ -46,22 +47,22 @@ public:
     float zoom;
 
     // Camera "size"
-    const float CAMERA_WIDTH = 0.4f;
-    const float CAMERA_DEPTH = 0.4f;
-    const float CAMERA_HEIGHT = 0.4f;
+    static float constexpr CAMERA_WIDTH = 0.4f;
+    static float constexpr CAMERA_DEPTH = 0.4f;
+    static float constexpr CAMERA_HEIGHT = 0.4f;
 
     // Default camera values
-    const float YAW = -90.0f;
-    const float PITCH = 0.0f;
-    const float ZOOM = 45.0f;
-    const float SENSITIVITY = 0.1f;
+    static float constexpr YAW = -90.0f;
+    static float constexpr PITCH = 0.0f;
+    static float constexpr ZOOM = 45.0f;
+    static float constexpr SENSITIVITY = 0.1f;
 
     // Camera AABB
     glm::vec3 camera_bbox_min;
     glm::vec3 camera_bbox_max;
 
     // Constructor with vectors
-    Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(Game::SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
+    Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(Constants::SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
     {
         this->position = position;
         this->up = up;
@@ -76,7 +77,7 @@ public:
     }
 
     // Constructor with scalar values
-    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
+    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(Constants::SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
     {
         this->position = glm::vec4(posX, posY, posZ, 1.0);
         this->up = glm::vec4(upX, upY, upZ, 0.0);

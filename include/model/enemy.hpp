@@ -32,16 +32,7 @@ public:
     float bezier_time = 0.0f;
 
     // Update function (moves the object, and checks the collision with the camera to move it
-    virtual void update(float delta_time, Camera *camera) {
-        const float multiplier = 0.5;
-        const float delta_position = multiplier * delta_time;
-
-        this->position.z += delta_position;
-
-        if (camera->check_collision(this)) {
-            camera->position.z += delta_position;
-        }
-    }
+    virtual void update(float delta_time, Camera *camera);
 };
 
 #endif // ENEMY_H
