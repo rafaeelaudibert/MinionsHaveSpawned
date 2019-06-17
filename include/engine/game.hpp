@@ -6,9 +6,10 @@
 #include <string>
 #include <map>
 
-#include "engine\camera.hpp"
-#include "model\base.hpp"
-#include "model\collisive.hpp"
+#include "engine/camera.hpp"
+#include "model/base.hpp"
+#include "model/collisive.hpp"
+#include "model/enemy.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -41,8 +42,8 @@ public:
     // Mechanic variables
     const GLfloat GRAVITY = -26.0f;                      // Gravity Force
     const GLfloat MAX_SPEED = -180.0f;                   // Maximum falling speed due to air resistance
-    const GLfloat CHARACTER_HEIGHT = 3.0f;               // Height of the character, in meters
-    const GLfloat JUMP_SPEED = 7.5f;                     // Instantaneous jump speed
+    static constexpr float CHARACTER_HEIGHT = 3.0f;               // Height of the character, in meters
+    const GLfloat JUMP_SPEED = 12.5f;                     // Instantaneous jump speed
     const GLfloat MAX_HEIGHT = 100.0f;                   // Maximum height the character can possibly jump to
     const GLfloat CHARACTER_CROUCHING_HEIGHT = 2.3f;     // Height of the character while crouching, in meters
     const GLfloat CROUCHING_SPEED = -3.5f;               // Instantaneous crouching speed
@@ -62,6 +63,9 @@ public:
 
     // Collisive objects map
     std::map<std::string, Collisive *> collisive_objects;
+
+    // Enemy objects map
+    std::map<std::string, Enemy *> enemy_objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);

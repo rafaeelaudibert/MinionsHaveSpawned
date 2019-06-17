@@ -906,7 +906,7 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1560672999 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1560735185 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/game.hpp"
 	"engine/matrices.hpp"
 	"engine/resource_manager.hpp"
@@ -927,14 +927,15 @@
 	"model/enemy/chaos_siege.hpp"
 	"model/enemy/chaos_super.hpp"
 
-1560674019 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1560733052 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	<string>
 	<map>
-	"engine\camera.hpp"
-	"model\base.hpp"
-	"model\collisive.hpp"
+	"engine/camera.hpp"
+	"model/base.hpp"
+	"model/collisive.hpp"
+	"model/enemy.hpp"
 
 1554904293 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glfw\glfw3.h
 	<stddef.h>
@@ -1028,7 +1029,7 @@
 1560567693 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils.h
 	<cstdio>
 
-1560673850 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
+1560734867 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
 	<algorithm>
 	"engine\camera.hpp"
 	"engine\matrices.hpp"
@@ -1048,7 +1049,7 @@
 	<glm/vec4.hpp>
 	<glm/gtc/matrix_transform.hpp>
 
-1560674726 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\camera.hpp
+1560734014 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\camera.hpp
 	<glad/glad.h>
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
@@ -1082,7 +1083,7 @@
 1560567664 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.hpp
 	<glad/glad.h>
 
-1560660515 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
+1560730560 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
 	<string>
 	<glad/glad.h>
 	<tiny_obj_loader.h>
@@ -1090,7 +1091,7 @@
 	"engine/texture.hpp"
 	"model/obj_model.hpp"
 
-1560567627 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
+1560730601 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
 	"model\base.hpp"
 
 1560567641 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\obj_model.hpp
@@ -1112,7 +1113,7 @@
 1560567904 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\tiny_obj_loader.cpp
 	"tiny_obj_loader.h"
 
-1560567618 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
+1560730597 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
 	"model/base.hpp"
 
 1560567901 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\stb_image.cpp
@@ -1171,7 +1172,7 @@
 	"engine/matrices.hpp"
 	"model/dummy.hpp"
 
-1560567631 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dragon.hpp
+1560730615 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dragon.hpp
 	"model/base.hpp"
 
 1560587770 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dragon.cpp
@@ -1179,71 +1180,72 @@
 	"engine/matrices.hpp"
 	"model/dragon.hpp"
 
-1560588645 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_melee.cpp
+1560731984 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_melee.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/order_melee.hpp"
 
-1560588631 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_melee.hpp
+1560732056 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_melee.hpp
 	"model/enemy.hpp"
 
-1560661218 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy.hpp
+1560735463 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy.hpp
 	"model/collisive.hpp"
+	"engine/camera.hpp"
 
-1560589328 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_melee.cpp
+1560731995 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_melee.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/chaos_melee.hpp"
 
-1560589190 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_melee.hpp
+1560732044 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_melee.hpp
 	"model/enemy.hpp"
 
-1560589332 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_ranged.cpp
+1560731993 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_ranged.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/chaos_ranged.hpp"
 
-1560589234 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_ranged.hpp
+1560732041 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_ranged.hpp
 	"model/enemy.hpp"
 
-1560589335 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_siege.cpp
+1560731990 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_siege.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/chaos_siege.hpp"
 
-1560589204 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_siege.hpp
+1560732049 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_siege.hpp
 	"model/enemy.hpp"
 
-1560589346 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_super.cpp
+1560731987 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_super.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/chaos_super.hpp"
 
-1560589210 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_super.hpp
+1560732053 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_super.hpp
 	"model/enemy.hpp"
 
-1560589371 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_ranged.cpp
+1560731982 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_ranged.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/order_ranged.hpp"
 
-1560589237 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_ranged.hpp
+1560732059 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_ranged.hpp
 	"model/enemy.hpp"
 
-1560589394 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_siege.cpp
+1560731978 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_siege.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/order_siege.hpp"
 
-1560589224 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_siege.hpp
+1560732062 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_siege.hpp
 	"model/enemy.hpp"
 
-1560589418 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_super.cpp
+1560735239 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_super.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/enemy/order_super.hpp"
 
-1560589230 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_super.hpp
+1560735229 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_super.hpp
 	"model/enemy.hpp"
 
 1560661316 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\collisive.hpp

@@ -13,6 +13,7 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     float velocity = movement_speed * delta_time;
     float falling_velocity = game.y_speed * delta_time;
     glm::vec4 new_position = position;
+    glm::vec4 old_position = position;
 
     if (direction == FORWARD)
         new_position += matrix::crossproduct(up, right) * velocity;
@@ -25,14 +26,17 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     if (direction == DOWN)
         new_position.y = utils::clamping(new_position.y + falling_velocity, game.MAX_HEIGHT, game.player_status == PlayerStatus::STANDING ? game.CHARACTER_HEIGHT : game.CHARACTER_CROUCHING_HEIGHT);
 
-    // Check collision
-    bool collision = check_collision(new_position, game, collisive_objects);
-    if (!collision) {
-        position = new_position;
-        return true;
-    }
+    // Update camera bbox to collision checking
+    set_bbox(new_position);
 
-    return false;
+    bool collision = check_collision(collisive_objects);
+    if (!collision) {
+        position = new_position; // Configure the new position
+        return true;
+    } else {
+        set_bbox(old_position); // Restore old bounding box
+        return false;
+    }
 }
 
 void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean constrain_pitch)
@@ -74,13 +78,19 @@ void Camera::update_camera_vectors()
     this->right = matrix::normalize(matrix::crossproduct(this->front, this->world_up));
 }
 
-bool Camera::check_collision(glm::vec4 position, const Game &game, std::map<std::string, Collisive *> collisive_objects) {
-    glm::vec3 camera_bbox_min = glm::vec3(position.x - 0.2f, position.y - game.CHARACTER_HEIGHT, position.z - 0.2f);
-    glm::vec3 camera_bbox_max = glm::vec3(position.x + 0.2f, position.y + 0.5f, position.z + 0.2f);
-
+bool Camera::check_collision(std::map<std::string, Collisive *> collisive_objects) {
     return std::any_of(collisive_objects.begin(),
                        collisive_objects.end(),
-                       [camera_bbox_min, camera_bbox_max](std::pair<std::string, Collisive *> entry) {
-                           return entry.second->collide(camera_bbox_min, camera_bbox_max);
+                       [this](std::pair<std::string, Collisive *> entry) {
+                           return check_collision(entry.second);
                        });
+}
+
+bool Camera::check_collision(Collisive * object) {
+    return object->collide(this->camera_bbox_min, this->camera_bbox_max);
+}
+
+void Camera::set_bbox(glm::vec4 position) {
+    this->camera_bbox_min = glm::vec3(position.x - CAMERA_WIDTH, position.y - Game::CHARACTER_HEIGHT, position.z - CAMERA_DEPTH);
+    this->camera_bbox_max = glm::vec3(position.x + CAMERA_WIDTH, position.y + CAMERA_HEIGHT, position.z + CAMERA_DEPTH);
 }

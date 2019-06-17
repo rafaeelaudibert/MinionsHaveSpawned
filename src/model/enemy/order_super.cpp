@@ -53,3 +53,7 @@ void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
     // Unbind the VAO to prevent bugs
     glBindVertexArray(0);
 }
+
+void OrderSuper::update(float delta_time, Camera *camera) {
+    this->position.y += 0.01 * delta_time;
+}

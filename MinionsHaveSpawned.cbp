@@ -332,6 +332,7 @@
 		<Unit filename="include/glm/vector_relational.hpp" />
 		<Unit filename="include/model/base.hpp" />
 		<Unit filename="include/model/bunny.hpp" />
+		<Unit filename="include/model/collisive.hpp" />
 		<Unit filename="include/model/cube.hpp" />
 		<Unit filename="include/model/dragon.hpp" />
 		<Unit filename="include/model/dummy.hpp" />
@@ -363,6 +364,7 @@
 		<Unit filename="src/engine/texture.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/model/bunny.cpp" />
+		<Unit filename="src/model/collisive.cpp" />
 		<Unit filename="src/model/cube.cpp" />
 		<Unit filename="src/model/dragon.cpp" />
 		<Unit filename="src/model/dummy.cpp" />

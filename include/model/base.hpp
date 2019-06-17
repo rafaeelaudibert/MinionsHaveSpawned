@@ -22,7 +22,7 @@ public:
 
     std::string name;
 
-private:
+protected:
     virtual void build() = 0;
 
     // Public for now, should be protected

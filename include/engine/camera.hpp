@@ -52,6 +52,15 @@ public:
     float mouse_sensitivity;
     float zoom;
 
+    // Camera "size"
+    const float CAMERA_WIDTH = 0.4f;
+    const float CAMERA_DEPTH = 0.4f;
+    const float CAMERA_HEIGHT = 0.4f;
+
+    // Camera AABB
+    glm::vec3 camera_bbox_min;
+    glm::vec3 camera_bbox_max;
+
     // Constructor with vectors
     Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
     {
@@ -60,6 +69,10 @@ public:
         this->world_up = up;
         this->yaw = yaw;
         this->pitch = pitch;
+
+        // Configure bbox
+        set_bbox(this->position);
+
         update_camera_vectors();
     }
 
@@ -71,6 +84,10 @@ public:
         this->world_up = glm::vec4(upX, upY, upZ, 0.0);
         this->yaw = yaw;
         this->pitch = pitch;
+
+        // Configure bbox
+        set_bbox(this->position);
+
         update_camera_vectors();
     }
 
@@ -87,12 +104,15 @@ public:
     // Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
     void process_mouse_scroll(float yoffset);
 
+    // Check if the camera collided with something
+    bool check_collision(std::map<std::string, Collisive *>);
+    bool check_collision(Collisive *);
+
 private:
     // Calculates the front vector from the Camera's (updated) Euler Angles
     void update_camera_vectors();
 
-    // Check if the camera collided with something
-    bool check_collision(glm::vec4, const Game&, std::map<std::string, Collisive *>);
+    void set_bbox(glm::vec4 position);
 };
 
 // Game include down here to satisfy forward referencing

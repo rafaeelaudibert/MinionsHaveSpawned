@@ -62,41 +62,49 @@ void Game::init()
     Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("om", om));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("om", om));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("om", om));
     printf("[GAME] OrderMelee created\n");
 
     Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("org", org));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("org", org));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("org", org));
     printf("[GAME] OrderRanged created\n");
 
     Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("osg", osg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osg", osg));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osg", osg));
     printf("[GAME] OrderSiege created\n");
 
     Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("osp", osp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osp", osp));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osp", osp));
     printf("[GAME] OrderSuper created\n");
 
     Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("cm", cm));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cm", cm));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cm", cm));
     printf("[GAME] ChaosMelee created\n");
 
     Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cr", cr));
     printf("[GAME] ChaosRanged created\n");
 
     Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csg", csg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csg", csg));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csg", csg));
     printf("[GAME] ChaosSiege created\n");
 
     Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("csp", csp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csp", csp));
+    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csp", csp));
     printf("[GAME] ChaosSuper created\n");
 }
 
@@ -131,6 +139,12 @@ void Game::update()
         // Makes the character stop falling if it hit the top of an object
         if (player_status == PlayerStatus::JUMPING)
             player_status = PlayerStatus::STANDING;
+    }
+
+    // Update objects
+    for (const auto &object : this->enemy_objects)
+    {
+        object.second->update(this->deltaTime, &camera);
     }
 
 }

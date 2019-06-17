@@ -1,4 +1,5 @@
 #include "model/collisive.hpp"
+#include "engine/camera.hpp"
 
 #ifndef ENEMY_H
 #define ENEMY_H
@@ -22,6 +23,25 @@ protected:
 
 public:
     EnemyColor color = EnemyColor::RED;
+
+    //Life points properties
+    unsigned int max_life_points = 0;
+    unsigned int current_life_points = 0;
+
+    // Movement properties
+    float bezier_time = 0.0f;
+
+    // Update function (moves the object, and checks the collision with the camera to move it
+    virtual void update(float delta_time, Camera *camera) {
+        const float multiplier = 0.5;
+        const float delta_position = multiplier * delta_time;
+
+        this->position.z += delta_position;
+
+        if (camera->check_collision(this)) {
+            camera->position.z += delta_position;
+        }
+    }
 };
 
 #endif // ENEMY_H
