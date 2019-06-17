@@ -25,13 +25,6 @@ enum CameraMovement
     DOWN
 };
 
-// Default camera values
-const float YAW = -90.0f;
-const float PITCH = 0.0f;
-const float SPEED = 10.0f;
-const float SENSITIVITY = 0.1f;
-const float ZOOM = 45.0f;
-
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
 class Camera
 {
@@ -57,12 +50,18 @@ public:
     const float CAMERA_DEPTH = 0.4f;
     const float CAMERA_HEIGHT = 0.4f;
 
+    // Default camera values
+    const float YAW = -90.0f;
+    const float PITCH = 0.0f;
+    const float ZOOM = 45.0f;
+    const float SENSITIVITY = 0.1f;
+
     // Camera AABB
     glm::vec3 camera_bbox_min;
     glm::vec3 camera_bbox_max;
 
     // Constructor with vectors
-    Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
+    Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(Game::SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
     {
         this->position = position;
         this->up = up;
@@ -95,7 +94,7 @@ public:
     glm::mat4 get_view_matrix();
 
     // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    // Returns if it really occured a movement or not
+    // Returns if the movement occurred or not
     bool process_movement(CameraMovement direction, float delta_time, std::map<std::string, Collisive *> collisive_objects, const Game& game);
 
     // Processes input received from a mouse input system. Expects the offset value in both the x and y direction.

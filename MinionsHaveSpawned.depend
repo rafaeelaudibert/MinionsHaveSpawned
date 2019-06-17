@@ -906,7 +906,7 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1560787774 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1560788861 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/game.hpp"
 	"engine/matrices.hpp"
 	"engine/resource_manager.hpp"
@@ -927,7 +927,7 @@
 	"model/enemy/chaos_siege.hpp"
 	"model/enemy/chaos_super.hpp"
 
-1560787297 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1560790886 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	<string>
@@ -1029,7 +1029,7 @@
 1560567693 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils.h
 	<cstdio>
 
-1560787016 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
+1560788837 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\camera.cpp
 	<algorithm>
 	"engine\camera.hpp"
 	"engine\matrices.hpp"
