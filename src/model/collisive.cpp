@@ -3,15 +3,14 @@
 
 bool Collisive::collide(glm::vec3 bbox_min, glm::vec3 bbox_max) {
 
-    // If the "highest" part is "lower" than the "lowest" other object's part, or;
-    // If the "lowest" part is "higher" than the "highest" other object's part
-    //matrix::print_vector(glm::vec4(bbox_min, 0.0f), "bbox_min");
-    //matrix::print_vector(glm::vec4(bbox_max, 0.0f), "bbox_max");
-    //matrix::print_vector(glm::vec4(this->bbox_min + this->position, 0.0f), "this->bbox_min");
-    //matrix::print_vector(glm::vec4(this->bbox_max + this->position, 0.0f), "this->bbox_max");
-    if (this->bbox_max.x + this->position.x < bbox_min.x || this->bbox_min.x + this->position.x > bbox_max.x) return false;
-    if (this->bbox_max.y + this->position.y < bbox_min.y || this->bbox_min.y + this->position.y > bbox_max.y) return false;
-    if (this->bbox_max.z + this->position.z < bbox_min.z || this->bbox_min.z + this->position.z > bbox_max.z) return false;
+    // Calculate this object bbox translated, scaled, and rotated
+    glm::vec3 this_bbox_min = this->position + matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * glm::vec4(this->bbox_min, 1.0f);
+    glm::vec3 this_bbox_max = this->position + matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * glm::vec4(this->bbox_max, 1.0f);
+
+    // Check the collisions
+    if (this_bbox_max.x < bbox_min.x || this_bbox_min.x > bbox_max.x) return false;
+    if (this_bbox_max.y < bbox_min.y || this_bbox_min.y > bbox_max.y) return false;
+    if (this_bbox_max.z < bbox_min.z || this_bbox_min.z > bbox_max.z) return false;
 
     return true;
 }
