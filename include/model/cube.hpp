@@ -1,6 +1,7 @@
-#include "model\base.hpp"
+#include "model/base.hpp"
+#include "model/collisive.hpp"
 
-class Cube : public GameObject
+class Cube : public Collisive
 {
 public:
     Cube(std::string name,
@@ -9,7 +10,7 @@ public:
          float angle = 0,
          glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f),
          const GLchar *texture_path = NULL,
-         const GLchar *texture_name = NULL) : GameObject(name, position, orientation, angle, scale)
+         const GLchar *texture_name = NULL) : Collisive(name, position, orientation, angle, scale)
     {
         if (texture_path != NULL && texture_name != NULL)
             this->build(texture_path, texture_name);
