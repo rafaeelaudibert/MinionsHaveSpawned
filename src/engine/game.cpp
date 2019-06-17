@@ -37,22 +37,27 @@ void Game::init()
 
     Cube *plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 0.01f, 80.0f), "../../src/textures/full_map.jpg", "full_map");
     objects.insert(std::map<std::string, GameObject *>::value_type("plane", plane));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("plane", plane));
     printf("[GAME] Plane created\n");
 
     Cube *wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("wall_1", wall_1));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_1", wall_1));
     printf("[GAME] Wall 1 created\n");
 
     Cube *wall_2 = new Cube("wall_2", glm::vec4(40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("wall_2", wall_2));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_2", wall_2));
     printf("[GAME] Wall 2 created\n");
 
     Cube *wall_3 = new Cube("wall_3", glm::vec4(0.0f, 1.5f, -40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
     objects.insert(std::map<std::string, GameObject *>::value_type("wall_3", wall_3));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_3", wall_3));
     printf("[GAME] Wall 3 created\n");
 
     Cube *wall_4 = new Cube("wall_4", glm::vec4(0.0f, 1.5f, 40.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 3.0f, 0.005f));
     objects.insert(std::map<std::string, GameObject *>::value_type("wall_4", wall_4));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
     Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
@@ -89,7 +94,7 @@ void Game::init()
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cm", cm));
     printf("[GAME] ChaosMelee created\n");
 
-    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 1.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cr", cr));
