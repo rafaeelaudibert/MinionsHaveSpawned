@@ -108,11 +108,14 @@ int main(int argc, char *argv[])
 
     // configure global opengl state
     // -----------------------------
-    glEnable(GL_DEPTH_TEST);        // Depth testing
-    glEnable(GL_MULTISAMPLE);       // Antialiasing multisample
-    glEnable(GL_CULL_FACE);         // Backface culling
-    glCullFace(GL_BACK);            // Configuring culling to back
-    glFrontFace(GL_CCW);            // Configuring front face with counter-clockwise orientation
+    glEnable(GL_DEPTH_TEST);                            // Depth testing
+    glEnable(GL_MULTISAMPLE);                           // Antialiasing multisample
+    glEnable(GL_BLEND);                                 // Enable color blending
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Configuring blend function
+    glEnable(GL_CULL_FACE);                             // Backface culling
+    glCullFace(GL_BACK);                                // Configuring culling to back
+    glFrontFace(GL_CCW);                                // Configuring front face with counter-clockwise orientation
+
 
     // Imprimimos no terminal informações sobre a GPU do sistema
     utils::print_gpu_info();

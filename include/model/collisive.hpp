@@ -15,9 +15,13 @@ protected:
 
     };
 
+    bool collisive = true;
+
 public:
     bool collide(glm::vec3 bbox_min, glm::vec3 bbox_max);
     bool collide(Collisive *collisive);
+    void set_collisive();
+    void unset_collisive();
 };
 
 #endif // COLLISIVE_H

@@ -16,5 +16,13 @@ bool Collisive::collide(glm::vec3 bbox_min, glm::vec3 bbox_max) {
 }
 
 bool Collisive::collide(Collisive *collisive) {
-    return collide(collisive->bbox_min, collisive->bbox_max);
+    return this->collisive && collide(collisive->bbox_min, collisive->bbox_max);
+}
+
+void Collisive::set_collisive() {
+    this->collisive = true;
+}
+
+void Collisive::unset_collisive() {
+    this->collisive = false;
 }
