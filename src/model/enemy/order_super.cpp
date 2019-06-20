@@ -6,7 +6,7 @@ void OrderSuper::build()
 {
     // Initialize object, shaders, and textures
     ResourceManager::load_object("../../src/objects/order_minion_super.obj", this, this->name);
-    this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/enemy.vs", "../../src/shaders/enemy.fs", nullptr, this->name);
     this->shader.use();
 
     switch (this->color)
@@ -46,6 +46,10 @@ void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
     model *= matrix::scale_matrix(this->scale);
     model *= matrix::rotate_matrix(this->angle, this->orientation);
     this->shader.set_matrix("model", model);
+
+    // Render the dead minions properly
+    if (this->is_dead())
+        shader.set("is_dead", true);
 
     // Draw the element
     glDrawElements(this->drawMode, this->indexesLength, GL_UNSIGNED_INT, this->indexesOffset);
