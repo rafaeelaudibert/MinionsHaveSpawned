@@ -1,6 +1,7 @@
 #include "engine/resource_manager.hpp"
 #include "engine/matrices.hpp"
 #include "model/health_bar.hpp"
+#include "engine/game.hpp"
 
 void HealthBar::build()
 {
@@ -62,11 +63,14 @@ void HealthBar::build()
 }
 
 void HealthBar::render(glm::mat4 view, glm::mat4 projection) {
-    this->render(view, projection, 1.0f);
+    this->render(view, projection, 0.8f);
 }
 
 void HealthBar::render(glm::mat4 view, glm::mat4 projection, float health_percentage)
 {
+
+    // Get the camera position
+    glm::vec4 camera_position = Game::camera.position;
 
     // Set to use this shader
     this->shader.use();
@@ -85,7 +89,7 @@ void HealthBar::render(glm::mat4 view, glm::mat4 projection, float health_percen
     glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first
     model *= matrix::translate_matrix(this->position);
     model *= matrix::scale_matrix(this->scale);
-    model *= matrix::rotate_matrix(this->angle, this->orientation);
+    model *= matrix::rotate_matrix(std::atan2(camera_position.x - this->position.x, camera_position.z - this->position.z), this->orientation);
     this->shader.set_matrix("model", model);
 
     // Draw the element

@@ -49,7 +49,7 @@ public:
     GLfloat deltaTime = 0.0f;
 
     // Camera
-    Camera camera = Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
+    static Camera camera;
 
     // Objects map
     std::map<std::string, GameObject *> objects;

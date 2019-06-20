@@ -118,9 +118,6 @@ glm::mat4 matrix::rotate_z_matrix(float angle)
 glm::mat4 matrix::rotate_matrix(float angle, glm::vec4 axis)
 {
 
-    // Fix the angle
-    angle = 2 * angle;
-
     float c = cos(angle);
     float s = sin(angle);
     float minusc = 1 - c;

@@ -20,8 +20,8 @@ public:
 
     void build();
 
-    void render(glm::mat4 view, glm::mat4 projection);
-    void render(glm::mat4 view, glm::mat4 projection, float health_percentage);
+    void render(glm::mat4, glm::mat4);
+    void render(glm::mat4, glm::mat4, float);
 };
 #endif // HEALTH_BAR_H
 

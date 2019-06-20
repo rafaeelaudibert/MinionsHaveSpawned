@@ -36,6 +36,7 @@ Game::~Game()
 }
 
 float Game::character_height = Constants::CHARACTER_STANDING_HEIGHT;
+Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
 
 void Game::init()
 {
