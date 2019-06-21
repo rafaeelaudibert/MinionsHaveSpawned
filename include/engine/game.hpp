@@ -11,6 +11,7 @@
 #include "model/collisive.hpp"
 #include "model/enemy.hpp"
 #include "model/turret.hpp"
+#include "model/hand.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -58,6 +59,9 @@ public:
 
     // Holding on hand turret
     Turret *hand_turret;
+
+    // Hand
+    Hand *hand;
 
 
     // Collisive objects map

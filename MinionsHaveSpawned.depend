@@ -906,7 +906,7 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1561081211 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1561089190 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/constants.hpp"
 	"engine/game.hpp"
 	"engine/matrices.hpp"
@@ -935,7 +935,7 @@
 	"model/turret/howling_order.hpp"
 	"model/turret/siege_chaos.hpp"
 
-1561080957 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1561089131 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	<string>
@@ -945,6 +945,7 @@
 	"model/collisive.hpp"
 	"model/enemy.hpp"
 	"model/turret.hpp"
+	"model/hand.hpp"
 
 1554904293 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glfw\glfw3.h
 	<stddef.h>
@@ -1178,7 +1179,7 @@
 1560567636 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dummy.hpp
 	"model/base.hpp"
 
-1561067014 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dummy.cpp
+1561089230 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dummy.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/dummy.hpp"
@@ -1346,4 +1347,12 @@
 	"engine/matrices.hpp"
 	"model/health_bar.hpp"
 	"engine/game.hpp"
+
+1561089214 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\hand.hpp
+	"model/base.hpp"
+
+1561089703 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\hand.cpp
+	"engine/resource_manager.hpp"
+	"engine/matrices.hpp"
+	"model/hand.hpp"
 

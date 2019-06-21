@@ -71,7 +71,7 @@ void Game::init()
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
-    Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
+    Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0);
     objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
     printf("[GAME] Dummy created\n");
 
@@ -159,6 +159,9 @@ void Game::init()
     printf("[GAME] SiegeChaos created\n");
 
     // Create hand
+    this->hand = new Hand("hand");
+
+    // Create hand turret
     this->hand_turret = new HowlingChaos("hc_hand", TurretColor::RED, 2.0f, glm::vec4(29.0f, 0.0f, -5.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(2.1f, 2.1f, 2.1f));
 }
 
@@ -232,6 +235,11 @@ void Game::update()
         object.second->update(this->deltaTime, &camera);
     }
 
+    // Moves the hand with the camera
+    this->hand->position = camera.position;
+    this->hand->position.y -= Game::character_height / 2.5f;
+    this->hand->position -= matrix::normalize(matrix::crossproduct(camera.right, camera.world_up)) / 2.0f;
+    this->hand->angle = -(camera.yaw / 360.0f * 3.1415f) * 2;
 }
 
 void Game::process_input()
@@ -300,6 +308,9 @@ void Game::render()
         object.second->render_health_bar(view, projection);
     }
 
+    // Render hand
+    this->hand->render(view, projection);
+
     // Render hand turret
-    this->hand_turret->render(view, projection);
+    // this->hand_turret->render(view, projection);
 }
