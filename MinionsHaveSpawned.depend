@@ -983,7 +983,7 @@
 1560567599 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
 	<glad/glad.h>
 
-1560567595 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\shader.hpp
+1561139055 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\shader.hpp
 	<string>
 	<glad/glad.h>
 	<glm/glm.hpp>
@@ -1015,7 +1015,7 @@
 	"engine/texture.hpp"
 	"engine/resource_manager.hpp"
 
-1560567784 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\shader.cpp
+1561139049 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\shader.cpp
 	"engine/shader.hpp"
 	<iostream>
 
@@ -1026,7 +1026,7 @@
 	<fstream>
 	<stb_image.h>
 
-1561081235 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
+1561138876 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	"engine\resource_manager.hpp"
@@ -1035,6 +1035,7 @@
 	"engine\game.hpp"
 	"utils\helpers.hpp"
 	"utils.h"
+	"resources.h"
 
 1560567693 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils.h
 	<cstdio>
@@ -1355,4 +1356,8 @@
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/hand.hpp"
+
+1561138192 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\resources.h
+
+1561138693 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\resources.rc
 
