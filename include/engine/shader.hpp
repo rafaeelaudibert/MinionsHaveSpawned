@@ -17,7 +17,7 @@ public:
     GLuint ID;
 
     // Constructor
-    Shader() {}
+    Shader() : ID(glCreateProgram()) {}
 
     // Sets the current shader as active
     Shader &use();
