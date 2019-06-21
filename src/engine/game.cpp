@@ -157,6 +157,9 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject *>::value_type("sgc", sgc));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sgc", sgc));
     printf("[GAME] SiegeChaos created\n");
+
+    // Create hand
+    this->hand_turret = new HowlingChaos("hc_hand", TurretColor::RED, 2.0f, glm::vec4(29.0f, 0.0f, -5.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(2.1f, 2.1f, 2.1f));
 }
 
 void Game::new_frame()
@@ -204,6 +207,24 @@ void Game::update()
     // Update charachter height for uncrouching
     if (player_status == PlayerStatus::UNCROUCHING)
         this->character_height = utils::clamping(this->character_height + this->y_speed * this->deltaTime, Constants::CHARACTER_STANDING_HEIGHT, Constants::CHARACTER_CROUCHING_HEIGHT);
+
+    // Prevent player from falling indefinitely
+    if (this->camera.position.y < Constants::MINIMUM_HEIGHT)
+        this->camera.position.y = character_height + 0.01f;
+
+    // Update character "hand turret" position and angle, computing it
+    float camera_distance = Constants::SPAWNING_TURRET_MAX_DISTANCE;
+    float denominator = matrix::dotproduct(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), this->camera.front);
+    if (fabs(denominator) > Constants::EPSILON)
+    {
+        float camera_plane_intersection = matrix::dotproduct(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f) - this->camera.position, glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)) / denominator;
+        if (camera_plane_intersection >= Constants::EPSILON)
+            camera_distance = std::min(camera_distance, camera_plane_intersection);
+    }
+    this->hand_turret->position = this->camera.position + matrix::normalize(this->camera.front) * camera_distance;
+    this->hand_turret->position.y = 0.0f;
+    this->hand_turret->position.w = 1.0f;
+    this->hand_turret->angle = std::atan2(this->camera.position.x - this->hand_turret->position.x, this->camera.position.z - this->hand_turret->position.z);
 
     // Update objects
     for (const auto &object : this->enemy_objects)
@@ -278,4 +299,7 @@ void Game::render()
     {
         object.second->render_health_bar(view, projection);
     }
+
+    // Render hand turret
+    this->hand_turret->render(view, projection);
 }

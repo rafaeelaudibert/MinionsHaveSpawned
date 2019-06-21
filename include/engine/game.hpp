@@ -10,6 +10,7 @@
 #include "model/base.hpp"
 #include "model/collisive.hpp"
 #include "model/enemy.hpp"
+#include "model/turret.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -43,6 +44,7 @@ public:
     static float character_height;                              // Height of the character, in meters
     PlayerStatus player_status = PlayerStatus::STANDING;        // Current player status
     GLfloat y_speed = 0;                                        // Current character falling velocity
+    glm::vec4 aiming_position;
 
     // Time variables
     GLfloat lastFrame = 0.0f;
@@ -53,6 +55,10 @@ public:
 
     // Objects map
     std::map<std::string, GameObject *> objects;
+
+    // Holding on hand turret
+    Turret *hand_turret;
+
 
     // Collisive objects map
     std::map<std::string, Collisive *> collisive_objects;
