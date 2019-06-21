@@ -28,7 +28,7 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 const GLuint SCREEN_WIDTH = 1920;       // Width of the screen
 const GLuint SCREEN_HEIGHT = 1080;      // Height of the screen
 const GLboolean FULLSCREEN = false;     // Should we render fullscreen or not
-const GLboolean ANTIALIASING = false;   // Should we use antialiasing or not
+const GLboolean ANTIALIASING = true;   // Should we use antialiasing or not
 const GLuint ANTIALIASING_QUALITY = 4;  // Antialiasing level, if ANTIALIASING is set to true
 
 using namespace std;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     glEnable(GL_DEPTH_TEST);                            // Depth testing
     glEnable(GL_MULTISAMPLE);                           // Antialiasing multisample
     glEnable(GL_BLEND);                                 // Enable color blending
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Configuring blend function
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  // Configuring blend function
     glEnable(GL_CULL_FACE);                             // Backface culling
     glCullFace(GL_BACK);                                // Configuring culling to back
     glFrontFace(GL_CCW);                                // Configuring front face with counter-clockwise orientation

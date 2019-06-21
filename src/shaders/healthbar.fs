@@ -39,6 +39,6 @@ void main()
     if (health_percentage > position.x) {
         color = vec4(red_component(), green_component(), blue_component(), 1.0);
     } else {
-        color = vec4(0.7, 0.7, 0.7, 0.4);
+        color = vec4(0.7, 0.7, 0.7, 0.8);
     }
 }

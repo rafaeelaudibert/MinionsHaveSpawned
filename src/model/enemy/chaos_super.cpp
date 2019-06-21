@@ -58,5 +58,5 @@ void ChaosSuper::render(glm::mat4 view, glm::mat4 projection)
     glBindVertexArray(0);
 
     // Render health bar, calculating the percentage of life
-    this->health_bar->render(view, projection, this->current_life_points / this->max_life_points);
+    // this->health_bar->render(view, projection, this->current_life_points / this->max_life_points);
 }

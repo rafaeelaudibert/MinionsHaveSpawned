@@ -41,6 +41,9 @@ public:
 
     // Give damage to the enemy
     void hit(float);
+
+    // Render health_bar
+    void render_health_bar(glm::mat4, glm::mat4);
 };
 
 #endif // ENEMY_H

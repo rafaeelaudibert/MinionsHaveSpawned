@@ -1,7 +1,7 @@
 #include "model/enemy.hpp"
 
 void Enemy::update(float delta_time, Camera *camera) {
-    if (!this->is_dead()) {
+    if (false && !this->is_dead()) {
         const float multiplier = 0.5;
         const float delta_position = multiplier * delta_time;
 
@@ -22,4 +22,12 @@ bool Enemy::is_dead(){
 void Enemy::hit(float life_points) {
     if (!this->is_dead())
         this->current_life_points -= life_points;
+
+    return;
+}
+
+void Enemy::render_health_bar(glm::mat4 view, glm::mat4 projection) {
+    this->health_bar->render(view, projection, this->current_life_points / this->max_life_points);
+
+    return;
 }

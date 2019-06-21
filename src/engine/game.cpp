@@ -272,4 +272,10 @@ void Game::render()
     {
         object.second->render(view, projection);
     }
+
+    // Render enemies health_bar (need to render later because of their transparency)
+    for (const auto &object : this->enemy_objects)
+    {
+        object.second->render_health_bar(view, projection);
+    }
 }
