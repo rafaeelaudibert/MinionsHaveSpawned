@@ -83,6 +83,6 @@ Optionally, you might implement the following extra concepts:
 - [ ] [Sound effects](http://www.ambiera.com/irrklang/)
 - [ ] [Particle system](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/)
 - [ ] [Shadows](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/)
-- [ ] [Billboards / Sprites](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/billboards/)
+- [x] [Billboards / Sprites](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/billboards/)
 - [ ] Graphical interface (buttons, etc.)
 - [ ] Selecting virtual objects with the mouse (picking). Example of implementation: Picking with custom Ray-OBB function.
