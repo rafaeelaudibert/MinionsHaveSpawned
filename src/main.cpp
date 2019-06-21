@@ -12,6 +12,9 @@
 #include "utils\helpers.hpp"
 #include "utils.h"
 
+// Header do resource
+#include "resources.h"
+
 // Activate NVIDIA off-board GPU, only if needed
 // extern "C"
 // {
@@ -74,6 +77,12 @@ int main(int argc, char *argv[])
         fprintf(stderr, "ERROR: glfwCreateWindow() failed.\n");
         std::exit(EXIT_FAILURE);
     }
+
+    // Configure window icon
+    GLFWimage images[1];
+    images[0].pixels = stbi_load("../../assets/icon.png", &images[0].width, &images[0].height, 0, 4); //rgba channels
+    glfwSetWindowIcon(window, 1, images);
+    stbi_image_free(images[0].pixels);
 
     // Definimos a função de callback que será chamada sempre que o usuário
     // pressionar alguma tecla do teclado ...

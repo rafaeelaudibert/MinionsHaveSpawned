@@ -1,0 +1,7 @@
+#ifndef RESOURCE_RC_INCLUDED
+#define RESOURCE_RC_INCLUDED
+
+CONSOLE_ICON ICON "../assets/icon.ico"
+
+#endif // RESOURCE_RC_INCLUDED
+
