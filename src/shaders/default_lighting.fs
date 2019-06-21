@@ -23,7 +23,7 @@ uniform sampler2D TextureImage0;
 
 
 // The Fragment Shader output is the final fragment color
-out vec3 color;
+out vec4 color;
 
 void main()
 {
@@ -51,33 +51,29 @@ void main()
     vec4 r = -l + 2 * n * (dot(l, v));
 
     // Parameters which define the surface spectral properties.
-    vec3 Kd = vec3(0.08,0.4,0.3); // Diffuse reflectance
-    vec3 Ks = vec3(0.8,0.8,0.8); // Specular reflectance
-    vec3 Ka = vec3(0.04,0.2,0.4); // Ambient reflectance
+    vec4 Kd = vec4(0.08, 0.4, 0.3, 1.0); // Diffuse reflectance
+    vec4 Ks = vec4(0.8, 0.8, 0.8, 1.0); // Specular reflectance
+    vec4 Ka = vec4(0.04, 0.2, 0.4, 1.0); // Ambient reflectance
     float q = 5.0; // Specular exponent for Phong's illumination model
 
-    // Coordenadas de textura U e V
-    float U = 0.0;
-    float V = 0.0;
-
     // Parameters which define the illumination spectrum
-    vec3 I = vec3(1.0,1.0,1.0); // Light source spectrum
-    vec3 Ia = vec3(0.2,0.2,0.2); // Ambient source light spectrum
+    vec4 I = vec4(1.0, 1.0, 1.0, 1.0); // Light source spectrum
+    vec4 Ia = vec4(0.2, 0.2, 0.2, 1.0); // Ambient source light spectrum
 
     // Diffuse term used in Lambert's cosine law
-    vec3 lambert_diffuse_term = Kd * I * max(0, dot(n, l));
+    vec4 lambert_diffuse_term = Kd * I * max(0, dot(n, l));
 
     // Ambient term
-    vec3 ambient_term = Ka * Ia;
+    vec4 ambient_term = Ka * Ia;
 
     // Specular term used in Phong's illumination model
     vec4 h = normalize(v + l);
-    vec3 phong_specular_term  = Ks * I * pow(max(0, dot(n, h)), q);
+    vec4 phong_specular_term  = Ks * I * pow(max(0, dot(n, h)), q);
 
     // Final fragment color calculated with a combination of the diffuse, specular and ambiance terms.
     color = lambert_diffuse_term + ambient_term + phong_specular_term;
 
     // We need to make our gamma color correction, considering a sRGB display.
     // See https://en.wikipedia.org/w/index.php?title=Gamma_correction&oldid=751281772#Windows.2C_Mac.2C_sRGB_and_TV.2Fvideo_standard_gammas
-    color = pow(color, vec3(1.0,1.0,1.0)/2.2);
+    color = pow(color, vec4(1.0, 1.0, 1.0, 1.0) / 2.2);
 }
