@@ -346,6 +346,7 @@
 		<Unit filename="include/model/enemy/order_ranged.hpp" />
 		<Unit filename="include/model/enemy/order_siege.hpp" />
 		<Unit filename="include/model/enemy/order_super.hpp" />
+		<Unit filename="include/model/hand.hpp" />
 		<Unit filename="include/model/health_bar.hpp" />
 		<Unit filename="include/model/obj_model.hpp" />
 		<Unit filename="include/model/skybox.hpp" />
@@ -387,6 +388,7 @@
 		<Unit filename="src/model/enemy/order_ranged.cpp" />
 		<Unit filename="src/model/enemy/order_siege.cpp" />
 		<Unit filename="src/model/enemy/order_super.cpp" />
+		<Unit filename="src/model/hand.cpp" />
 		<Unit filename="src/model/health_bar.cpp" />
 		<Unit filename="src/model/skybox.cpp" />
 		<Unit filename="src/model/turret.cpp" />
