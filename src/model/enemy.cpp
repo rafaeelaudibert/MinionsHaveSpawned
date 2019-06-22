@@ -1,7 +1,15 @@
 #include "model/enemy.hpp"
 
 void Enemy::update(float delta_time) {
-    // TODO: Needs to handle this->effects
+    for (AmmoEffects::AmmoEffect effect : this->effects) {
+        effect.update(delta_time);
+    }
+
+    // Remove the effects which are over
+    auto res = std::remove_if(this->effects.begin(), this->effects.end(), [](auto const x) {return x.ammo_time <= 0.0f});
+    this->effects.erase(res, this->effects.end());
+
+    // TODO: Need to figure it out how to properly use the effects applied
 }
 
 bool Enemy::is_dead(){
