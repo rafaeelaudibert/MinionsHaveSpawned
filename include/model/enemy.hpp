@@ -1,13 +1,17 @@
 #include "model/collisive.hpp"
 #include "engine/camera.hpp"
 #include "model/health_bar.hpp"
+#include "model/ammo_effect.hpp"
+#include <vector>
 
 #ifndef ENEMY_H
 #define ENEMY_H
+
 enum class EnemyColor {
     RED,
     BLUE
 };
+
 
 class Enemy : public Collisive
 {
@@ -26,6 +30,8 @@ protected:
     float current_life_points = 0;
     float max_life_points = 0;
     HealthBar *health_bar;
+    std::vector<AmmoEffects::AmmoEffect> effects;
+
 
     // Movement properties
     float bezier_time = 0.0f;
@@ -40,7 +46,7 @@ public:
     bool is_dead();
 
     // Give damage to the enemy
-    void hit(float);
+    void hit(float life_points, AmmoEffects::AmmoEffect *ammo_effect = nullptr);
 
     // Render health_bar
     void render_health_bar(glm::mat4, glm::mat4);
