@@ -14,6 +14,17 @@
 #include "model/base.hpp"
 #include "engine/matrices.hpp"
 
+// A basic struct to hold the stuff we need to remember about loaded models
+struct BasicModelStorage
+{
+    GLuint VAO;
+    GLenum drawMode;
+    unsigned int indexesLength;
+    GLvoid* indexesOffset;
+    glm::vec3 bbox_min;
+    glm::vec3 bbox_max;
+};
+
 // A static singleton ResourceManager class that hosts several
 // functions to load Textures and Shaders. Each loaded texture
 // and/or shader is also stored for future reference by string
@@ -26,6 +37,7 @@ public:
     static std::map<std::string, Shader> shaders;
     static std::map<std::string, Texture2D> textures;
     static std::map<std::string, CubemapTexture2D> cubemapTextures;
+    static std::map<std::string, BasicModelStorage> models;
 
     // Loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
     static Shader load_shader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name);
@@ -53,7 +65,7 @@ public:
     static CubemapTexture2D get_cubemap_texture(std::string name);
 
     // Loads an object from a .obj file and configure it
-    static ObjModel *load_object(const char *filename, GameObject *gameObject, std::string name);
+    static void load_object(const char *filename, GameObject *gameObject, std::string name);
 
     // Properly de-allocates all loaded resources
     static void clear();

@@ -32,7 +32,18 @@ enum PlayerStatus
     JUMPING
 };
 
-
+// Represents the turrets you can hold on hand
+enum Turrets
+{
+    NONE = GLFW_KEY_0,
+    BILGERWATER_CHAOS,
+    BILGERWATER_ORDER,
+    HOWLING_CHAOS,
+    HOWLING_ORDER,
+    SIEGE_CHAOS,
+    SUMMONERS_CHAOS,
+    SUMMONERS_ORDER
+};
 
 // Game holds all game-related state and functionality.
 // Combines all game-related data into a single class for
@@ -62,9 +73,6 @@ public:
     // Objects map
     std::map<std::string, GameObject *> objects;
 
-    // Holding on hand turret
-    Turret *hand_turret;
-
     // Hand
     Hand *hand;
 
@@ -91,6 +99,7 @@ public:
 
     // Processes game input
     void process_input();
+    void update_hand_turret();
 };
 
 #endif

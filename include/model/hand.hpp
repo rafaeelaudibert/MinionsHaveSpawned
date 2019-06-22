@@ -1,5 +1,8 @@
 #include "model/base.hpp"
+#include "model/turret.hpp"
 
+#ifndef HAND_H
+#define HAND_H
 class Hand : public GameObject
 {
 public:
@@ -11,9 +14,16 @@ public:
         GameObject(name, position, orientation, angle, scale)
     {
         this->build();
+        this->turret = nullptr;
     };
 
     void build();
 
     void render(glm::mat4 view, glm::mat4 projection);
+    void render_turret(glm::mat4 view, glm::mat4 projection);
+
+    // The hand might me holding a turret
+    Turret *turret;
 };
+#endif // HAND_H
+

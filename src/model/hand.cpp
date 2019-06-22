@@ -43,3 +43,8 @@ void Hand::render(glm::mat4 view, glm::mat4 projection)
     // Unbind the VAO to prevent bugs
     glBindVertexArray(0);
 }
+
+void Hand::render_turret(glm::mat4 view, glm::mat4 projection) {
+    if (this->turret != nullptr)
+        this->turret->render(view, projection);
+}

@@ -171,9 +171,6 @@ void Game::init()
 
     // Create hand
     this->hand = new Hand("hand");
-
-    // Create hand turret
-    this->hand_turret = new HowlingChaos("hc_hand", TurretColor::RED, 2.0f, glm::vec4(29.0f, 0.0f, -5.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(2.1f, 2.1f, 2.1f));
 }
 
 void Game::new_frame()
@@ -227,18 +224,21 @@ void Game::update()
         this->camera.position.y = character_height + 0.01f;
 
     // Update character "hand turret" position and angle, computing it
-    float camera_distance = Constants::SPAWNING_TURRET_MAX_DISTANCE;
-    float denominator = matrix::dotproduct(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), this->camera.front);
-    if (fabs(denominator) > Constants::EPSILON)
+    if (this->hand->turret != nullptr)
     {
-        float camera_plane_intersection = matrix::dotproduct(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f) - this->camera.position, glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)) / denominator;
-        if (camera_plane_intersection >= Constants::EPSILON)
-            camera_distance = std::min(camera_distance, camera_plane_intersection);
+        float camera_distance = Constants::SPAWNING_TURRET_MAX_DISTANCE;
+        float denominator = matrix::dotproduct(glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), this->camera.front);
+        if (fabs(denominator) > Constants::EPSILON)
+        {
+            float camera_plane_intersection = matrix::dotproduct(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f) - this->camera.position, glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)) / denominator;
+            if (camera_plane_intersection >= Constants::EPSILON)
+                camera_distance = std::min(camera_distance, camera_plane_intersection);
+        }
+        this->hand->turret->position = this->camera.position + matrix::normalize(this->camera.front) * camera_distance;
+        this->hand->turret->position.y = 0.0f;
+        this->hand->turret->position.w = 1.0f;
+        this->hand->turret->angle = std::atan2(this->camera.position.x - this->hand->turret->position.x, this->camera.position.z - this->hand->turret->position.z);
     }
-    this->hand_turret->position = this->camera.position + matrix::normalize(this->camera.front) * camera_distance;
-    this->hand_turret->position.y = 0.0f;
-    this->hand_turret->position.w = 1.0f;
-    this->hand_turret->angle = std::atan2(this->camera.position.x - this->hand_turret->position.x, this->camera.position.z - this->hand_turret->position.z);
 
     // Update objects
     for (const auto &object : this->enemy_objects)
@@ -252,13 +252,13 @@ void Game::update()
     this->hand->position -= matrix::normalize(matrix::crossproduct(camera.right, camera.world_up)) / 2.0f;
     this->hand->angle = -(camera.yaw / 360.0f * 3.1415f) * 2;
 
-    enemy_objects["cr"]->hit(this->deltaTime * 5);
-    this->chaos_nexus->hit(this->deltaTime * 50);
-
     // Update game state (win or lost)
-    if (this->chaos_nexus->is_dead()) {
+    if (this->chaos_nexus->is_dead())
+    {
         Game::state = GameState::GAME_WIN;
-    } else if (this->order_nexus->is_dead()) {
+    }
+    else if (this->order_nexus->is_dead())
+    {
         Game::state = GameState::GAME_LOSE;
     }
 }
@@ -306,6 +306,9 @@ void Game::process_input()
         player_status = PlayerStatus::UNCROUCHING;
         printf("[GAME] Started uncrouching\n");
     }
+
+    // Update the turret being hold on hand
+    this->update_hand_turret();
 }
 
 void Game::render()
@@ -333,9 +336,67 @@ void Game::render()
     this->order_nexus->render_health_bar(view, projection);
     this->chaos_nexus->render_health_bar(view, projection);
 
-    // Render hand
+    // Render hand and its turret
     this->hand->render(view, projection);
+    this->hand->render_turret(view, projection);
+}
 
-    // Render hand turret
-    // this->hand_turret->render(view, projection);
+void Game::update_hand_turret()
+{
+    if (keys[Turrets::NONE] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = nullptr;   // Store no turret on hand
+        keys[Turrets::NONE] = GL_FALSE;
+        printf("[GAME] Deselected any turret\n");
+    }
+    else if (keys[Turrets::BILGERWATER_CHAOS] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new BilgerwaterChaos("bc_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::BILGERWATER_CHAOS] = GL_FALSE;
+        printf("[GAME] Selected a BilgerwaterChaos turret\n");
+    }
+    else if (keys[Turrets::BILGERWATER_ORDER] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new BilgerwaterOrder("bo_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::BILGERWATER_ORDER] = GL_FALSE;
+        printf("[GAME] Selected a BilgerwaterOrder turret\n");
+    }
+    else if (keys[Turrets::HOWLING_CHAOS] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new HowlingChaos("hc_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::HOWLING_CHAOS] = GL_FALSE;
+        printf("[GAME] Selected a HowlingChaos turret\n");
+    }
+    else if (keys[Turrets::HOWLING_ORDER] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new HowlingOrder("ho_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::HOWLING_ORDER] = GL_FALSE;
+        printf("[GAME] Selected a HowlingOrder turret\n");
+    }
+    else if (keys[Turrets::SIEGE_CHAOS] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new SiegeChaos("sgc_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::SIEGE_CHAOS] = GL_FALSE;
+        printf("[GAME] Selected a SiegeChaos turret\n");
+    }
+    else if (keys[Turrets::SUMMONERS_CHAOS] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new SummonersChaos("sc_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::SUMMONERS_CHAOS] = GL_FALSE;
+        printf("[GAME] Selected a SummonersChaos turret\n");
+    }
+    else if (keys[Turrets::SUMMONERS_ORDER] == GL_TRUE)
+    {
+        delete this->hand->turret;
+        this->hand->turret = new SummonersOrder("so_hand", TurretColor::BLUE, 2.0f);
+        keys[Turrets::SUMMONERS_ORDER] = GL_FALSE;
+        printf("[GAME] Selected a SummonersOrder turret\n");
+    }
 }

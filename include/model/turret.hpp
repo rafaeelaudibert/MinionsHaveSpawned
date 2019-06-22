@@ -26,6 +26,8 @@ protected:
     };
 
 public:
+    virtual ~Turret() {}; // Virtual destructor
+
     TurretColor color = TurretColor::RED;
 
     // Shooting

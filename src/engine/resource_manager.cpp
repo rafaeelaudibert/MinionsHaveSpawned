@@ -11,6 +11,7 @@
 std::map<std::string, Texture2D> ResourceManager::textures;
 std::map<std::string, CubemapTexture2D> ResourceManager::cubemapTextures;
 std::map<std::string, Shader> ResourceManager::shaders;
+std::map<std::string, BasicModelStorage> ResourceManager::models;
 
 Shader ResourceManager::load_shader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
@@ -45,139 +46,156 @@ CubemapTexture2D ResourceManager::get_cubemap_texture(std::string name)
     return cubemapTextures[name];
 }
 
-ObjModel* ResourceManager::load_object(const char* filename, GameObject* gameObject, std::string name)
+void ResourceManager::load_object(const char* filename, GameObject* gameObject, std::string name)
 {
-    // Configure the VAO, and bind it
-    glGenVertexArrays(1, &gameObject->VAO); // Set at the object level
-    glBindVertexArray(gameObject->VAO);
+    std::string filename_str(filename); // Create a string from the char* filename
 
-    // Initialize model, loaded from a .obj file
-    ObjModel* model = new ObjModel(filename);
-    ResourceManager::compute_normals(model); // If the model doesn't have normals in the .obj file, we compute them manually
-
-    // Temporary structures to hold the object information
-    std::vector<GLuint> indexes;
-    std::vector<float>  model_coefficients;
-    std::vector<float>  normal_coefficients;
-    std::vector<float>  texture_coefficients;
-
-    // TODO:
-    // We assume that we have only one shape, if not we would need to iterate and store them in some object
-    // and, after, render each of them individually, as well.
-    // I didn't coded it, because I don't know if we will have any object with more than one shape
-    // so for sake of simplicity, it only works this way, right now
-    //
-    // If we need to add this, we might compare the code below with the Lab4 one
-    size_t num_triangles = model->shapes[0].mesh.num_face_vertices.size();
-
-    // Variables and constants to calculate the bbox_min and bbox_max
-    const float minval = std::numeric_limits<float>::min();
-    const float maxval = std::numeric_limits<float>::max();
-
-    glm::vec3 bbox_min = glm::vec3(maxval,maxval,maxval);
-    glm::vec3 bbox_max = glm::vec3(minval,minval,minval);
-
-    for (size_t triangle = 0; triangle < num_triangles; ++triangle)
+    if (models.find(filename_str) == models.end())   // We haven't loaded this object yet
     {
-        assert(model->shapes[0].mesh.num_face_vertices[triangle] == 3);
+        // Configure the VAO, and bind it
+        glGenVertexArrays(1, &gameObject->VAO); // Set at the object level
+        glBindVertexArray(gameObject->VAO);
 
-        for (size_t vertex = 0; vertex < 3; ++vertex)
+        // Initialize model, loaded from a .obj file
+        ObjModel* model = new ObjModel(filename);
+        ResourceManager::compute_normals(model); // If the model doesn't have normals in the .obj file, we compute them manually
+
+        // Temporary structures to hold the object information
+        std::vector<GLuint> indexes;
+        std::vector<float>  model_coefficients;
+        std::vector<float>  normal_coefficients;
+        std::vector<float>  texture_coefficients;
+
+        // TODO:
+        // We assume that we have only one shape, if not we would need to iterate and store them in some object
+        // and, after, render each of them individually, as well.
+        // I didn't coded it, because I don't know if we will have any object with more than one shape
+        // so for sake of simplicity, it only works this way, right now
+        //
+        // If we need to add this, we might compare the code below with the Lab4 one
+        size_t num_triangles = model->shapes[0].mesh.num_face_vertices.size();
+
+        // Variables and constants to calculate the bbox_min and bbox_max
+        const float minval = std::numeric_limits<float>::min();
+        const float maxval = std::numeric_limits<float>::max();
+
+        glm::vec3 bbox_min = glm::vec3(maxval,maxval,maxval);
+        glm::vec3 bbox_max = glm::vec3(minval,minval,minval);
+
+        for (size_t triangle = 0; triangle < num_triangles; ++triangle)
         {
-            tinyobj::index_t idx = model->shapes[0].mesh.indices[3*triangle + vertex];
+            assert(model->shapes[0].mesh.num_face_vertices[triangle] == 3);
 
-            indexes.push_back(3*triangle + vertex);
-
-            // Calculate x, y and z vertex
-            const float vx = model->attrib.vertices[3*idx.vertex_index + 0];
-            const float vy = model->attrib.vertices[3*idx.vertex_index + 1];
-            const float vz = model->attrib.vertices[3*idx.vertex_index + 2];
-
-            // Append them to the model_coefficients vector
-            model_coefficients.push_back(vx); // X
-            model_coefficients.push_back(vy); // Y
-            model_coefficients.push_back(vz); // Z
-            model_coefficients.push_back(1.0f); // W
-
-            // Update the bbox
-            bbox_min.x = std::min(bbox_min.x, vx);
-            bbox_min.y = std::min(bbox_min.y, vy);
-            bbox_min.z = std::min(bbox_min.z, vz);
-            bbox_max.x = std::max(bbox_max.x, vx);
-            bbox_max.y = std::max(bbox_max.y, vy);
-            bbox_max.z = std::max(bbox_max.z, vz);
-
-            // We check if there are normals in the object, if there are, we save them
-            if ( idx.normal_index != -1 )
+            for (size_t vertex = 0; vertex < 3; ++vertex)
             {
-                normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 0] ); // X
-                normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 1] ); // Y
-                normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 2] ); // Z
-                normal_coefficients.push_back( 0.0f ); // W
-            }
+                tinyobj::index_t idx = model->shapes[0].mesh.indices[3*triangle + vertex];
 
-            // We check if there are textures in the object, if there are, we save them
-            if ( idx.texcoord_index != -1 )
-            {
-                texture_coefficients.push_back( model->attrib.texcoords[2*idx.texcoord_index + 0] ); // U
-                texture_coefficients.push_back( model->attrib.texcoords[2*idx.texcoord_index + 1] ); // V
+                indexes.push_back(3*triangle + vertex);
+
+                // Calculate x, y and z vertex
+                const float vx = model->attrib.vertices[3*idx.vertex_index + 0];
+                const float vy = model->attrib.vertices[3*idx.vertex_index + 1];
+                const float vz = model->attrib.vertices[3*idx.vertex_index + 2];
+
+                // Append them to the model_coefficients vector
+                model_coefficients.push_back(vx); // X
+                model_coefficients.push_back(vy); // Y
+                model_coefficients.push_back(vz); // Z
+                model_coefficients.push_back(1.0f); // W
+
+                // Update the bbox
+                bbox_min.x = std::min(bbox_min.x, vx);
+                bbox_min.y = std::min(bbox_min.y, vy);
+                bbox_min.z = std::min(bbox_min.z, vz);
+                bbox_max.x = std::max(bbox_max.x, vx);
+                bbox_max.y = std::max(bbox_max.y, vy);
+                bbox_max.z = std::max(bbox_max.z, vz);
+
+                // We check if there are normals in the object, if there are, we save them
+                if ( idx.normal_index != -1 )
+                {
+                    normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 0] ); // X
+                    normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 1] ); // Y
+                    normal_coefficients.push_back( model->attrib.normals[3*idx.normal_index + 2] ); // Z
+                    normal_coefficients.push_back( 0.0f ); // W
+                }
+
+                // We check if there are textures in the object, if there are, we save them
+                if ( idx.texcoord_index != -1 )
+                {
+                    texture_coefficients.push_back( model->attrib.texcoords[2*idx.texcoord_index + 0] ); // U
+                    texture_coefficients.push_back( model->attrib.texcoords[2*idx.texcoord_index + 1] ); // V
+                }
             }
         }
-    }
 
-    // VBO for the vertex
-    GLuint VBO_model_coefficients_id;
-    glGenBuffers(1, &VBO_model_coefficients_id);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO_model_coefficients_id);
-    glBufferData(GL_ARRAY_BUFFER, model_coefficients.size() * sizeof(float), model_coefficients.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0); // Location = 0, vec4
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    printf("[GAME] Fetched model attributes for %s from file\n", name.c_str());
-
-    // VBO for the normals
-    if ( !normal_coefficients.empty() )
-    {
-        GLuint VBO_normal_coefficients_id;
-        glGenBuffers(1, &VBO_normal_coefficients_id);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO_normal_coefficients_id);
-        glBufferData(GL_ARRAY_BUFFER, normal_coefficients.size() * sizeof(float), normal_coefficients.data(), GL_STATIC_DRAW);
-        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0); // Location = 1, vec4
-        glEnableVertexAttribArray(1);
+        // VBO for the vertex
+        GLuint VBO_model_coefficients_id;
+        glGenBuffers(1, &VBO_model_coefficients_id);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO_model_coefficients_id);
+        glBufferData(GL_ARRAY_BUFFER, model_coefficients.size() * sizeof(float), model_coefficients.data(), GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0); // Location = 0, vec4
+        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
-        printf("[GAME] Fetched normal attributes for %s from file\n", name.c_str());
+        printf("[GAME] Fetched model attributes for %s from file\n", name.c_str());
+
+        // VBO for the normals
+        if ( !normal_coefficients.empty() )
+        {
+            GLuint VBO_normal_coefficients_id;
+            glGenBuffers(1, &VBO_normal_coefficients_id);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO_normal_coefficients_id);
+            glBufferData(GL_ARRAY_BUFFER, normal_coefficients.size() * sizeof(float), normal_coefficients.data(), GL_STATIC_DRAW);
+            glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0); // Location = 1, vec4
+            glEnableVertexAttribArray(1);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            printf("[GAME] Fetched normal attributes for %s from file\n", name.c_str());
+        }
+
+        // VBO for the texture
+        if ( !texture_coefficients.empty() )
+        {
+            GLuint VBO_texture_coefficients_id;
+            glGenBuffers(1, &VBO_texture_coefficients_id);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO_texture_coefficients_id);
+            glBufferData(GL_ARRAY_BUFFER, texture_coefficients.size() * sizeof(float), texture_coefficients.data(), GL_STATIC_DRAW);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0); // Location = 2, vec2
+            glEnableVertexAttribArray(2);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            printf("[GAME] Fetched texture attributes for %s from file\n", name.c_str());
+        }
+
+        // We create an OpenGL buffer to store the indexes
+        // We "turn on" the buffer. Notice that we use GL_ELEMENT_ARRAY_BUFFER now.
+        // We allocate memory to the buffer, and copy the data to it.
+        // Also notice, that we don't turn off the buffer
+        GLuint indexes_id;
+        glGenBuffers(1, &indexes_id);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexes_id);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexes.size() * sizeof(GLuint), indexes.data(), GL_STATIC_DRAW);
+        // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); // XXX Wrong!
+
+        // Create the BasicModelStorage with its values
+        BasicModelStorage storage = {
+            gameObject->VAO,
+            GL_TRIANGLES,
+            indexes.size(),
+            0,
+            bbox_min,
+            bbox_max
+        };
+        models[filename_str] = storage;
+    } else {
+        printf("[GAME] Using already loaded %s\n", filename);
     }
 
-    // VBO for the texture
-    if ( !texture_coefficients.empty() )
-    {
-        GLuint VBO_texture_coefficients_id;
-        glGenBuffers(1, &VBO_texture_coefficients_id);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO_texture_coefficients_id);
-        glBufferData(GL_ARRAY_BUFFER, texture_coefficients.size() * sizeof(float), texture_coefficients.data(), GL_STATIC_DRAW);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0); // Location = 2, vec2
-        glEnableVertexAttribArray(2);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        printf("[GAME] Fetched texture attributes for %s from file\n", name.c_str());
-    }
-
-    // We create an OpenGL buffer to store the indexes
-    // We "turn on" the buffer. Notice that we use GL_ELEMENT_ARRAY_BUFFER now.
-    // We allocate memory to the buffer, and copy the data to it.
-    // Also notice, that we don't turn off the buffer
-    GLuint indexes_id;
-    glGenBuffers(1, &indexes_id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexes_id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexes.size() * sizeof(GLuint), indexes.data(), GL_STATIC_DRAW);
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); // XXX Wrong!
-
-    // Drawing methods definition
-    gameObject->drawMode = GL_TRIANGLES;
-    gameObject->indexesLength = indexes.size();
-    gameObject->indexesOffset = 0;
-    gameObject->bbox_min = bbox_min;
-    gameObject->bbox_max = bbox_max;
-
-    return model;
+    // Copy the data from the BasicModelStorage
+    gameObject->VAO = models[filename_str].VAO;
+    gameObject->drawMode = models[filename_str].drawMode;
+    gameObject->indexesLength = models[filename_str].indexesLength;
+    gameObject->indexesOffset = models[filename_str].indexesOffset;
+    gameObject->bbox_min = models[filename_str].bbox_min;
+    gameObject->bbox_max = models[filename_str].bbox_max;
 }
 
 Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)
@@ -324,7 +342,7 @@ void ResourceManager::clear()
     for (auto iter : textures)
         glDeleteTextures(1, &iter.second.ID);
 
-        // (Properly) delete all cubeMap textures
+    // (Properly) delete all cubeMap textures
     for (auto iter : cubemapTextures)
         glDeleteTextures(1, &iter.second.ID);
 }
