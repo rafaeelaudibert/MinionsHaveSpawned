@@ -34,7 +34,7 @@ protected:
 public:
 
     // Update function (moves the object, and checks the collision with the camera to move it
-    virtual void update(float, Camera *);
+    virtual void update(float);
 
     // Returns if the enemy is dead
     bool is_dead();

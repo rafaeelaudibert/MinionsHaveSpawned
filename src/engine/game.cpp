@@ -243,7 +243,7 @@ void Game::update()
     // Update objects
     for (const auto &object : this->enemy_objects)
     {
-        object.second->update(this->deltaTime, &camera);
+        object.second->update(this->deltaTime);
     }
 
     // Moves the hand with the camera
@@ -251,6 +251,9 @@ void Game::update()
     this->hand->position.y -= Constants::HAND_LESS_HEIGHT;
     this->hand->position -= matrix::normalize(matrix::crossproduct(camera.right, camera.world_up)) / 2.0f;
     this->hand->angle = -(camera.yaw / 360.0f * 3.1415f) * 2;
+
+    enemy_objects["cr"]->hit(this->deltaTime * 5);
+    this->chaos_nexus->hit(this->deltaTime * 50);
 
     // Update game state (win or lost)
     if (this->chaos_nexus->is_dead()) {

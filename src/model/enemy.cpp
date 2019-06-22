@@ -1,6 +1,6 @@
 #include "model/enemy.hpp"
 
-void Enemy::update(float delta_time, Camera *camera) {
+void Enemy::update(float delta_time) {
     if (false && !this->is_dead()) {
         const float multiplier = 0.5;
         const float delta_position = multiplier * delta_time;
@@ -9,8 +9,8 @@ void Enemy::update(float delta_time, Camera *camera) {
         this->position.z += delta_position;
         this->health_bar->position.z += delta_position;
 
-        if (camera->check_collision(this)) {
-            camera->position.z += delta_position;
+        if (Game::camera.check_collision(this)) {
+            Game::camera.position.z += delta_position;
         }
     }
 }

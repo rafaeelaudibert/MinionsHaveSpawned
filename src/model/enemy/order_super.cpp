@@ -58,6 +58,6 @@ void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
     glBindVertexArray(0);
 }
 
-void OrderSuper::update(float delta_time, Camera *camera) {
+void OrderSuper::update(float delta_time) {
     // this->position.y += 0.1 * delta_time;
 }
