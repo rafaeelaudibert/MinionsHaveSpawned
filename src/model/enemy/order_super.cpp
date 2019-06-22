@@ -48,8 +48,8 @@ void OrderSuper::render(glm::mat4 view, glm::mat4 projection)
     this->shader.set_matrix("model", model);
 
     // Render the dead minions properly
-    if (this->is_dead())
-        shader.set("is_dead", true);
+    shader.set("is_dead", this->is_dead());
+
 
     // Draw the element
     glDrawElements(this->drawMode, this->indexesLength, GL_UNSIGNED_INT, this->indexesOffset);

@@ -6,7 +6,7 @@ void SummonersChaos::build()
 {
     // Initialize object, shaders, and textures
     ResourceManager::load_object("../../src/objects/summoners_chaos_turret.obj", this, this->name);
-    this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/turret.vs", "../../src/shaders/turret.fs", nullptr, this->name);
     this->shader.use();
 
     switch (this->color)
@@ -39,6 +39,10 @@ void SummonersChaos::render(glm::mat4 view, glm::mat4 projection)
 
     // Bind the VAO
     glBindVertexArray(this->VAO);
+
+    // Configure the shader variables
+    this->shader.set("placed", this->placed);
+    this->shader.set("can_place", this->can_place());
 
     // Calculate the model matrix
     glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first

@@ -124,37 +124,37 @@ void Game::init()
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csp", csp));
     printf("[GAME] ChaosSuper created\n");
 
-    Turret *bc = new BilgerwaterChaos("bc", TurretColor::RED, 2.0f, glm::vec4(1.0f, 0.0f, -5.0f, 1.0f));
+    Turret *bc = new BilgerwaterChaos("bc", TurretColor::RED, true, 2.0f, glm::vec4(1.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("bc", bc));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bc", bc));
     printf("[GAME] BilgerwaterChaos created\n");
 
-    Turret *bo = new BilgerwaterOrder("bo", TurretColor::RED, 2.0f, glm::vec4(5.0f, 0.0f, -5.0f, 1.0f));
+    Turret *bo = new BilgerwaterOrder("bo", TurretColor::RED, true, 2.0f, glm::vec4(5.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("bo", bo));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bo", bo));
     printf("[GAME] BilgerwaterOrder created\n");
 
-    Turret *sc = new SummonersChaos("sc", TurretColor::BLUE, 2.0f, glm::vec4(9.0f, 0.0f, -5.0f, 1.0f));
+    Turret *sc = new SummonersChaos("sc", TurretColor::BLUE, true, 2.0f, glm::vec4(9.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("sc", sc));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sc", sc));
     printf("[GAME] SummonersChaos created\n");
 
-    Turret *so = new SummonersOrder("so", TurretColor::RED, 2.0f, glm::vec4(13.0f, 0.0f, -5.0f, 1.0f));
+    Turret *so = new SummonersOrder("so", TurretColor::RED, true, 2.0f, glm::vec4(13.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("so", so));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("so", so));
     printf("[GAME] SummonersOrder created\n");
 
-    Turret *hc = new HowlingChaos("hc", TurretColor::BLUE, 2.0f, glm::vec4(17.0f, 0.0f, -5.0f, 1.0f));
+    Turret *hc = new HowlingChaos("hc", TurretColor::BLUE, true, 2.0f, glm::vec4(17.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("hc", hc));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("hc", hc));
     printf("[GAME] HowlingChaos created\n");
 
-    Turret *ho = new HowlingOrder("ho", TurretColor::RED, 2.0f, glm::vec4(21.0f, 0.0f, -5.0f, 1.0f));
+    Turret *ho = new HowlingOrder("ho", TurretColor::RED, true, 2.0f, glm::vec4(21.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("ho", ho));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("ho", ho));
     printf("[GAME] HowlingOrder created\n");
 
-    Turret *sgc = new SiegeChaos("sgc", TurretColor::RED, 2.0f, glm::vec4(25.0f, 0.0f, -5.0f, 1.0f));
+    Turret *sgc = new SiegeChaos("sgc", TurretColor::RED, true, 2.0f, glm::vec4(25.0f, 0.0f, -5.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("sgc", sgc));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sgc", sgc));
     printf("[GAME] SiegeChaos created\n");
@@ -353,49 +353,49 @@ void Game::update_hand_turret()
     else if (keys[Turrets::BILGERWATER_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new BilgerwaterChaos("bc_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new BilgerwaterChaos("bc_hand", TurretColor::BLUE);
         keys[Turrets::BILGERWATER_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a BilgerwaterChaos turret\n");
     }
     else if (keys[Turrets::BILGERWATER_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new BilgerwaterOrder("bo_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new BilgerwaterOrder("bo_hand", TurretColor::BLUE);
         keys[Turrets::BILGERWATER_ORDER] = GL_FALSE;
         printf("[GAME] Selected a BilgerwaterOrder turret\n");
     }
     else if (keys[Turrets::HOWLING_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new HowlingChaos("hc_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new HowlingChaos("hc_hand", TurretColor::BLUE);
         keys[Turrets::HOWLING_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a HowlingChaos turret\n");
     }
     else if (keys[Turrets::HOWLING_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new HowlingOrder("ho_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new HowlingOrder("ho_hand", TurretColor::BLUE);
         keys[Turrets::HOWLING_ORDER] = GL_FALSE;
         printf("[GAME] Selected a HowlingOrder turret\n");
     }
     else if (keys[Turrets::SIEGE_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SiegeChaos("sgc_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new SiegeChaos("sgc_hand", TurretColor::BLUE);
         keys[Turrets::SIEGE_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a SiegeChaos turret\n");
     }
     else if (keys[Turrets::SUMMONERS_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SummonersChaos("sc_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new SummonersChaos("sc_hand", TurretColor::BLUE);
         keys[Turrets::SUMMONERS_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a SummonersChaos turret\n");
     }
     else if (keys[Turrets::SUMMONERS_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SummonersOrder("so_hand", TurretColor::BLUE, 2.0f);
+        this->hand->turret = new SummonersOrder("so_hand", TurretColor::BLUE);
         keys[Turrets::SUMMONERS_ORDER] = GL_FALSE;
         printf("[GAME] Selected a SummonersOrder turret\n");
     }
