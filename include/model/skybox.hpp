@@ -4,6 +4,8 @@ class SkyBox : public GameObject
 {
 protected:
     CubemapTexture2D texture;
+    CubemapTexture2D texture_victory;
+    CubemapTexture2D texture_defeat;
 
 public:
     SkyBox(std::string name) : GameObject(name)

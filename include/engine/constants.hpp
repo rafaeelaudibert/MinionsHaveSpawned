@@ -15,6 +15,7 @@ namespace Constants {
     const float CHARACTER_CROUCHING_HEIGHT = 2.3f;                  // Height of the character while crouching, in meters
     const float CROUCHING_SPEED_MULTIPLIER = 0.4f;                  // How much of the normal speed the player runs while crouching
     const float SPEED = 10.0f;                                      // Player speed
+    const float HAND_LESS_HEIGHT = 1.2f;                            // How lower is the hand position according to the camera
     const float SPAWNING_TURRET_MAX_DISTANCE = 12.0f;               // Maximum distance which a player can drop a turret
     const float EPSILON = std::numeric_limits<float>::epsilon();    // Machine epsilon
     const float MAX_NUMBER = std::numeric_limits<float>::max();     // Machine maximum number

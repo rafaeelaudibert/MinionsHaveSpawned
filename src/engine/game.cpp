@@ -27,7 +27,7 @@
 #include "model/turret/siege_chaos.hpp"
 
 Game::Game(GLuint width, GLuint height)
-    : state(GAME_ACTIVE), width(width), height(height), screen_ratio((float)width / (float)height)
+    : width(width), height(height), screen_ratio((float)width / (float)height)
 {
 }
 
@@ -37,6 +37,7 @@ Game::~Game()
 
 float Game::character_height = Constants::CHARACTER_STANDING_HEIGHT;
 Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
+GameState Game::state = GameState::GAME_ACTIVE;
 
 void Game::init()
 {
@@ -247,9 +248,16 @@ void Game::update()
 
     // Moves the hand with the camera
     this->hand->position = camera.position;
-    this->hand->position.y -= Game::character_height / 2.5f;
+    this->hand->position.y -= Constants::HAND_LESS_HEIGHT;
     this->hand->position -= matrix::normalize(matrix::crossproduct(camera.right, camera.world_up)) / 2.0f;
     this->hand->angle = -(camera.yaw / 360.0f * 3.1415f) * 2;
+
+    // Update game state (win or lost)
+    if (this->chaos_nexus->is_dead()) {
+        Game::state = GameState::GAME_WIN;
+    } else if (this->order_nexus->is_dead()) {
+        Game::state = GameState::GAME_LOSE;
+    }
 }
 
 void Game::process_input()

@@ -19,7 +19,8 @@ enum GameState
 {
     GAME_ACTIVE,
     GAME_MENU,
-    GAME_WIN
+    GAME_WIN,
+    GAME_LOSE
 };
 
 // Represents the player status
@@ -37,7 +38,7 @@ class Game
 {
 public:
     // GameState variables
-    GameState state = GAME_ACTIVE;
+    static GameState state;
     GLboolean keys[1024] = {false};
     GLuint width, height;
     float screen_ratio;
