@@ -15,7 +15,12 @@ std::map<std::string, BasicModelStorage> ResourceManager::models;
 
 Shader ResourceManager::load_shader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
-    shaders[name] = load_shader_from_file(vShaderFile, fShaderFile, gShaderFile);
+    if (shaders.find(name) == shaders.end()) {
+        shaders[name] = load_shader_from_file(vShaderFile, fShaderFile, gShaderFile);
+    } else {
+        printf("[GAME] Using already loaded shader\n");
+    }
+
     return shaders[name];
 }
 
@@ -26,7 +31,12 @@ Shader ResourceManager::get_shader(std::string name)
 
 Texture2D ResourceManager::load_texture(const GLchar *file, std::string name)
 {
-    textures[name] = load_texture_from_file(file);
+    if (textures.find(name) == textures.end()) {
+        textures[name] = load_texture_from_file(file);
+    } else {
+        printf("[GAME] Using already loaded texture\n");
+    }
+
     return textures[name];
 }
 
@@ -37,7 +47,12 @@ Texture2D ResourceManager::get_texture(std::string name)
 
 CubemapTexture2D ResourceManager::load_cubemap_texture(std::vector<std::string> files, std::string name)
 {
-    cubemapTextures[name] = load_cubemap_texture_from_files(files);
+    if (cubemapTextures.find(name) == cubemapTextures.end()) {
+        cubemapTextures[name] = load_cubemap_texture_from_files(files);
+    } else {
+        printf("[GAME] Using already loaded cubemap texture\n");
+    }
+
     return cubemapTextures[name];
 }
 
@@ -186,7 +201,7 @@ void ResourceManager::load_object(const char* filename, GameObject* gameObject, 
         };
         models[filename_str] = storage;
     } else {
-        printf("[GAME] Using already loaded %s\n", filename);
+        printf("[GAME] Using already loaded %s model\n", filename);
     }
 
     // Copy the data from the BasicModelStorage
