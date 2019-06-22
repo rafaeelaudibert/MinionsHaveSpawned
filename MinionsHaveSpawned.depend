@@ -1183,7 +1183,7 @@
 1560567636 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dummy.hpp
 	"model/base.hpp"
 
-1561089230 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dummy.cpp
+1561238421 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dummy.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/dummy.hpp"
@@ -1282,13 +1282,13 @@
 	"model/turret.hpp"
 	<algorithm>
 
-1561229271 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret.hpp
+1561233815 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret.hpp
 	"model/collisive.hpp"
 	"model/enemy.hpp"
 	<map>
 	<string>
 
-1561224144 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\bilgerwater_chaos.cpp
+1561234483 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\bilgerwater_chaos.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/bilgerwater_chaos.hpp"
@@ -1296,7 +1296,7 @@
 1561224057 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret\bilgerwater_chaos.hpp
 	"model/turret.hpp"
 
-1561224141 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\bilgerwater_order.cpp
+1561234497 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\bilgerwater_order.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/bilgerwater_order.hpp"
@@ -1304,7 +1304,7 @@
 1561224061 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret\bilgerwater_order.hpp
 	"model/turret.hpp"
 
-1561224120 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\summoners_chaos.cpp
+1561234563 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\summoners_chaos.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/summoners_chaos.hpp"
@@ -1312,7 +1312,7 @@
 1561224083 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret\summoners_chaos.hpp
 	"model/turret.hpp"
 
-1561224110 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\summoners_order.cpp
+1561234574 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\summoners_order.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/summoners_order.hpp"
@@ -1326,17 +1326,17 @@
 1561224071 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret\howling_order.hpp
 	"model/turret.hpp"
 
-1561224138 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\howling_chaos.cpp
+1561234511 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\howling_chaos.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/howling_chaos.hpp"
 
-1561224133 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\howling_order.cpp
+1561234532 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\howling_order.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/howling_order.hpp"
 
-1561224125 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\siege_chaos.cpp
+1561234550 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\turret\siege_chaos.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/turret/siege_chaos.hpp"
