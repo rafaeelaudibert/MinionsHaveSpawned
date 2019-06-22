@@ -21,6 +21,9 @@ void HowlingOrder::build()
         throw std::runtime_error("[ERROR] Error when trying to load the HowlingOrder model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(-0.4f, 5.49f, -1.01f, 1.0f);
+
     return;
 }
 

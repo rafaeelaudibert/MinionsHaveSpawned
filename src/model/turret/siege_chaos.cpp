@@ -21,6 +21,9 @@ void SiegeChaos::build()
         throw std::runtime_error("[ERROR] Error when trying to load the SiegeChaos model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.0f, 2.06f, -0.47f, 1.0f);
+
     return;
 }
 

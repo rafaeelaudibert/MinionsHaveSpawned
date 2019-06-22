@@ -21,6 +21,9 @@ void HowlingChaos::build()
         throw std::runtime_error("[ERROR] Error when trying to load the HowlingChaos model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.3f, 5.37f, -1.15f, 1.0f);
+
     return;
 }
 

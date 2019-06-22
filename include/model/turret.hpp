@@ -32,6 +32,7 @@ public:
     TurretColor color = TurretColor::RED;
 
     // Shooting
+    glm::vec4 shooting_position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
     float recharge_time = 2.0f;     // Time to recharge
     float elapsed_time = 0.0f;      // Elapsed time since the last shot
     Enemy* target;                  // Current target

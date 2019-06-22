@@ -19,6 +19,9 @@ void BilgerwaterOrder::build()
         throw std::runtime_error("[ERROR] Error when trying to load the BilgerwaterOrder model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.0f, 4.3f, -1.52f, 1.0f);
+
     return;
 }
 

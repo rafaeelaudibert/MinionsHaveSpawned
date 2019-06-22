@@ -21,6 +21,9 @@ void SummonersOrder::build()
         throw std::runtime_error("[ERROR] Error when trying to load the SummonersOrder model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.54f, 5.16f, -1.56f, 1.0f);
+
     return;
 }
 

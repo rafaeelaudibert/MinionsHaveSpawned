@@ -1020,8 +1020,9 @@
 	"engine/shader.hpp"
 	<iostream>
 
-1561229816 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
+1561230146 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
 	"engine/resource_manager.hpp"
+	"engine/constants.hpp"
 	<iostream>
 	<sstream>
 	<fstream>

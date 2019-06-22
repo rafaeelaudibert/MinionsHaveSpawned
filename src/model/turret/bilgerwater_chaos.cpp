@@ -19,6 +19,9 @@ void BilgerwaterChaos::build()
         throw std::runtime_error("[ERROR] Error when trying to load the BilgerwaterChaos model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.0f, 3.78f, -1.59f, 1.0f);
+
     return;
 }
 

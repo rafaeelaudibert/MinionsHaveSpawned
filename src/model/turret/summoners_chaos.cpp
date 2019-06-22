@@ -21,6 +21,9 @@ void SummonersChaos::build()
         throw std::runtime_error("[ERROR] Error when trying to load the SummonersChaos model - Non existent TurretColor.");
     }
 
+    // Configure shooting position
+    this->shooting_position = glm::vec4(0.53f, 5.15f, -1.19f, 1.0f);
+
     return;
 }
 
