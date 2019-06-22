@@ -43,15 +43,15 @@ Your application should include implementation of the following concepts of Comp
     - [x] At a minimum your application should include a geometric model of complexity equal to or greater than the `cow.obj` template available at [this link](https://moodle.inf.ufrgs.br/mod/resource/view.php?id=81157).
     - [x] The greater the variety of geometric models, the better.
 
-- [ ] **Geometric transformations** of virtual objects.
-    - [ ] Through interaction with the keyboard and/or mouse, the user must be able to control geometric transformations applied to virtual objects (not just camera control).
+- [x] **Geometric transformations** of virtual objects.
+    - [x] Through interaction with the keyboard and/or mouse, the user must be able to control geometric transformations applied to virtual objects (not just camera control).
 
 - [ ] Control of virtual cameras.
     - [ ] At the very least your application should implement:
         - [ ] a **look-at camera**, and;
         - [x] a **free camera**.
 
-- [ ] At least one virtual object must be copied with two or more **instances**, that is, using two or more model matrix applied to the same set of vertices.
+- [x] At least one virtual object must be copied with two or more **instances**, that is, using two or more model matrix applied to the same set of vertices.
 
 - [ ] **Intersection tests between virtual objects**.
     - [ ] **At a minimum** your application should use **three types** of intersection test):
