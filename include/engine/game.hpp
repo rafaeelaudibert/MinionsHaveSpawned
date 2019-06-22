@@ -12,6 +12,7 @@
 #include "model/enemy.hpp"
 #include "model/turret.hpp"
 #include "model/hand.hpp"
+#include "model/nexus.hpp"
 
 // Represents the current state of the game
 enum GameState
@@ -63,6 +64,8 @@ public:
     // Hand
     Hand *hand;
 
+    // Game nexus
+    Nexus *order_nexus, *chaos_nexus;
 
     // Collisive objects map
     std::map<std::string, Collisive *> collisive_objects;

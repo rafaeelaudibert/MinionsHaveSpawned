@@ -158,6 +158,16 @@ void Game::init()
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sgc", sgc));
     printf("[GAME] SiegeChaos created\n");
 
+    this->order_nexus = new Nexus("nos", NexusColorSide::CHAOS_BLUE, glm::vec4(33.0f, 0.0f, -33.0f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("nos", this->order_nexus));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("nos", this->order_nexus));
+    printf("[GAME] Order Nexus created\n");
+
+    this->chaos_nexus = new Nexus("ncs", NexusColorSide::CHAOS_RED, glm::vec4(-33.5f, 0.0f, 32.5f, 1.0f));
+    objects.insert(std::map<std::string, GameObject *>::value_type("ncs", this->chaos_nexus));
+    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("ncs", this->chaos_nexus));
+    printf("[GAME] Chaos Nexus created\n");
+
     // Create hand
     this->hand = new Hand("hand");
 
@@ -307,6 +317,10 @@ void Game::render()
     {
         object.second->render_health_bar(view, projection);
     }
+
+    // Render nexus health bar (need to render later because of their transparency)
+    this->order_nexus->render_health_bar(view, projection);
+    this->chaos_nexus->render_health_bar(view, projection);
 
     // Render hand
     this->hand->render(view, projection);
