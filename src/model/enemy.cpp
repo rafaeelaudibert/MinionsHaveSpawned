@@ -27,7 +27,9 @@ void Enemy::hit(float life_points) {
 }
 
 void Enemy::render_health_bar(glm::mat4 view, glm::mat4 projection) {
-    this->health_bar->render(view, projection, this->current_life_points / this->max_life_points);
+
+    if (!this->is_dead())
+        this->health_bar->render(view, projection, this->current_life_points / this->max_life_points);
 
     return;
 }
