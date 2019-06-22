@@ -1,4 +1,5 @@
 #include "engine/resource_manager.hpp"
+#include "engine/constants.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -94,8 +95,8 @@ void ResourceManager::load_object(const char* filename, GameObject* gameObject, 
         const float minval = std::numeric_limits<float>::min();
         const float maxval = std::numeric_limits<float>::max();
 
-        glm::vec3 bbox_min = glm::vec3(maxval,maxval,maxval);
-        glm::vec3 bbox_max = glm::vec3(minval,minval,minval);
+        glm::vec3 bbox_min = glm::vec3(maxval, maxval, maxval);
+        glm::vec3 bbox_max = glm::vec3(minval, minval, minval);
 
         for (size_t triangle = 0; triangle < num_triangles; ++triangle)
         {
@@ -120,7 +121,7 @@ void ResourceManager::load_object(const char* filename, GameObject* gameObject, 
 
                 // Update the bbox
                 bbox_min.x = std::min(bbox_min.x, vx);
-                bbox_min.y = std::min(bbox_min.y, vy);
+                bbox_min.y = std::max(Constants::EPSILON, std::min(bbox_min.y, vy)); // We don't want collision with things in the negative side in the y axis
                 bbox_min.z = std::min(bbox_min.z, vz);
                 bbox_max.x = std::max(bbox_max.x, vx);
                 bbox_max.y = std::max(bbox_max.y, vy);

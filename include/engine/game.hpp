@@ -63,6 +63,9 @@ public:
     GLfloat y_speed = 0;                                        // Current character falling velocity
     glm::vec4 aiming_position;
 
+    // Counting variables
+    static unsigned int turret_quantity;
+
     // Time variables
     GLfloat lastFrame = 0.0f;
     GLfloat deltaTime = 0.0f;
@@ -80,7 +83,7 @@ public:
     Nexus *order_nexus, *chaos_nexus;
 
     // Collisive objects map
-    std::map<std::string, Collisive *> collisive_objects;
+    static std::map<std::string, Collisive *> collisive_objects;
 
     // Enemy objects map
     std::map<std::string, Enemy *> enemy_objects;
@@ -99,7 +102,11 @@ public:
 
     // Processes game input
     void process_input();
+
+private:
+    // Helpers to process game input
     void update_hand_turret();
+    void check_place_turret();
 };
 
 #endif

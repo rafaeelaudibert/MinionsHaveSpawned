@@ -38,6 +38,8 @@ Game::~Game()
 float Game::character_height = Constants::CHARACTER_STANDING_HEIGHT;
 Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
 GameState Game::state = GameState::GAME_ACTIVE;
+std::map<std::string, Collisive *> Game::collisive_objects;
+unsigned int Game::turret_quantity = 0;
 
 void Game::init()
 {
@@ -47,7 +49,7 @@ void Game::init()
     objects.insert(std::map<std::string, GameObject *>::value_type("skybox", skybox));
     printf("[GAME] Skybox created\n");
 
-    Cube *plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(1.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(80.0f, 0.01f, 80.0f), "../../src/textures/full_map.jpg", "full_map");
+    Cube *plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(Constants::MAP_SIZE, 0.01f, Constants::MAP_SIZE), "../../src/textures/full_map.jpg", "full_map");
     objects.insert(std::map<std::string, GameObject *>::value_type("plane", plane));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("plane", plane));
     printf("[GAME] Plane created\n");
@@ -309,6 +311,9 @@ void Game::process_input()
 
     // Update the turret being hold on hand
     this->update_hand_turret();
+
+    // Puts the turret on the ground, if asked too
+    this->check_place_turret();
 }
 
 void Game::render()
@@ -398,5 +403,23 @@ void Game::update_hand_turret()
         this->hand->turret = new SummonersOrder("so_hand", TurretColor::BLUE);
         keys[Turrets::SUMMONERS_ORDER] = GL_FALSE;
         printf("[GAME] Selected a SummonersOrder turret\n");
+    }
+}
+
+void Game::check_place_turret()
+{
+    // If there is a turret that can be placed, and the user clicks, place it
+    if (keys[GLFW_MOUSE_BUTTON_1] == GL_TRUE && this->hand->turret != nullptr && this->hand->turret->can_place()) {
+        this->objects.insert(std::map<std::string, GameObject *>::value_type("turret" + std::to_string(++turret_quantity), this->hand->turret));
+        collisive_objects.insert(std::map<std::string, Collisive *>::value_type("turret" + std::to_string(++turret_quantity), this->hand->turret));
+        this->hand->turret->placed = true;      // Mark as placed
+        this->hand->turret = nullptr;           // Updated it
+        keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;   // Remove the flag
+
+        printf("[GAME] Turret current holded on hand created\n");
+    } else if (keys[GLFW_MOUSE_BUTTON_2] == GL_TRUE && this->hand->turret != nullptr) { // If uses right button, deselects turret
+        delete this->hand->turret;
+        this->hand->turret = nullptr;
+        printf("[GAME] Deselected any turret\n");
     }
 }

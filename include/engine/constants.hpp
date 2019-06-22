@@ -6,6 +6,7 @@
 namespace Constants {
 
     // Static constant variables
+    const float MAP_SIZE = 80.0f;                                   // Width/Depth of the map
     const float GRAVITY = -26.0f;                                   // Gravity Force
     const float MINIMUM_HEIGHT = -150.0f;                           // Minimum height the camera can be
     const float MAX_FALLING_SPEED = -180.0f;                        // Maximum falling speed due to air resistance

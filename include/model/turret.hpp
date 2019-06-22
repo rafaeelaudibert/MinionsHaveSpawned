@@ -42,6 +42,9 @@ public:
     // Update function (updates all its ammo and change current target
     virtual void update(float delta_time, std::map<std::string, Enemy *> enemies);
     virtual bool can_place();
+
+private:
+    bool out_of_map();
 };
 
 #endif // TURRET_H

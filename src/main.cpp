@@ -25,6 +25,7 @@
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 // Global Constants
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
     // ... ou rolar a "rodinha" do mouse ...
     glfwSetScrollCallback(window, scroll_callback);
     // ... ou clicar os botões do mouse.
-    // glfwSetMouseButtonCallback(window, MouseButtonCallback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -219,6 +220,17 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos)
     lastY = ypos;
 
     MinionsHaveSpawned.camera.process_mouse_movement(xoffset, yoffset);
+}
+
+// glfw: whenever the mouse clicks, this callback is called
+// --------------------------------------------------------
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_PRESS) {
+        MinionsHaveSpawned.keys[button] = GL_TRUE;
+    } else if ((button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) && action == GLFW_RELEASE) {
+        MinionsHaveSpawned.keys[button] = GL_FALSE;
+    }
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
