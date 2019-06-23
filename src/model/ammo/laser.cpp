@@ -54,14 +54,17 @@ void Laser::update(float delta_time){
     if (!this->completed_movement() && this->target != nullptr) { // Keep updating the laser direction and angle
         this->time += delta_time * this->speed;
 
+        // Compute the middle of the target for the target_position
+        glm::vec4 target_position = this->target->position;
+        target_position.y = this->target->position.y + (this->target->bbox_max.y - this->target->bbox_min.y) / 2;
+
         // The scale of this cube is the distance between the objects. In the render we only expand on the X axis
-        //this->scale = glm::vec3(matrix::norm(this->target->position - this->origin_position), this->time / 5.0f, this->time / 5.0f);
-        this->scale = glm::vec3(this->time / 5.0f, this->time / 5.0f, matrix::norm(this->target->position - this->origin_position));
+        this->scale = glm::vec3(this->time / 5.0f, this->time / 5.0f, matrix::norm(target_position - this->origin_position));
 
         // The y rotation of this ray is related to the equation below
-        this->angle = std::atan2(this->target->position.x - this->origin_position.x, this->target->position.z - this->origin_position.z);
+        this->angle = std::atan2(target_position.x - this->origin_position.x, target_position.z - this->origin_position.z);
 
         // The x rotation of this ray is related to the equation below
-        this->x_angle = std::atan2(this->target->position.y - this->origin_position.y, this->target->position.z - this->origin_position.z);
+        this->x_angle = std::atan2(target_position.y - this->origin_position.y, target_position.z - this->origin_position.z);
     }
 }
