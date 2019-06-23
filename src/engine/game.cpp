@@ -43,6 +43,7 @@ std::map<std::string, GameObject *> Game::objects;
 std::map<std::string, Collisive *> Game::collisive_objects;
 std::map<std::string, Enemy *> Game::enemy_objects;
 std::map<std::string, Turret *> Game::turret_objects;
+Nexus *Game::chaos_nexus, *Game::order_nexus;
 
 void Game::init()
 {
@@ -237,6 +238,16 @@ void Game::update()
         {
             printf("[INFO] Deleting minion %s\n", it->second->name.c_str());
             this->enemy_objects.erase(it);
+
+            // Check that if the camera is focusing this minion, it should change
+            if (Game::camera.look_at_target == it->second)
+            {
+                printf("[WARN] Minion targeted by camera will be deleted, switching it\n");
+                Game::camera.switch_camera_type();
+            }
+
+            // Now we can properly free it
+            delete it->second;
         }
     }
 
@@ -301,11 +312,14 @@ void Game::process_input()
         printf("[GAME] Started uncrouching\n");
     }
 
-    // Update the turret being hold on hand
-    this->update_hand_turret();
+    if (this->camera.camera_type == CameraType::LOOK_AROUND)
+    {
+        // Update the turret being hold on hand
+        this->update_hand_turret();
 
-    // Puts the turret on the ground, if asked too
-    this->check_place_turret();
+        // Puts the turret on the ground, if asked too
+        this->check_place_turret();
+    }
 }
 
 void Game::render()
@@ -345,9 +359,12 @@ void Game::render()
     this->order_nexus->render_health_bar(view, projection);
     this->chaos_nexus->render_health_bar(view, projection);
 
-    // Render hand and its transparent turret
-    this->hand->render(view, projection);
-    this->hand->render_turret(view, projection);
+    // Render hand and its transparent turret IF CAMERA IS OK
+    if (this->camera.camera_type == CameraType::LOOK_AROUND)
+    {
+        this->hand->render(view, projection);
+        this->hand->render_turret(view, projection);
+    }
 }
 
 void Game::update_hand_turret()

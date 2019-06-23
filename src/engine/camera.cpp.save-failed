@@ -5,18 +5,13 @@
 
 glm::mat4 Camera::get_view_matrix()
 {
-    return matrix::camera_view_matrix(position, get_front_vector(), up);
-}
-
-glm::vec4 Camera::get_front_vector()
-{
     if (this->camera_type == CameraType::LOOK_AROUND)
     {
-        return matrix::normalize(front);
+        return matrix::camera_view_matrix(position, front, up);
     }
     else
     {
-        return matrix::normalize(this->look_at_target->position - this->position);
+        return matrix::camera_view_matrix(this->position, this->look_at_target->position - this->position, up);
     }
 }
 
@@ -26,7 +21,7 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     glm::vec4 new_position = position;
     glm::vec4 old_position = position;
 
-    if (this->camera_type == CameraType::LOOK_AROUND)
+    if (this->camera_type = CameraType::LOOK_AROUND)
     {
         if (direction == FORWARD)
             new_position += matrix::crossproduct(up, right) * velocity;
@@ -41,17 +36,14 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     }
     else
     {
-        glm::vec4 position_on_ground = glm::vec4(this->position.x, 0.0f, this->position.z, this->position.w);
-
-        // The signals are inverted because we are generating "left" vectors, instead of right ones
         if (direction == FORWARD)
-            new_position -= matrix::crossproduct(up, matrix::crossproduct(up, matrix::normalize(this->look_at_target->position - position_on_ground))) * velocity;
+            new_position += matrix::crossproduct(up, matrix::crossproduct(up, this->look_at_target - this->position)) * velocity;
         if (direction == BACKWARD)
-            new_position += matrix::crossproduct(up, matrix::crossproduct(up, matrix::normalize(this->look_at_target->position - position_on_ground))) * velocity;
+            new_position -= matrix::crossproduct(up, matrix::crossproduct(up, this->look_at_target - this->position)) * velocity;
         if (direction == LEFT)
-            new_position += matrix::crossproduct(up, matrix::normalize(this->look_at_target->position - position_on_ground)) * velocity;
+            new_position -= matrix::crossproduct(up, matrix::crossproduct(this->look_at_target - this->position) * velocity;
         if (direction == RIGHT)
-            new_position -= matrix::crossproduct(up, matrix::normalize(this->look_at_target->position - position_on_ground)) * velocity;
+            new_position += matrix::crossproduct(up, matrix::crossproduct(this->look_at_target - this->position) * velocity;
         if (direction == DOWN)
             new_position.y = new_position.y + game.y_speed * delta_time;
     }
@@ -114,7 +106,6 @@ void Camera::update_camera_vectors()
     // Also re-calculate the Right  vector
     // Normalize the vector, because their length gets closer to 0 the more you look up or down which results in slower movement.
     this->right = matrix::normalize(matrix::crossproduct(this->front, this->world_up));
-
 }
 
 bool Camera::check_collision(std::map<std::string, Collisive *> collisive_objects)
@@ -142,13 +133,6 @@ void Camera::switch_camera_type()
 {
     if (this->camera_type == CameraType::LOOK_AT)
     {
-        // Update front, pitch and yaw to have a smooth transition
-        this->front = this->look_at_target->position - this->position;
-        this->front.w = 0.0f;
-        this->front = matrix::normalize(front);
-        this->pitch = glm::degrees(std::asin(this->front.y));
-        this->yaw = glm::degrees(std::asin(this->front.z / std::cos(glm::radians(this->pitch))));
-
         this->camera_type = CameraType::LOOK_AROUND; // Easy switch
         this->look_at_target = nullptr;
         printf("[GAME] Camera changed to LOOK_AROUND\n");
@@ -176,7 +160,4 @@ void Camera::switch_camera_type()
             printf("[GAME] Camera changed to LOOK_AT, focusing %s\n", this->look_at_target->name.c_str());
         }
     }
-
-    // Update camera vectors
-    this->update_camera_vectors();
 }

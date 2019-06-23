@@ -202,7 +202,7 @@ float matrix::dotproduct(glm::vec4 u, glm::vec4 v)
 
     if ( u4 != 0.0f || v4 != 0.0f )
     {
-        fprintf(stderr, "ERROR: Produto escalar n�o definido para pontos.\n");
+        fprintf(stderr, "ERROR: Produto escalar não definido para pontos.\n");
         std::exit(EXIT_FAILURE);
     }
 
@@ -218,7 +218,6 @@ glm::mat4 matrix::camera_view_matrix(glm::vec4 position_c, glm::vec4 view_vector
     glm::vec4 v = crossproduct(w,u);
 
     glm::vec4 origin_o = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-
     return Matrix(
         u.x   , u.y   , u.z   , dotproduct(-u, position_c - origin_o) ,  // LINHA 1
         v.x   , v.y   , v.z   , dotproduct(-v, position_c - origin_o) ,  // LINHA 2

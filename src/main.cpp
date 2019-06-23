@@ -166,6 +166,10 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
 
+    // When a user presses TAB, should change camera type (if possible)
+    if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+        Game::camera.switch_camera_type();
+
     if (key >= 0 && key < 1024)
     {
         if (action == GLFW_PRESS)
@@ -173,6 +177,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         else if (action == GLFW_RELEASE)
             MinionsHaveSpawned.keys[key] = GL_FALSE;
     }
+
 }
 
 // Definição da função que será chamada sempre que a janela do sistema

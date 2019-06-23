@@ -80,7 +80,7 @@ public:
     Hand *hand;
 
     // Game nexus
-    Nexus *order_nexus, *chaos_nexus;
+    static Nexus *order_nexus, *chaos_nexus;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);

@@ -10,6 +10,7 @@
 #include <map>
 
 #include "engine/matrices.hpp"
+#include "model/enemy.hpp"
 #include "model/collisive.hpp"
 #include "engine/constants.hpp"
 
@@ -24,6 +25,12 @@ enum CameraMovement
     LEFT,
     RIGHT,
     DOWN
+};
+
+enum CameraType
+{
+    LOOK_AROUND,
+    LOOK_AT
 };
 
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
@@ -61,6 +68,12 @@ public:
     glm::vec3 camera_bbox_min;
     glm::vec3 camera_bbox_max;
 
+    // Camera actual type
+    CameraType camera_type = CameraType::LOOK_AROUND;
+
+    // Minion targeted, when camera in LOOK_AT
+    Enemy *look_at_target = nullptr;
+
     // Constructor with vectors
     Camera(glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), glm::vec4 up = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : front(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)), movement_speed(Constants::SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM)
     {
@@ -72,6 +85,9 @@ public:
 
         // Configure bbox
         set_bbox(this->position);
+
+        // Configure default camera_type
+        this->camera_type = CameraType::LOOK_AROUND;
 
         update_camera_vectors();
     }
@@ -88,6 +104,9 @@ public:
         // Configure bbox
         set_bbox(this->position);
 
+        // Configure default camera_type
+        this->camera_type = CameraType::LOOK_AROUND;
+
         update_camera_vectors();
     }
 
@@ -103,6 +122,12 @@ public:
 
     // Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
     void process_mouse_scroll(float yoffset);
+
+    // Tries to change the camera type
+    void switch_camera_type();
+
+    // Makes the calculus for the front vector easier
+    glm::vec4 get_front_vector();
 
     // Check if the camera collided with something
     bool check_collision(std::map<std::string, Collisive *>);
