@@ -52,9 +52,9 @@ void main()
     vec4 r = -l + 2 * n * (dot(l, v));
 
     // Parameters which define the surface spectral properties.
-    vec4 Kd = color_v; // Diffuse reflectance
-    vec4 Ks = color_v; // Specular reflectance
-    vec4 Ka = color_v; // Ambient reflectance
+    vec4 Kd = vec4(1.0, 1.0, 1.0, 1.0); // Diffuse reflectance
+    vec4 Ks = vec4(1.0, 1.0, 1.0, 1.0); // Specular reflectance
+    vec4 Ka = vec4(1.0, 1.0, 1.0, 1.0); // Ambient reflectance
     float q = 5.0; // Specular exponent for Phong's illumination model
 
     // Parameters which define the illumination spectrum
@@ -72,7 +72,7 @@ void main()
     vec4 phong_specular_term  = Ks * I * pow(max(0, dot(n, h)), q);
 
     // Final fragment color calculated with a combination of the diffuse, specular and ambiance terms.
-    color = lambert_diffuse_term + ambient_term + phong_specular_term;
+    color = (lambert_diffuse_term + ambient_term + phong_specular_term) * color_v;
 
     // We need to make our gamma color correction, considering a sRGB display.
     // See https://en.wikipedia.org/w/index.php?title=Gamma_correction&oldid=751281772#Windows.2C_Mac.2C_sRGB_and_TV.2Fvideo_standard_gammas
