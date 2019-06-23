@@ -53,11 +53,11 @@ Your application should include implementation of the following concepts of Comp
 
 - [x] At least one virtual object must be copied with two or more **instances**, that is, using two or more model matrix applied to the same set of vertices.
 
-- [ ] **Intersection tests between virtual objects**.
-    - [ ] **At a minimum** your application should use **three types** of intersection test):
+- [x] **Intersection tests between virtual objects**.
+    - [x] **At a minimum** your application should use **three types** of intersection test):
         - [x] Cube-Cube test
+	- [x] Ray-Surface test
         - [x] Point-Sphere test
-        - [ ] Cube-Point test
 
 - [x] **Illumination** models of geometric objects.
     - [x] **At a minimum** your application should include objects with the following lighting models:
