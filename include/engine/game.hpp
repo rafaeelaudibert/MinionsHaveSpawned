@@ -58,13 +58,10 @@ public:
     float screen_ratio;
 
     // Mechanic variables
-    static float character_height;                              // Height of the character, in meters
-    PlayerStatus player_status = PlayerStatus::STANDING;        // Current player status
-    GLfloat y_speed = 0;                                        // Current character falling velocity
-    glm::vec4 aiming_position;
-
-    // Counting variables
-    static unsigned int turret_quantity;
+    static float character_height;                          // Height of the character, in meters
+    PlayerStatus player_status = PlayerStatus::STANDING;    // Current player status
+    GLfloat y_speed = 0;                                    // Current character falling velocity
+    glm::vec4 aiming_position;                              // Position we are aiming at/placing a turret
 
     // Time variables
     GLfloat lastFrame = 0.0f;
@@ -73,20 +70,17 @@ public:
     // Camera
     static Camera camera;
 
-    // Objects map
-    std::map<std::string, GameObject *> objects;
+    /* MAPS */
+    static std::map<std::string, GameObject *> objects;             // All objects map
+    static std::map<std::string, Collisive *> collisive_objects;    // Collisive objects map
+    static std::map<std::string, Enemy *> enemy_objects;            // Enemy objects map
+    static std::map<std::string, Turret *> turret_objects;         // Turrets objects map
 
     // Hand
     Hand *hand;
 
     // Game nexus
     Nexus *order_nexus, *chaos_nexus;
-
-    // Collisive objects map
-    static std::map<std::string, Collisive *> collisive_objects;
-
-    // Enemy objects map
-    std::map<std::string, Enemy *> enemy_objects;
 
     // Constructor/Destructor
     Game(GLuint width, GLuint height);
