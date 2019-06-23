@@ -59,19 +59,19 @@ Your application should include implementation of the following concepts of Comp
         - [ ] Cube-Sphere test
         - [ ] Cube-Point test
 
-- [ ] **Illumination** models of geometric objects.
-    - [ ] **At a minimum** your application should include objects with the following lighting models:
+- [x] **Illumination** models of geometric objects.
+    - [x] **At a minimum** your application should include objects with the following lighting models:
         - [x] **diffuse** (Lambert), and;
-        - [ ] **Blinn-Phong**.
-    - [ ] **At a minimum** your application should include objects with the following interpolation models for lighting:
-        - [ ] **At least** one object with a **Gouraud** model: the lighting model is evaluated for each vertex using its normals, generating a color, which is interpolated for each pixel during the rasterization.
+        - [x] **Blinn-Phong**.
+    - [x] **At a minimum** your application should include objects with the following interpolation models for lighting:
+        - [x] **At least** one object with a **Gouraud** model: the lighting model is evaluated for each vertex using its normals, generating a color, which is interpolated for each pixel during the rasterization.
         - [x] **At least** one object with **Phong** model: the normals of each vertex are interpolated for each pixel during the rasterization, and the illumination model is evaluated for each pixel, using these interpolated normals.
 
 - [x] Mapping of **textures**.
     - [x] **At a minimum**, a virtual object of your application must have its color defined through a texture defined through an image.
 
-- [ ] **Bézier** curves.
-    - [ ] **At least one** virtual object of your application must have its movement defined through a cubic Bezier curve. The object must move smoothly along space on a curved path (not straight).
+- [x] **Bézier** curves.
+    - [x] **At least one** virtual object of your application must have its movement defined through a cubic Bezier curve. The object must move smoothly along space on a curved path (not straight).
 
 - [x] **Motion animation based on time**.
     - [x] **All object movements** (including camera) must be computed based on time (ie, movements must always occur at the same speed regardless of the CPU speed where the program is running).
