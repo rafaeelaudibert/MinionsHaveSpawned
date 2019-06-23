@@ -24,6 +24,9 @@ void Bunny::render(glm::mat4 view, glm::mat4 projection)
     // Bind the VAO
     glBindVertexArray(this->VAO);
 
+    // Configure the color
+    this->shader.set_vector("color_v", glm::vec4(0.94f, 0.06f, 0.15f, 1.0f));
+
     // Calculate the model matrix
     glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first
     model *= matrix::translate_matrix(this->position);

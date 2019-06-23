@@ -41,9 +41,12 @@ void Cube::render(glm::mat4 view, glm::mat4 projection)
     // Bind the VAO
     glBindVertexArray(this->VAO);
 
-    // Bind textures
-    if (&this->texture != NULL)
+    // Bind textures or the color for the shaders
+    if (&this->texture != NULL) {
         this->texture.bind();
+    } else {
+        this->shader.set_vector("color_v", glm::vec4(0.11f, 0.89f, 0.14f, 1.0f));
+    }
 
     // Calculate the model matrix, initializing with
     glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first

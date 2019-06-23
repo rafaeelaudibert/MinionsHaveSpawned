@@ -17,10 +17,11 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+// Color chosen in the C++ code
+uniform vec4 color_v;
 
 // Variáveis para acesso das imagens de textura
 uniform sampler2D TextureImage0;
-
 
 // The Fragment Shader output is the final fragment color
 out vec4 color;
@@ -51,9 +52,9 @@ void main()
     vec4 r = -l + 2 * n * (dot(l, v));
 
     // Parameters which define the surface spectral properties.
-    vec4 Kd = vec4(0.08, 0.4, 0.3, 1.0); // Diffuse reflectance
-    vec4 Ks = vec4(0.8, 0.8, 0.8, 1.0); // Specular reflectance
-    vec4 Ka = vec4(0.04, 0.2, 0.4, 1.0); // Ambient reflectance
+    vec4 Kd = color_v; // Diffuse reflectance
+    vec4 Ks = color_v; // Specular reflectance
+    vec4 Ka = color_v; // Ambient reflectance
     float q = 5.0; // Specular exponent for Phong's illumination model
 
     // Parameters which define the illumination spectrum
