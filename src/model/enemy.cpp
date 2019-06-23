@@ -15,15 +15,19 @@ void Enemy::update(float delta_time)
         for (const AmmoEffects::AmmoEffect effect : this->effects)
         {
             // Aoe effects are handled in a different way, splitting the damage to the enemies in a radius
-            if (effect.ammo_type != "aoe") {
+            if (effect.ammo_type != "aoe")
+            {
                 accumulated_damage += effect.ammo_damage * delta_time;
                 accumulated_speed *= effect.ammo_speed_multiplier;
-            } else {
+            }
+            else
+            {
                 // For enemies in a certain radial distance from this enemy, apply effect.ammo_damage once
                 for (const auto &object : Game::enemy_objects)
                 {
                     float enemy_distance = matrix::norm(object.second->position - this->position);
-                    if (enemy_distance <= Ammo::AOE_RADIUS && object.second != this) {
+                    if (enemy_distance <= Ammo::AOE_RADIUS && object.second != this)
+                    {
                         object.second->hit(effect.ammo_damage / 2);
                     }
                 }
@@ -40,8 +44,29 @@ void Enemy::update(float delta_time)
         // Hit the damage accumulated in the computation above
         this->hit(accumulated_damage);
 
-        // TODO: Walk multiplying by the speed computed above
-    } else { // Slowly goes to beneath the ground
+        switch(this->route)
+        {
+        case Route::TOP:
+        case Route::BOTTOM:
+        case Route::MID:
+            // In MID doesn't matter the walking phase, we only have one
+            this->walking_phase_step += delta_time * accumulated_speed * this->speed;
+            glm::vec4 new_position = Constants::CHAOS_NEXUS_POSITION + (Constants::ORDER_NEXUS_POSITION - Constants::CHAOS_NEXUS_POSITION) * this->walking_phase_step;
+            this->angle = -3.14159f / 8.0f + std::sin(this->walking_phase_step * 3.14159f * 60.0f) * 0.2f; // 20 small giggles
+
+            glm::vec4 movement = new_position - this->position;
+            this->health_bar->position += movement;
+            this->position += movement;
+
+            if (Game::camera.check_collision(this))
+            {
+                Game::camera.position += movement;
+            }
+            break;
+        }
+    }
+    else     // Slowly goes to beneath the ground
+    {
         this->position.y -= Constants::MINION_DEATH_SPEED * delta_time;
     }
 

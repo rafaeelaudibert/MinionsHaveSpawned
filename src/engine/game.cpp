@@ -252,11 +252,21 @@ void Game::update()
         object.second->update(this->deltaTime);
     }
 
-    // Remove all minions which are far beneath the ground
+    // Remove all minions which are far beneath the ground or hitted the enemy nexus, damaging them
     for (auto it = this->enemy_objects.cbegin(), next_it = it; it != this->enemy_objects.cend(); it = next_it)
     {
         ++next_it;
-        if (it->second->position.y <= -1.5f)
+        if (!it->second->is_dead() && Game::order_nexus->collide(it->second))
+        {
+                // Damage the ally nexus
+                printf("[INFO] Minion %s hit the nexus dealing %f damage\n", it->second->name.c_str(), it->second->max_life_points);
+                Game::order_nexus->hit(it->second->max_life_points);
+
+                // Kill the minion with a lot of damage
+                it->second->hit(100000);
+        }
+
+        if (it->second->is_dead() && it->second->position.y <= -2.5f)
         {
             printf("[INFO] Deleting minion %s\n", it->second->name.c_str());
             this->enemy_objects.erase(it);
@@ -293,10 +303,10 @@ void Game::update()
     if (this->state == GameState::GAME_ACTIVE && horde_inner_iterator != (*hordes_outer_iterator).end() && !this->wave_finished)
     {
         this->delta_since_last_spawn += this->deltaTime;
-        if (this->delta_since_last_spawn >= 1.0f)
+        if (this->delta_since_last_spawn >= Constants::SPAWN_RATE)
         {
             Enemy *enemy = *horde_inner_iterator; // Grab iterator value
-            this->delta_since_last_spawn -= 1.0f;
+            this->delta_since_last_spawn -= Constants::SPAWN_RATE;
             collisive_objects.insert(std::map<std::string, Collisive *>::value_type(enemy->name, enemy));
             enemy_objects.insert(std::map<std::string, Enemy *>::value_type(enemy->name, enemy));
 
