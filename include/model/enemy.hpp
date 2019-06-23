@@ -39,6 +39,9 @@ protected:
 
 public:
 
+    // Creating virtual desconstructor
+    virtual ~Enemy() { };
+
     // Update function (moves the object, and checks the collision with the camera to move it
     virtual void update(float);
 

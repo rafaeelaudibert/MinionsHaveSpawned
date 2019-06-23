@@ -15,6 +15,8 @@ public:
         this->max_life_points = this->current_life_points = 100;
     };
 
+    ~ChaosSiege() { };
+
     void build();
     void render(glm::mat4 view, glm::mat4 projection);
 };
