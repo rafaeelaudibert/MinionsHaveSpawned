@@ -40,8 +40,8 @@ public:
     // Placing
     bool placed = false;
 
-    // Update function (updates all its ammo and change current target
-    virtual void update(float delta_time, std::map<std::string, Enemy *> enemies);
+    // Update function (updates all its ammo and change current target)
+    virtual void update(float delta_time) = 0;
     virtual bool can_place();
 
 private:

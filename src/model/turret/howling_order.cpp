@@ -61,3 +61,7 @@ void HowlingOrder::render(glm::mat4 view, glm::mat4 projection)
     glBindVertexArray(0);
 }
 
+void HowlingOrder::update(float delta_time){
+    // TODO: Compute enemies nearby, shot at them and rechoose enemy
+}
+
