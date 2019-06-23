@@ -18,7 +18,7 @@
 enum GameState
 {
     GAME_ACTIVE,
-    GAME_MENU,
+    GAME_WAIT,
     GAME_WIN,
     GAME_LOSE
 };
@@ -66,6 +66,7 @@ public:
     // Time variables
     GLfloat lastFrame = 0.0f;
     GLfloat deltaTime = 0.0f;
+    GLfloat delta_since_last_spawn = 0.0f;
 
     // Camera
     static Camera camera;
@@ -75,6 +76,12 @@ public:
     static std::map<std::string, Collisive *> collisive_objects;    // Collisive objects map
     static std::map<std::string, Enemy *> enemy_objects;            // Enemy objects map
     static std::map<std::string, Turret *> turret_objects;         // Turrets objects map
+
+    /* HORDES OF MINIONS CONTROL */
+    std::vector<std::vector<Enemy *> > enemy_hordes;
+    std::vector<std::vector<Enemy *> >::iterator hordes_outer_iterator;
+    std::vector<Enemy *>::iterator horde_inner_iterator;
+    bool wave_finished = false;
 
     // Hand
     Hand *hand;

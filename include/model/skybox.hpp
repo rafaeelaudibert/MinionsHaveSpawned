@@ -1,5 +1,7 @@
 #include "model\base.hpp"
 
+#ifndef SKYBOX_H_
+#define SKYBOX_H_
 class SkyBox : public GameObject
 {
 protected:
@@ -17,3 +19,5 @@ public:
 
     void render(glm::mat4 view, glm::mat4 projection);
 };
+#endif // SKYBOX_H_
+

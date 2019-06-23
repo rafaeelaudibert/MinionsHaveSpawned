@@ -77,7 +77,7 @@ void Nexus::render(glm::mat4 view, glm::mat4 projection)
 }
 
 bool Nexus::is_dead(){
-    return this->current_life_points < 0;
+    return this->current_life_points <= 0;
 }
 
 void Nexus::hit(float life_points) {

@@ -1,5 +1,6 @@
-#include "engine/constants.hpp"
 #include "engine/game.hpp"
+
+
 #include "engine/matrices.hpp"
 #include "engine/resource_manager.hpp"
 #include "engine/camera.hpp"
@@ -30,6 +31,7 @@
 Game::Game(GLuint width, GLuint height)
     : width(width), height(height), screen_ratio((float)width / (float)height)
 {
+
 }
 
 Game::~Game()
@@ -38,7 +40,7 @@ Game::~Game()
 
 float Game::character_height = Constants::CHARACTER_STANDING_HEIGHT;
 Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
-GameState Game::state = GameState::GAME_ACTIVE;
+GameState Game::state = GameState::GAME_WAIT;
 std::map<std::string, GameObject *> Game::objects;
 std::map<std::string, Collisive *> Game::collisive_objects;
 std::map<std::string, Enemy *> Game::enemy_objects;
@@ -78,56 +80,12 @@ void Game::init()
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
-    Dummy *dummy = new Dummy("dummy", glm::vec4(0.0f, 3.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("dummy", dummy));
-    printf("[GAME] Dummy created\n");
-
-    Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("om", om));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("om", om));
-    printf("[GAME] OrderMelee created\n");
-
-    Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("org", org));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("org", org));
-    printf("[GAME] OrderRanged created\n");
-
-    Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osg", osg));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osg", osg));
-    printf("[GAME] OrderSiege created\n");
-
-    Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(1.5f, 1.5f, 1.5f));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osp", osp));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osp", osp));
-    printf("[GAME] OrderSuper created\n");
-
-    Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cm", cm));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cm", cm));
-    printf("[GAME] ChaosMelee created\n");
-
-    Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cr", cr));
-    printf("[GAME] ChaosRanged created\n");
-
-    Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csg", csg));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csg", csg));
-    printf("[GAME] ChaosSiege created\n");
-
-    Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csp", csp));
-    enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csp", csp));
-    printf("[GAME] ChaosSuper created\n");
-
-    this->order_nexus = new Nexus("nos", NexusColorSide::CHAOS_BLUE, glm::vec4(33.0f, 0.0f, -33.0f, 1.0f));
+    this->order_nexus = new Nexus("nos", NexusColorSide::CHAOS_BLUE, Constants::ORDER_NEXUS_POSITION);
     objects.insert(std::map<std::string, GameObject *>::value_type("nos", this->order_nexus));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("nos", this->order_nexus));
     printf("[GAME] Order Nexus created\n");
 
-    this->chaos_nexus = new Nexus("ncs", NexusColorSide::CHAOS_RED, glm::vec4(-33.5f, 0.0f, 32.5f, 1.0f));
+    this->chaos_nexus = new Nexus("ncs", NexusColorSide::CHAOS_RED, Constants::CHAOS_NEXUS_POSITION);
     objects.insert(std::map<std::string, GameObject *>::value_type("ncs", this->chaos_nexus));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("ncs", this->chaos_nexus));
     printf("[GAME] Chaos Nexus created\n");
@@ -150,6 +108,69 @@ void Game::init()
     // HowlingOrder("", TurretColor::RED);
     SiegeChaos("", TurretColor::BLUE);
     // SiegeChaos("", TurretColor::RED);
+
+    // Loading MINION textures, shaders and .objs (only loading red chaos ones, because the blue and order are not used)
+    // OrderMelee("", EnemyColor::RED);
+    // OrderMelee("", EnemyColor::BLUE);
+    // OrderRanged("", EnemyColor::RED);
+    // OrderRanged("", EnemyColor::BLUE);
+    // OrderSiege("", EnemyColor::RED);
+    // OrderSiege("", EnemyColor::BLUE);
+    // OrderSuper("", EnemyColor::RED);
+    // OrderSuper("", EnemyColor::BLUE);
+    ChaosMelee("", EnemyColor::RED);
+    // ChaosMelee("cm", EnemyColor::BLUE);
+    ChaosRanged("", EnemyColor::RED);
+    // ChaosRanged("cr", EnemyColor::BLUE);
+    ChaosSiege("", EnemyColor::RED);
+    // ChaosSiege("csg", EnemyColor::BLUE);
+    ChaosSuper("", EnemyColor::RED);
+    // ChaosSuper("csp", EnemyColor::BLUE);
+
+    /* CREATE THE HORDES */
+    this->enemy_hordes = {
+       // HORDE 1 - 160 HP
+       {
+           new ChaosMelee("h1_m1"), new ChaosMelee("h1_m2"), new ChaosRanged("h1_r1"), new ChaosRanged("h1_r2")
+       },
+       // HORDE 2 - 240 HP
+       {
+           new ChaosMelee("h2_m1"), new ChaosMelee("h2_m2"), new ChaosMelee("h2_m3"), new ChaosRanged("h2_r1"), new ChaosRanged("h2_r2"), new ChaosRanged("h2_r3")
+       },
+       // HORDE 3 - 340 HP
+       {
+           new ChaosSiege("h3_sg1"), new ChaosMelee("h3_m1"), new ChaosMelee("h3_m2"), new ChaosMelee("h3_m3"), new ChaosRanged("h3_r1"), new ChaosRanged("h3_r2"), new ChaosRanged("h3_r3")
+       },
+       // HORDE 4 - 450HP
+       {
+           new ChaosMelee("h4_m1"), new ChaosMelee("h4_m2"), new ChaosMelee("h4_m3"), new ChaosRanged("h4_r1"), new ChaosRanged("h4_r2"), new ChaosRanged("h4_r3"), new ChaosMelee("h4_m4"), new ChaosMelee("h4_m5"), new ChaosMelee("h4_m6"), new ChaosRanged("h4_r4"), new ChaosRanged("h4_r5"), new ChaosRanged("h4_r6")
+       },
+       // HORDE 5 - 500HP
+       {
+           new ChaosSiege("h5_sg1"), new ChaosRanged("h5_r1"), new ChaosRanged("h5_r2"), new ChaosRanged("h5_r3"), new ChaosRanged("h5_r4"), new ChaosRanged("h5_r5"), new ChaosSiege("h5_sg2"), new ChaosRanged("h5_r6"), new ChaosRanged("h5_r7"), new ChaosRanged("h5_r8"), new ChaosRanged("h5_r9"), new ChaosRanged("h5_r10")
+       },
+       // HORDE 6 - 700HP
+       {
+           new ChaosSiege("h6_sg1"), new ChaosMelee("h6_m1"), new ChaosMelee("h6_m2"), new ChaosMelee("h6_m3"), new ChaosMelee("h6_m4"), new ChaosMelee("h6_m5"), new ChaosSiege("h6_sg2"), new ChaosMelee("h6_m6"), new ChaosMelee("h6_m7"), new ChaosMelee("h6_m8"), new ChaosMelee("h6_m9"), new ChaosMelee("h6_m10")
+       },
+       // HORDE 7 - 730HP
+       {
+           new ChaosMelee("h7_m1"), new ChaosMelee("h7_m2"), new ChaosMelee("h7_m3"), new ChaosRanged("h7_r1"), new ChaosRanged("h7_r2"), new ChaosRanged("h7_r3"), new ChaosSuper("h7_sp1"), new ChaosMelee("h7_m4"), new ChaosMelee("h7_m5"), new ChaosMelee("h7_m6"), new ChaosRanged("h7_r4"), new ChaosRanged("h7_r5"), new ChaosRanged("h7_r6")
+       },
+       // HORDE 8 - 750HP
+       {
+           new ChaosSiege("h8_sg1"), new ChaosMelee("h8_m1"), new ChaosMelee("h8_m2"), new ChaosMelee("h8_m3"), new ChaosRanged("h8_r1"), new ChaosRanged("h8_r2"), new ChaosRanged("h8_r3"), new ChaosSuper("h8_sp1"), new ChaosMelee("h8_m4"), new ChaosMelee("h8_m5"), new ChaosRanged("h8_r4"), new ChaosRanged("h8_r5")
+       },
+       // HORDE 9 - 1000HP
+       {
+           new ChaosSiege("h9_sg1"), new ChaosSiege("h9_sg2"), new ChaosSiege("h9_sg3"), new ChaosSuper("h9_sp1"), new ChaosSiege("h9_sg4"), new ChaosSiege("h9_sg5"), new ChaosSiege("h9_sg6"), new ChaosSuper("h9_sp2")
+       },
+       // HORDE 10 - 1250HP
+       {
+           new ChaosSuper("h10_sp1"), new ChaosSuper("h10_sp2"), new ChaosSuper("h10_sp3"), new ChaosSuper("h10_sp4"), new ChaosSuper("h10_sp5"),
+       }
+    };
+    this->hordes_outer_iterator = this->enemy_hordes.begin();
 }
 
 void Game::new_frame()
@@ -226,7 +247,8 @@ void Game::update()
     }
 
     // Update all turret objects in the game
-    for (const auto &object: this->turret_objects){
+    for (const auto &object: this->turret_objects)
+    {
         object.second->update(this->deltaTime);
     }
 
@@ -234,7 +256,7 @@ void Game::update()
     for (auto it = this->enemy_objects.cbegin(), next_it = it; it != this->enemy_objects.cend(); it = next_it)
     {
         ++next_it;
-        if (it->second->position.y <= -5.0f)
+        if (it->second->position.y <= -1.5f)
         {
             printf("[INFO] Deleting minion %s\n", it->second->name.c_str());
             this->enemy_objects.erase(it);
@@ -251,11 +273,55 @@ void Game::update()
         }
     }
 
+    // Makes this stage finished
+    if (this->state == GameState::GAME_ACTIVE && this->wave_finished && this->enemy_objects.size() == 0)
+    {
+        this->state = GameState::GAME_WAIT;
+        this->chaos_nexus->hit(this->chaos_nexus->max_life_points / this->enemy_hordes.size());
+        printf("[GAME] Stage finished\n");
+
+        // TODO: Give extra money to the player
+    }
+
     // Moves the hand with the camera
     this->hand->position = camera.position;
     this->hand->position.y -= Constants::HAND_LESS_HEIGHT;
     this->hand->position -= matrix::normalize(matrix::crossproduct(camera.right, camera.world_up)) / 2.0f;
     this->hand->angle = camera.yaw / 360.0f * 3.14159 * -2;
+
+    // Processes current wave
+    if (this->state == GameState::GAME_ACTIVE && horde_inner_iterator != (*hordes_outer_iterator).end() && !this->wave_finished)
+    {
+        this->delta_since_last_spawn += this->deltaTime;
+        if (this->delta_since_last_spawn >= 1.0f)
+        {
+            Enemy *enemy = *horde_inner_iterator; // Grab iterator value
+            this->delta_since_last_spawn -= 1.0f;
+            collisive_objects.insert(std::map<std::string, Collisive *>::value_type(enemy->name, enemy));
+            enemy_objects.insert(std::map<std::string, Enemy *>::value_type(enemy->name, enemy));
+
+            this->horde_inner_iterator++; // Update iterator
+            printf("[GAME] Spawned %s\n", enemy->name.c_str());
+        }
+    }
+
+    // Updates outer vector
+    if (horde_inner_iterator == (*hordes_outer_iterator).end())
+    {
+        this->wave_finished = true;
+        this->hordes_outer_iterator++;          // Updates hordes_outer_iterator
+    }
+
+    // Processes next wave
+    if (this->keys[GLFW_KEY_ENTER] == GL_TRUE && this->state == GameState::GAME_WAIT && this->hordes_outer_iterator != this->enemy_hordes.end())
+    {
+        printf("[GAME] Starting new wave\n");
+        this->wave_finished = false;
+        this->keys[GLFW_KEY_ENTER]= GL_FALSE;   // Reset key
+        this->delta_since_last_spawn = 0.0f;    // Reset time
+        this->state = GameState::GAME_ACTIVE;   // Update game state
+        this->horde_inner_iterator = (*hordes_outer_iterator).begin();
+    }
 
     // Update game state (win or lost)
     if (this->chaos_nexus->is_dead())
@@ -312,6 +378,7 @@ void Game::process_input()
         printf("[GAME] Started uncrouching\n");
     }
 
+    // Process turret placement
     if (this->camera.camera_type == CameraType::LOOK_AROUND)
     {
         // Update the turret being hold on hand
@@ -430,7 +497,8 @@ void Game::update_hand_turret()
 void Game::check_place_turret()
 {
     // If there is a turret that can be placed, and the user clicks, place it
-    if (keys[GLFW_MOUSE_BUTTON_1] == GL_TRUE && this->hand->turret != nullptr && this->hand->turret->can_place()) {
+    if (keys[GLFW_MOUSE_BUTTON_1] == GL_TRUE && this->hand->turret != nullptr && this->hand->turret->can_place())
+    {
         collisive_objects.insert(std::map<std::string, Collisive *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
         turret_objects.insert(std::map<std::string, Turret *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
         this->hand->turret->placed = true;      // Mark as placed
@@ -438,7 +506,9 @@ void Game::check_place_turret()
         keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;   // Remove the flag
 
         printf("[GAME] Turret current holded on hand created\n");
-    } else if (keys[GLFW_MOUSE_BUTTON_2] == GL_TRUE && this->hand->turret != nullptr) { // If uses right button, deselects turret
+    }
+    else if (keys[GLFW_MOUSE_BUTTON_2] == GL_TRUE && this->hand->turret != nullptr)     // If uses right button, deselects turret
+    {
         delete this->hand->turret;
         this->hand->turret = nullptr;
         printf("[GAME] Deselected any turret\n");

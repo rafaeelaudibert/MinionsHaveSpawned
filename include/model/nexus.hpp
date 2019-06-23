@@ -25,12 +25,11 @@ public:
     {
         this->build();
         this->health_bar = new HealthBar(this->name + "_healthbar", glm::vec4(this->position.x, this->bbox_max.y * scale.y + 0.5f, this->position.z, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(glm::vec4(0.5f, 0.4f, 1.0f, 1.0f) * matrix::scale_matrix(this->scale)));
-        this->max_life_points = this->current_life_points = 2000;
+        this->max_life_points = this->current_life_points = 3000;
 
         this->nexus_rubble = new NexusRubble(this->name + "_rubble", (this->color == NexusColorSide::CHAOS_RED || this->color == NexusColorSide::CHAOS_BLUE) ? NexusSide::CHAOS : NexusSide::ORDER, this->position, this->orientation, this->angle, this->scale);
     };
 
-protected:
     NexusColorSide color = NexusColorSide::CHAOS_RED;
 
     //Life properties

@@ -126,7 +126,7 @@ void SkyBox::render(glm::mat4 view, glm::mat4 projection)
     glActiveTexture(GL_TEXTURE0);
     switch (Game::state) {
     case GameState::GAME_ACTIVE:
-    case GameState::GAME_MENU:
+    case GameState::GAME_WAIT:
         this->texture.bind();
         break;
     case GameState::GAME_WIN:
