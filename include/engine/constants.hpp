@@ -18,6 +18,7 @@ namespace Constants {
     const float SPEED = 10.0f;                                      // Player speed
     const float HAND_LESS_HEIGHT = 1.2f;                            // How lower is the hand position according to the camera
     const float SPAWNING_TURRET_MAX_DISTANCE = 12.0f;               // Maximum distance which a player can drop a turret
+    const float MINION_DEATH_SPEED = 0.5f;                          // Speed which the minions goes beneath the ground after dead
     const float EPSILON = std::numeric_limits<float>::epsilon();    // Machine epsilon
     const float MAX_NUMBER = std::numeric_limits<float>::max();     // Machine maximum number
 }

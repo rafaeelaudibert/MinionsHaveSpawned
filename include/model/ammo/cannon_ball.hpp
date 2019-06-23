@@ -1,7 +1,7 @@
+#include "model/ammo.hpp"
+
 #ifndef CANNON_BALL_H
 #define CANNON_BALL_H
-
-#include "model/ammo.hpp"
 
 class CannonBall : public Ammo
 {
@@ -19,6 +19,8 @@ public:
     {
         this->build();
     };
+
+    ~CannonBall() { };
 
     // Declare virtual functions
     void build();

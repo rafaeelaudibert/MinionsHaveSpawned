@@ -20,4 +20,6 @@ public:
     void build();
     void render(glm::mat4 view, glm::mat4 projection);
     void update(float delta_time);
+
+    const float AGGRO_RADIUS = 15.0f;
 };

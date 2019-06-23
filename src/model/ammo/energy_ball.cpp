@@ -53,17 +53,9 @@ void EnergyBall::render(glm::mat4 view, glm::mat4 projection)
 // Calculate the linear curve for the ball
 void EnergyBall::update(float delta_time)
 {
-    if (this->completed_movement())     // Already finished moving
-    {
-        this->hit_enemy();
-    }
-    else if (this->target != nullptr)     // Keep moving the ball, linearly towards the enemy (as it is moving, it wont be actually linear)
+    if (!this->completed_movement() && this->target != nullptr)     // Keep moving the ball, linearly towards the enemy (as it is moving, it wont be actually linear)
     {
         this->time += delta_time * this->speed;
-
-        glm::vec4 p_origin = this->origin_position;
-        glm::vec4 p_destiny = this->target->position;
-
-        this->position = glm::vec4(glm::vec3(p_origin - p_destiny) * this->time, 1.0f);
+        this->position = this->origin_position + ((this->target->position - this->origin_position) * this->time);
     }
 }

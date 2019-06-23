@@ -54,17 +54,16 @@ void CannonBall::render(glm::mat4 view, glm::mat4 projection)
 
 // Calculate the bezier curve movement for the ball
 void CannonBall::update(float delta_time){
-    if (this->completed_movement()) {   // Already finished moving
-        this->hit_enemy();
-    } else if (this->target != nullptr) { // Keep moving the ball, using bezier curves, towards the enemy
+    if (!this->completed_movement() && this->target != nullptr) { // Keep moving the ball, using bezier curves, towards the enemy
         this->time += delta_time * this->speed;
 
         glm::vec4 p_origin = this->origin_position;
         glm::vec4 p_destiny = this->target->position;
-        glm::vec4 p_control = glm::vec4(p_destiny.x, p_origin.y, p_destiny.z, 1.0f);
+        glm::vec4 p_control = glm::vec4((p_origin.x + p_destiny.x) / 2, p_origin.y, (p_origin.z + p_destiny.z) / 2, 1.0f);
 
-        glm::vec4 p1 = glm::vec4(glm::vec3(p_control - p_origin) * this->time, 1.0f);
-        glm::vec4 p2 = glm::vec4(glm::vec3(p_destiny - p_control) * this->time, 1.0f);
-        this->position = glm::vec4(glm::vec3(p2 - p1) * this->time, 1.0f);
+        glm::vec4 p1 = p_origin + ((p_control - p_origin) * this->time);
+        glm::vec4 p2 = p_control + ((p_destiny - p_control) * this->time);
+
+        this->position = p1 + ((p2 - p1) * this->time);
     }
 }

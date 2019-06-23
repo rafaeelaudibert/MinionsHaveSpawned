@@ -79,7 +79,7 @@ void main()
 
     if (is_dead) {
         float average_color = color.r * 0.3 + color.g * 0.59 + color.b * 0.11;
-        color = vec4(average_color, average_color, average_color, color.a);
+        color = vec4(average_color, average_color, average_color, color.a / 2);
     }
 
 }

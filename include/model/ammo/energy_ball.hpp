@@ -1,7 +1,7 @@
+#include "model/ammo.hpp"
+
 #ifndef ENERGY_BALL_H
 #define ENERGY_BALL_H
-
-#include "model/ammo.hpp"
 
 class EnergyBall : public Ammo
 {
@@ -19,6 +19,8 @@ public:
     {
         this->build();
     };
+
+    ~EnergyBall() { };
 
     // Declare virtual functions
     void build();

@@ -1,7 +1,7 @@
+#include "model/ammo.hpp"
+
 #ifndef LASER_H
 #define LASER_H
-
-#include "model/ammo.hpp"
 
 class Laser : public Ammo
 {
@@ -20,10 +20,15 @@ public:
         this->build();
     };
 
+    ~Laser() { };
+
     // Declare virtual functions
     void build();
     void update(float delta_time);
     void render(glm::mat4 view, glm::mat4 projection);
+
+    // Extra angle variable
+    float x_angle = 0.0f;
 };
 
 #endif // LASER_H

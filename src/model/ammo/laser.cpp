@@ -26,14 +26,15 @@ void Laser::render(glm::mat4 view, glm::mat4 projection)
         glBindVertexArray(this->VAO);
 
         // Configure the color
-        this->shader.set_vector("color_v", glm::vec4(0.14f, 1.0f, 0.91f, 1.0f));
+        this->shader.set_vector("color_v", glm::vec4(0.14f, 1.0f, 0.91f, 0.3f));
 
         // Calculate the model matrix
         glm::mat4 model = matrix::identity_matrix(); // make sure to initialize matrix to identity matrix first
         model *= matrix::translate_matrix(this->position);
-        model *= matrix::scale_matrix(this->scale);
-        model *= matrix::rotate_matrix(this->angle, this->orientation);         // Hard atan2 computation can be seen below boys
-        model *= matrix::translate_matrix(glm::vec4(0.5f, 0.0f, 0.0f, 0.0f));   // Make the cube centered in the left face
+        model *= matrix::rotate_y_matrix(this->angle);                          // Hard atan2 computations can be seen in Laser#update
+        model *= matrix::rotate_x_matrix(-this->x_angle);                        // Hard atan2 computations can be seen in Laser#update
+        model *= matrix::translate_matrix(0.0f, 0.0f, this->scale.z / 2);      // Fix distortion caused by the translation
+        model *= matrix::scale_matrix(this->scale);                             // Scale according to what is defined in Laser#update
         this->shader.set_matrix("model", model);
 
         // Draw the element
@@ -48,17 +49,19 @@ void Laser::render(glm::mat4 view, glm::mat4 projection)
 
 }
 
-// Calculate the bezier curve movement for the ball
+// Calculate the ray angle
 void Laser::update(float delta_time){
-    if (this->completed_movement()) {   // Already finished moving
-        this->hit_enemy();
-    } else if (this->target != nullptr) { // Keep updating the laser direction and angle
+    if (!this->completed_movement() && this->target != nullptr) { // Keep updating the laser direction and angle
         this->time += delta_time * this->speed;
 
         // The scale of this cube is the distance between the objects. In the render we only expand on the X axis
-        this->scale = glm::vec3(matrix::norm(this->target->position - this->origin_position), this->time, this->time);
+        //this->scale = glm::vec3(matrix::norm(this->target->position - this->origin_position), this->time / 5.0f, this->time / 5.0f);
+        this->scale = glm::vec3(this->time / 5.0f, this->time / 5.0f, matrix::norm(this->target->position - this->origin_position));
 
         // The y rotation of this ray is related to the equation below
         this->angle = std::atan2(this->target->position.x - this->origin_position.x, this->target->position.z - this->origin_position.z);
+
+        // The x rotation of this ray is related to the equation below
+        this->x_angle = std::atan2(this->target->position.y - this->origin_position.y, this->target->position.z - this->origin_position.z);
     }
 }

@@ -1,9 +1,9 @@
-#ifndef AMMO_H
-#define AMMO_H
-
 #include "model/ammo_effect.hpp"
 #include "model/base.hpp"
 #include "model/enemy.hpp"
+
+#ifndef AMMO_H
+#define AMMO_H
 
 class Ammo : public GameObject
 {
@@ -21,14 +21,18 @@ public:
     {
 
     };
+    virtual ~Ammo() { };
+
+    // Static variable indicating the range for the AOE
+    static float AOE_RADIUS;
 
     virtual void update(float delta_time) = 0;
 
     // Verifies if it already finished it movement and can hit the target
-    bool completed_movement()
-    {
-        return this->time >= 1.0f;
-    }
+    bool completed_movement();
+
+    // Hit the target
+    void hit_enemy();
 
 protected:
     Enemy *target;
@@ -38,13 +42,6 @@ protected:
     AmmoEffects::AmmoEffect ammo_effect = AmmoEffects::NoneEffect();    // Effect applied on hit or over time
     glm::vec4 origin_position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);      // Original ammo position to compute bézier curves
 
-
-    // Hit the target
-    void hit_enemy()
-    {
-        if (target != nullptr)
-            target->hit(damage, &ammo_effect);
-    }
 };
 
 #endif // AMMO_H

@@ -1,5 +1,8 @@
 #include "model/collisive.hpp"
 #include "model/enemy.hpp"
+#include "model/ammo/cannon_ball.hpp"
+#include "model/ammo/energy_ball.hpp"
+#include "model/ammo/laser.hpp"
 
 #include <map>
 #include <string>
@@ -33,9 +36,10 @@ public:
 
     // Shooting
     glm::vec4 shooting_position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    float recharge_time = 2.0f;     // Time to recharge
-    float elapsed_time = 0.0f;      // Elapsed time since the last shot
-    Enemy *target;                  // Current target
+    float recharge_time = 2.0f; // Time to recharge
+    float ellapsed_time = 0.0f; // Elapsed time since the last shot (initialized as zero, to start recharging)
+    Enemy *target = nullptr;    // Current target
+    Ammo *ammo = nullptr;       // Current ammo
 
     // Placing
     bool placed = false;

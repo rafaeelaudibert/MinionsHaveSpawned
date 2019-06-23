@@ -25,6 +25,7 @@
 #include "model/turret/howling_chaos.hpp"
 #include "model/turret/howling_order.hpp"
 #include "model/turret/siege_chaos.hpp"
+#include <algorithm>
 
 Game::Game(GLuint width, GLuint height)
     : width(width), height(height), screen_ratio((float)width / (float)height)
@@ -81,94 +82,44 @@ void Game::init()
     printf("[GAME] Dummy created\n");
 
     Enemy *om = new OrderMelee("om", EnemyColor::RED, glm::vec4(3.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("om", om));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("om", om));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("om", om));
     printf("[GAME] OrderMelee created\n");
 
     Enemy *org = new OrderRanged("org", EnemyColor::RED, glm::vec4(5.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("org", org));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("org", org));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("org", org));
     printf("[GAME] OrderRanged created\n");
 
     Enemy *osg = new OrderSiege("osg", EnemyColor::RED, glm::vec4(7.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("osg", osg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osg", osg));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osg", osg));
     printf("[GAME] OrderSiege created\n");
 
     Enemy *osp = new OrderSuper("osp", EnemyColor::RED, glm::vec4(9.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(1.5f, 1.5f, 1.5f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("osp", osp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("osp", osp));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("osp", osp));
     printf("[GAME] OrderSuper created\n");
 
     Enemy *cm = new ChaosMelee("cm", EnemyColor::RED, glm::vec4(11.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("cm", cm));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cm", cm));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cm", cm));
     printf("[GAME] ChaosMelee created\n");
 
     Enemy *cr = new ChaosRanged("cr", EnemyColor::RED, glm::vec4(13.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(4.0f, 4.0f, 4.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("cr", cr));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("cr", cr));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("cr", cr));
     printf("[GAME] ChaosRanged created\n");
 
     Enemy *csg = new ChaosSiege("csg", EnemyColor::RED, glm::vec4(15.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("csg", csg));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csg", csg));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csg", csg));
     printf("[GAME] ChaosSiege created\n");
 
     Enemy *csp = new ChaosSuper("csp", EnemyColor::RED, glm::vec4(17.0f, 0.0f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0);
-    objects.insert(std::map<std::string, GameObject *>::value_type("csp", csp));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("csp", csp));
     enemy_objects.insert(std::map<std::string, Enemy *>::value_type("csp", csp));
     printf("[GAME] ChaosSuper created\n");
-
-    Turret *bc = new BilgerwaterChaos("bc", TurretColor::RED, true, 2.0f, glm::vec4(1.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("bc", bc));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bc", bc));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("bc", bc));
-    printf("[GAME] BilgerwaterChaos created\n");
-
-    Turret *bo = new BilgerwaterOrder("bo", TurretColor::RED, true, 2.0f, glm::vec4(5.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("bo", bo));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("bo", bo));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("bo", bo));
-    printf("[GAME] BilgerwaterOrder created\n");
-
-    Turret *sc = new SummonersChaos("sc", TurretColor::BLUE, true, 2.0f, glm::vec4(9.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("sc", sc));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sc", sc));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("sc", sc));
-    printf("[GAME] SummonersChaos created\n");
-
-    Turret *so = new SummonersOrder("so", TurretColor::RED, true, 2.0f, glm::vec4(13.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("so", so));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("so", so));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("so", so));
-    printf("[GAME] SummonersOrder created\n");
-
-    Turret *hc = new HowlingChaos("hc", TurretColor::BLUE, true, 2.0f, glm::vec4(17.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("hc", hc));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("hc", hc));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("hc", hc));
-    printf("[GAME] HowlingChaos created\n");
-
-    Turret *ho = new HowlingOrder("ho", TurretColor::RED, true, 2.0f, glm::vec4(21.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("ho", ho));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("ho", ho));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("ho", ho));
-    printf("[GAME] HowlingOrder created\n");
-
-    Turret *sgc = new SiegeChaos("sgc", TurretColor::RED, true, 2.0f, glm::vec4(25.0f, 0.0f, -5.0f, 1.0f));
-    objects.insert(std::map<std::string, GameObject *>::value_type("sgc", sgc));
-    collisive_objects.insert(std::map<std::string, Collisive *>::value_type("sgc", sgc));
-    turret_objects.insert(std::map<std::string, Turret *>::value_type("sgc", sgc));
-    printf("[GAME] SiegeChaos created\n");
 
     this->order_nexus = new Nexus("nos", NexusColorSide::CHAOS_BLUE, glm::vec4(33.0f, 0.0f, -33.0f, 1.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("nos", this->order_nexus));
@@ -182,6 +133,22 @@ void Game::init()
 
     // Create hand
     this->hand = new Hand("hand");
+
+    // Loading TURRET textures, shaders and .objs (only loading blue ones, because the red are not used)
+    BilgerwaterChaos("", TurretColor::BLUE);
+    // BilgerwaterChaos("bc", TurretColor::RED);
+    BilgerwaterOrder("", TurretColor::BLUE);
+    // BilgerwaterOrder("bo", TurretColor::RED);
+    SummonersChaos("", TurretColor::BLUE);
+    // SummonersChaos("", TurretColor::RED);
+    SummonersOrder("", TurretColor::BLUE);
+    // SummonersOrder("", TurretColor::RED);
+    HowlingChaos("", TurretColor::BLUE);
+    // HowlingChaos("", TurretColor::RED);
+    HowlingOrder("", TurretColor::BLUE);
+    // HowlingOrder("", TurretColor::RED);
+    SiegeChaos("", TurretColor::BLUE);
+    // SiegeChaos("", TurretColor::RED);
 }
 
 void Game::new_frame()
@@ -251,10 +218,26 @@ void Game::update()
         this->hand->turret->angle = std::atan2(this->camera.position.x - this->hand->turret->position.x, this->camera.position.z - this->hand->turret->position.z);
     }
 
-    // Update all objects in the game
+    // Update all enemy objects in the game
     for (const auto &object : this->enemy_objects)
     {
         object.second->update(this->deltaTime);
+    }
+
+    // Update all turret objects in the game
+    for (const auto &object: this->turret_objects){
+        object.second->update(this->deltaTime);
+    }
+
+    // Remove all minions which are far beneath the ground
+    for (auto it = this->enemy_objects.cbegin(), next_it = it; it != this->enemy_objects.cend(); it = next_it)
+    {
+        ++next_it;
+        if (it->second->position.y <= -5.0f)
+        {
+            printf("[INFO] Deleting minion %s\n", it->second->name.c_str());
+            this->enemy_objects.erase(it);
+        }
     }
 
     // Moves the hand with the camera
@@ -340,6 +323,18 @@ void Game::render()
         object.second->render(view, projection);
     }
 
+    // Render enemies
+    for (const auto &object : this->enemy_objects)
+    {
+        object.second->render(view, projection);
+    }
+
+    // Render turrets
+    for (const auto &object : this->turret_objects)
+    {
+        object.second->render(view, projection);
+    }
+
     // Render enemies health_bar (need to render later because of their transparency)
     for (const auto &object : this->enemy_objects)
     {
@@ -350,7 +345,7 @@ void Game::render()
     this->order_nexus->render_health_bar(view, projection);
     this->chaos_nexus->render_health_bar(view, projection);
 
-    // Render hand and its turret
+    // Render hand and its transparent turret
     this->hand->render(view, projection);
     this->hand->render_turret(view, projection);
 }
@@ -419,9 +414,8 @@ void Game::check_place_turret()
 {
     // If there is a turret that can be placed, and the user clicks, place it
     if (keys[GLFW_MOUSE_BUTTON_1] == GL_TRUE && this->hand->turret != nullptr && this->hand->turret->can_place()) {
-        this->objects.insert(std::map<std::string, GameObject *>::value_type("turret" + std::to_string(turret_objects.size() + 1), this->hand->turret));
-        collisive_objects.insert(std::map<std::string, Collisive *>::value_type("turret" + std::to_string(turret_objects.size() + 1), this->hand->turret));
-        turret_objects.insert(std::map<std::string, Turret *>::value_type("turret" + std::to_string(turret_objects.size() + 1), this->hand->turret));
+        collisive_objects.insert(std::map<std::string, Collisive *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
+        turret_objects.insert(std::map<std::string, Turret *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
         this->hand->turret->placed = true;      // Mark as placed
         this->hand->turret = nullptr;           // Updated it
         keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;   // Remove the flag
