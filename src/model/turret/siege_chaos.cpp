@@ -104,7 +104,7 @@ void SiegeChaos::update(float delta_time)
                 this->angle = std::atan2(this->target->position.x - this->position.x, this->target->position.z - this->position.z);
 
                 this->ammo = new Laser(this->name + "_laser",
-                                       this->target, 1.0f, 25.0f,
+                                       this->target, 1.0f, 30.0f,
                                        AmmoEffects::NoneEffect(),
                                        matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position);
             }
