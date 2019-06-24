@@ -19,8 +19,7 @@ namespace AmmoEffects
 
         virtual void update(float delta_time)
         {
-            if (ammo_time >= 0.0f)
-                ammo_time -= delta_time;
+            ammo_time -= delta_time;
         }
     };
 

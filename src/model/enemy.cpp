@@ -5,7 +5,7 @@ void Enemy::update(float delta_time)
 {
     if (!this->is_dead())
     {
-        for (AmmoEffects::AmmoEffect effect : this->effects)
+        for (AmmoEffects::AmmoEffect& effect : this->effects)
         {
             effect.update(delta_time);
         }
