@@ -266,11 +266,19 @@ void Game::update()
                 it->second->hit(100000);
         }
 
+        // Remove the camera from the minion if he died
+        if (it->second->is_dead() && Game::camera.look_at_target == it->second)
+        {
+            printf("[WARN] Minion targeted by camera will be deleted, switching it\n");
+            Game::camera.switch_camera_type();
+        }
+
         if (it->second->is_dead() && it->second->position.y <= -2.5f)
         {
             printf("[INFO] Deleting minion %s\n", it->second->name.c_str());
             this->enemy_objects.erase(it);
 
+            // We still need to check the code below, because the user might force to change to this minion
             // Check that if the camera is focusing this minion, it should change
             if (Game::camera.look_at_target == it->second)
             {

@@ -158,14 +158,14 @@ void Camera::switch_camera_type()
         // Only change if there is a minion to target
         if (Game::enemy_objects.size() != 0)
         {
-            // Change to the closest minion to the chaos nexus
+            // Change to the closest minion to the order nexus (ally one)
             float min_distance = Constants::MAX_NUMBER;
-            Nexus *nexus = Game::chaos_nexus;
+            Nexus *nexus = Game::order_nexus;
             Enemy *target = Game::enemy_objects.begin()->second;
             for (const auto &object : Game::enemy_objects)
             {
                 float distance = matrix::norm(object.second->position - nexus->position);
-                if (distance <= min_distance)
+                if (!object.second->is_dead() && distance <= min_distance)
                 {
                     min_distance = distance;
                     target = object.second;
