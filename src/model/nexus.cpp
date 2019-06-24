@@ -18,7 +18,7 @@ void Nexus::build()
     default:
         throw std::runtime_error("[ERROR] Error when trying to load the Nexus model - Non existent NexusColorSide.");
     }
-    this->shader = ResourceManager::load_shader("../../src/shaders/default_texture.vs", "../../src/shaders/default_texture.fs", nullptr, this->name);
+    this->shader = ResourceManager::load_shader("../../src/shaders/nexus.vs", "../../src/shaders/nexus.fs", nullptr, this->name);
     this->shader.use();
 
     switch (this->color)
