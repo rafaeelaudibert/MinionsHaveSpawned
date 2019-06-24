@@ -19,7 +19,7 @@ bool Turret::can_place()
     // if (this->not_in_placeable_place())
     //    return false;
 
-    // If the turret is colliding with any other collidable object, cant place
+    // If the turret is colliding with any other collisive object, cant place
     return std::none_of(Game::collisive_objects.begin(),
                         Game::collisive_objects.end(),
                         [this](std::pair<std::string, Collisive *> entry)

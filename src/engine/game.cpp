@@ -289,6 +289,10 @@ void Game::update()
                 Game::camera.switch_camera_type();
             }
 
+            // Remove from the collisive map
+            this->collisive_objects.erase(this->collisive_objects.find(it->second->name));
+            printf("[INFO] Removed it from the collisive_objects map\n");
+
             // Now we can properly free it
             delete it->second;
         }
@@ -470,49 +474,49 @@ void Game::update_hand_turret()
     else if (keys[Turrets::BILGERWATER_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new BilgerwaterChaos("bc_hand", TurretColor::BLUE);
+        this->hand->turret = new BilgerwaterChaos("bc_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::BILGERWATER_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a BilgerwaterChaos turret\n");
     }
     else if (keys[Turrets::BILGERWATER_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new BilgerwaterOrder("bo_hand", TurretColor::BLUE);
+        this->hand->turret = new BilgerwaterOrder("bo_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::BILGERWATER_ORDER] = GL_FALSE;
         printf("[GAME] Selected a BilgerwaterOrder turret\n");
     }
     else if (keys[Turrets::HOWLING_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new HowlingChaos("hc_hand", TurretColor::BLUE);
+        this->hand->turret = new HowlingChaos("hc_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::HOWLING_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a HowlingChaos turret\n");
     }
     else if (keys[Turrets::HOWLING_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new HowlingOrder("ho_hand", TurretColor::BLUE);
+        this->hand->turret = new HowlingOrder("ho_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::HOWLING_ORDER] = GL_FALSE;
         printf("[GAME] Selected a HowlingOrder turret\n");
     }
     else if (keys[Turrets::SIEGE_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SiegeChaos("sgc_hand", TurretColor::BLUE);
+        this->hand->turret = new SiegeChaos("sgc_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::SIEGE_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a SiegeChaos turret\n");
     }
     else if (keys[Turrets::SUMMONERS_CHAOS] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SummonersChaos("sc_hand", TurretColor::BLUE);
+        this->hand->turret = new SummonersChaos("sc_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::SUMMONERS_CHAOS] = GL_FALSE;
         printf("[GAME] Selected a SummonersChaos turret\n");
     }
     else if (keys[Turrets::SUMMONERS_ORDER] == GL_TRUE)
     {
         delete this->hand->turret;
-        this->hand->turret = new SummonersOrder("so_hand", TurretColor::BLUE);
+        this->hand->turret = new SummonersOrder("so_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::SUMMONERS_ORDER] = GL_FALSE;
         printf("[GAME] Selected a SummonersOrder turret\n");
     }
