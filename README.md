@@ -85,4 +85,5 @@ Optionally, you might implement the following extra concepts:
 - [ ] [Shadows](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/)
 - [x] [Billboards / Sprites](http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/billboards/)
 - [ ] Graphical interface (buttons, etc.)
-- [ ] Selecting virtual objects with the mouse (picking). Example of implementation: Picking with custom Ray-OBB function.
+- [x] Moving virtual objects with the mouse with custom Ray-OBB function.
+- [x] Resource manager to improve code efficiency
