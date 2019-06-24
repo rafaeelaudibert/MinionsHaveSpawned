@@ -5,6 +5,7 @@
 #ifndef AMMO_H
 #define AMMO_H
 
+// Abstract class, which all the ammos should inherit to easily add them to the Turrets
 class Ammo : public GameObject
 {
 public:

@@ -2,6 +2,8 @@
 
 #ifndef CHAOS_SIEGE_H
 #define CHAOS_SIEGE_H
+
+// Implementation of an enemy
 class ChaosSiege : public Enemy
 {
 public:

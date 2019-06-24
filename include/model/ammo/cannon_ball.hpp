@@ -3,6 +3,7 @@
 #ifndef CANNON_BALL_H
 #define CANNON_BALL_H
 
+// Ammo used by the BilgerwaterChaos and BilgerwaterOrder turrets
 class CannonBall : public Ammo
 {
 public:

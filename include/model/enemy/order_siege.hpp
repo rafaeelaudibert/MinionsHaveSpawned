@@ -1,5 +1,7 @@
 #include "model/enemy.hpp"
 
+
+// Implementation of an enemy
 class OrderSiege : public Enemy
 {
 public:

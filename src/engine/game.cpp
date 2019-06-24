@@ -47,6 +47,7 @@ std::map<std::string, Enemy *> Game::enemy_objects;
 std::map<std::string, Turret *> Game::turret_objects;
 Nexus *Game::chaos_nexus, *Game::order_nexus;
 
+// Function called to start all the objects, textures and shaders
 void Game::init()
 {
     printf("[GAME] Game initialization\n");
@@ -173,6 +174,7 @@ void Game::init()
     this->hordes_outer_iterator = this->enemy_hordes.begin();
 }
 
+// Function called to process a new frame
 void Game::new_frame()
 {
     GLfloat currentFrame = glfwGetTime();
@@ -192,6 +194,7 @@ void Game::new_frame()
     lastFrame = currentFrame;
 }
 
+// Function called to update the game state
 void Game::update()
 {
 
@@ -352,6 +355,7 @@ void Game::update()
     }
 }
 
+// Function to update the input of the game
 void Game::process_input()
 {
     // Movement
@@ -407,6 +411,7 @@ void Game::process_input()
     }
 }
 
+// Function called to actually render the game information
 void Game::render()
 {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -452,6 +457,7 @@ void Game::render()
     }
 }
 
+// Helper function to update the turret which the hand is holding
 void Game::update_hand_turret()
 {
     if (keys[Turrets::NONE] == GL_TRUE)
@@ -512,6 +518,7 @@ void Game::update_hand_turret()
     }
 }
 
+// Check if we should place the turret on the floor
 void Game::check_place_turret()
 {
     // If there is a turret that can be placed, and the user clicks, place it

@@ -5,6 +5,8 @@
 
 #ifndef NEXUS_H
 #define NEXUS_H
+// Possible colors and sides for the nexus
+// Not actually using ORDER_RED and ORDER_BLUE because of a bug in the textures obtained
 enum class NexusColorSide
 {
     CHAOS_RED,
@@ -13,6 +15,8 @@ enum class NexusColorSide
     ORDER_BLUE
 };
 
+// Generic Nexus class, which holds some important game state information,
+// as when a Nexus die, the game needs to end either with a victory or a defeat
 class Nexus : public Collisive
 {
 public:

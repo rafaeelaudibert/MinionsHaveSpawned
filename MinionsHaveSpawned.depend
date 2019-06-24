@@ -935,7 +935,7 @@
 	"model/turret/siege_chaos.hpp"
 	<algorithm>
 
-1561278127 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1561343821 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	<string>
@@ -984,7 +984,7 @@
 1560567599 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
 	<glad/glad.h>
 
-1561139055 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\shader.hpp
+1561343830 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\shader.hpp
 	<string>
 	<glad/glad.h>
 	<glm/glm.hpp>
@@ -1098,7 +1098,7 @@
 1560567664 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\utils\helpers.hpp
 	<glad/glad.h>
 
-1561242953 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
+1561343922 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\base.hpp
 	<string>
 	<glad/glad.h>
 	<tiny_obj_loader.h>
@@ -1106,7 +1106,7 @@
 	"engine/texture.hpp"
 	"model/obj_model.hpp"
 
-1560785060 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
+1561343965 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\cube.hpp
 	"model/base.hpp"
 	"model/collisive.hpp"
 
@@ -1129,7 +1129,7 @@
 1560567904 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\tiny_obj_loader.cpp
 	"tiny_obj_loader.h"
 
-1561242898 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
+1561343930 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\bunny.hpp
 	"model/base.hpp"
 
 1560567901 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\stb_image.cpp
@@ -1162,7 +1162,7 @@
 	<vector>
 	"engine/cubemap_texture.hpp"
 
-1561275796 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\skybox.hpp
+1561344206 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\skybox.hpp
 	"model\base.hpp"
 
 1561248260 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\bunny.cpp
@@ -1181,7 +1181,7 @@
 	"model/skybox.hpp"
 	"engine/game.hpp"
 
-1560567636 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dummy.hpp
+1561343997 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dummy.hpp
 	"model/base.hpp"
 
 1561238421 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dummy.cpp
@@ -1189,7 +1189,7 @@
 	"engine/matrices.hpp"
 	"model/dummy.hpp"
 
-1560730615 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dragon.hpp
+1561343980 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\dragon.hpp
 	"model/base.hpp"
 
 1560587770 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\dragon.cpp
@@ -1202,10 +1202,10 @@
 	"engine/matrices.hpp"
 	"model/enemy/order_melee.hpp"
 
-1561279689 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_melee.hpp
+1561344307 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_melee.hpp
 	"model/enemy.hpp"
 
-1561279927 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy.hpp
+1561344053 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy.hpp
 	"model/collisive.hpp"
 	"engine/camera.hpp"
 	"model/health_bar.hpp"
@@ -1217,7 +1217,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/chaos_melee.hpp"
 
-1561280070 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_melee.hpp
+1561344297 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_melee.hpp
 	"model/enemy.hpp"
 
 1561255241 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_ranged.cpp
@@ -1225,7 +1225,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/chaos_ranged.hpp"
 
-1561280067 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_ranged.hpp
+1561344300 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_ranged.hpp
 	"model/enemy.hpp"
 
 1561255239 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_siege.cpp
@@ -1233,7 +1233,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/chaos_siege.hpp"
 
-1561279709 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_siege.hpp
+1561344302 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_siege.hpp
 	"model/enemy.hpp"
 
 1561255237 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\chaos_super.cpp
@@ -1241,7 +1241,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/chaos_super.hpp"
 
-1561279711 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_super.hpp
+1561344304 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\chaos_super.hpp
 	"model/enemy.hpp"
 
 1561255233 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_ranged.cpp
@@ -1249,7 +1249,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/order_ranged.hpp"
 
-1561279715 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_ranged.hpp
+1561344309 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_ranged.hpp
 	"model/enemy.hpp"
 
 1561255231 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_siege.cpp
@@ -1257,7 +1257,7 @@
 	"engine/matrices.hpp"
 	"model/enemy/order_siege.hpp"
 
-1561279718 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_siege.hpp
+1561344311 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_siege.hpp
 	"model/enemy.hpp"
 
 1561255228 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\enemy\order_super.cpp
@@ -1265,17 +1265,17 @@
 	"engine/matrices.hpp"
 	"model/enemy/order_super.hpp"
 
-1561279721 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_super.hpp
+1561344313 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\enemy\order_super.hpp
 	"model/enemy.hpp"
 
-1561225855 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\collisive.hpp
+1561343954 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\collisive.hpp
 	"model/base.hpp"
 
 1561227957 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\collisive.cpp
 	"model/collisive.hpp"
 	"engine/matrices.hpp"
 
-1561280879 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\constants.hpp
+1561343792 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\constants.hpp
 	<glm/glm.hpp>
 	<limits>
 
@@ -1287,7 +1287,7 @@
 	"model/turret.hpp"
 	<algorithm>
 
-1561260524 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret.hpp
+1561344243 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret.hpp
 	"model/collisive.hpp"
 	"model/enemy.hpp"
 	"model/ammo/cannon_ball.hpp"
@@ -1352,7 +1352,7 @@
 1561266113 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\turret\siege_chaos.hpp
 	"model/turret.hpp"
 
-1561067636 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\health_bar.hpp
+1561344111 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\health_bar.hpp
 	"model/base.hpp"
 
 1561068763 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\health_bar.cpp
@@ -1361,7 +1361,7 @@
 	"model/health_bar.hpp"
 	"engine/game.hpp"
 
-1561220015 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\hand.hpp
+1561344088 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\hand.hpp
 	"model/base.hpp"
 	"model/turret.hpp"
 
@@ -1379,13 +1379,13 @@
 	"engine/matrices.hpp"
 	"model/nexus.hpp"
 
-1561278358 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\nexus.hpp
+1561344158 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\nexus.hpp
 	"model/collisive.hpp"
 	"engine/camera.hpp"
 	"model/health_bar.hpp"
 	"model/nexus_rubble.hpp"
 
-1561181170 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\nexus_rubble.hpp
+1561344183 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\nexus_rubble.hpp
 	"model/collisive.hpp"
 	"engine/camera.hpp"
 	"model/health_bar.hpp"
@@ -1395,12 +1395,12 @@
 	"engine/matrices.hpp"
 	"model/nexus_rubble.hpp"
 
-1561252290 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo.hpp
+1561343857 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo.hpp
 	"model/ammo_effect.hpp"
 	"model/base.hpp"
 	"model/enemy.hpp"
 
-1561264355 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo_effect.hpp
+1561343872 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo_effect.hpp
 	<string>
 
 1561263093 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\ammo\cannon_ball.cpp
@@ -1408,7 +1408,7 @@
 	"engine/matrices.hpp"
 	"model/ammo/cannon_ball.hpp"
 
-1561251970 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\cannon_ball.hpp
+1561344258 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\cannon_ball.hpp
 	"model/ammo.hpp"
 
 1561263106 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\ammo\energy_ball.cpp
@@ -1416,7 +1416,7 @@
 	"engine/matrices.hpp"
 	"model/ammo/energy_ball.hpp"
 
-1561251976 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\energy_ball.hpp
+1561344280 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\energy_ball.hpp
 	"model/ammo.hpp"
 
 1561272946 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\ammo\laser.cpp
@@ -1424,7 +1424,7 @@
 	"engine/matrices.hpp"
 	"model/ammo/laser.hpp"
 
-1561259111 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\laser.hpp
+1561344287 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\model\ammo\laser.hpp
 	"model/ammo.hpp"
 
 1561265739 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\ammo.cpp

@@ -2,6 +2,8 @@
 
 #ifndef CHAOS_RANGED_H
 #define CHAOS_RANGED_H
+
+// Implementation of an enemy
 class ChaosRanged : public Enemy
 {
 public:

@@ -1,5 +1,7 @@
 #include "model/enemy.hpp"
 
+
+// Implementation of an enemy
 class OrderRanged : public Enemy
 {
 public:

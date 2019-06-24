@@ -1,5 +1,6 @@
 #include "model/base.hpp"
 
+// Possible dragon types
 enum DragonType
 {
     AIR,
@@ -9,6 +10,7 @@ enum DragonType
     ELDER
 };
 
+// Basic dragon model, not in use currently
 class Dragon : public GameObject
 {
 public:

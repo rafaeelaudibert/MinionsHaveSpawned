@@ -3,11 +3,14 @@
 #include "engine\matrices.hpp"
 #include "utils\helpers.hpp"
 
+
+// Self explicative
 glm::mat4 Camera::get_view_matrix()
 {
     return matrix::camera_view_matrix(position, get_front_vector(), up);
 }
 
+// Make the front vector calculation easier, due to the two types of camera
 glm::vec4 Camera::get_front_vector()
 {
     if (this->camera_type == CameraType::LOOK_AROUND)
@@ -20,6 +23,7 @@ glm::vec4 Camera::get_front_vector()
     }
 }
 
+// Processes keyboard pressing, according to the camera type
 bool Camera::process_movement(CameraMovement direction, float delta_time, std::map<std::string, Collisive *> collisive_objects, const Game &game)
 {
     float velocity = movement_speed * delta_time;
@@ -73,6 +77,7 @@ bool Camera::process_movement(CameraMovement direction, float delta_time, std::m
     }
 }
 
+// Proccess x and y axis mouse movement
 void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean constrain_pitch)
 {
     // Only move the camera around if we are in LookAround mode
@@ -95,11 +100,13 @@ void Camera::process_mouse_movement(float xoffset, float yoffset, GLboolean cons
     }
 }
 
+// Process zoom
 void Camera::process_mouse_scroll(float yoffset)
 {
     zoom = utils::clamping(zoom - yoffset, 45.0f, 1.0f);
 }
 
+// Self explicative
 void Camera::update_camera_vectors()
 {
 
@@ -117,6 +124,7 @@ void Camera::update_camera_vectors()
 
 }
 
+// Check if the cammera collided with all the collisive objects
 bool Camera::check_collision(std::map<std::string, Collisive *> collisive_objects)
 {
     return std::any_of(collisive_objects.begin(),
@@ -127,17 +135,20 @@ bool Camera::check_collision(std::map<std::string, Collisive *> collisive_object
     });
 }
 
+// Check if the camera collided
 bool Camera::check_collision(Collisive * object)
 {
     return object->collide(this->camera_bbox_min, this->camera_bbox_max);
 }
 
+// Update camera bbox
 void Camera::set_bbox(glm::vec4 position)
 {
     this->camera_bbox_min = glm::vec3(position.x - CAMERA_WIDTH, position.y - Game::character_height, position.z - CAMERA_DEPTH);
     this->camera_bbox_max = glm::vec3(position.x + CAMERA_WIDTH, position.y + CAMERA_HEIGHT, position.z + CAMERA_DEPTH);
 }
 
+// Change between camera types
 void Camera::switch_camera_type()
 {
     if (this->camera_type == CameraType::LOOK_AT)

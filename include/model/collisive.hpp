@@ -3,6 +3,8 @@
 #ifndef COLLISIVE_H
 #define COLLISIVE_H
 
+// Collisive class, which implements the collide function
+// All the elements that should have collision with the camera must inherit from this class
 class Collisive : public GameObject
 {
 protected:

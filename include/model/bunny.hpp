@@ -1,5 +1,6 @@
 #include "model/base.hpp"
 
+// Bunny class, not actually used
 class Bunny : public GameObject
 {
 public:

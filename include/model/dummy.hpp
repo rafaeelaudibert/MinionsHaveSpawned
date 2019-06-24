@@ -1,5 +1,6 @@
 #include "model/base.hpp"
 
+// Dummy class, used in the development for shaders, textures and .obj testing purposes
 class Dummy : public GameObject
 {
 public:

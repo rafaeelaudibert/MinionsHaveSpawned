@@ -3,6 +3,10 @@
 
 #ifndef HAND_H
 #define HAND_H
+
+// Hand model which appears on the side of the player
+// Besides being a normal GameObject, can also carry a Tower which is the one
+// than can be placed on the game
 class Hand : public GameObject
 {
 public:

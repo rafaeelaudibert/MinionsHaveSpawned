@@ -3,6 +3,7 @@
 #ifndef ENERGY_BALL_H
 #define ENERGY_BALL_H
 
+// Ammo used by the SummonersChaos, SummonersOrders, HowlingChaos e HowlingOrder turrets, with different AmmoEffects
 class EnergyBall : public Ammo
 {
 public:

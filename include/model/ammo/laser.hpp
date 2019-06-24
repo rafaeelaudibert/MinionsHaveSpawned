@@ -3,6 +3,7 @@
 #ifndef LASER_H
 #define LASER_H
 
+// Ammo used by the SiegeChaos Turret
 class Laser : public Ammo
 {
 public:

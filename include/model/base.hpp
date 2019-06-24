@@ -8,6 +8,8 @@
 #include "engine/texture.hpp"
 #include "model/obj_model.hpp"
 
+// Base gameObject class which all the objects which must be drawn must inherit from
+// Forces them to have a render and a build method, as well as a name, a position, an orientation, an angle and a scale
 class GameObject
 {
 protected:

@@ -3,6 +3,7 @@
 #ifndef HEALTH_BAR_H
 #define HEALTH_BAR_H
 
+// Generic HealthBar that can appear over any object, that are responsible for updating its values
 class HealthBar : public GameObject
 {
 protected:

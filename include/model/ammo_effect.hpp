@@ -3,6 +3,7 @@
 #ifndef AMMO_EFFECTS_H
 #define AMMO_EFFECTS_H
 
+// Namespace containing all the possible AmmoEffects an Ammo can apply on an enemy
 namespace AmmoEffects
 {
     class AmmoEffect

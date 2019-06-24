@@ -1,6 +1,7 @@
 #include "model/base.hpp"
 #include "model/collisive.hpp"
 
+// Basic 3D Cube used to draw the walls, the floor and the laser ray
 class Cube : public Collisive
 {
 public:

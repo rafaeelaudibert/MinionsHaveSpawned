@@ -5,6 +5,7 @@
 
 #include <limits>
 
+// Constants used throughout the game
 namespace Constants {
 
     // Static constant variables

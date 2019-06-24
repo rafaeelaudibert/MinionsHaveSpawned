@@ -9,11 +9,15 @@
 
 #ifndef TURRET_H
 #define TURRET_H
+
+// Possible colors for a Turret
 enum class TurretColor{
     RED,
     BLUE
 };
 
+// All turrets must inherit from this one, as they contain several important information that need to be used
+// to properly run the game such as a shooting position, a target, some ammo, etc...
 class Turret : public Collisive
 {
 protected:

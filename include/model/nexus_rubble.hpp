@@ -4,12 +4,14 @@
 
 #ifndef NEXUS_RUBBLE_H
 #define NEXUS_RUBBLE_H
+// Which "side" is the nexus at
 enum class NexusSide
 {
     CHAOS,
     ORDER
 };
 
+// Structure of a broken Nexus, used when a nexus is destroyed
 class NexusRubble : public Collisive
 {
 public:

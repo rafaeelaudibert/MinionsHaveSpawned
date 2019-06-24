@@ -2,6 +2,8 @@
 
 #ifndef SKYBOX_H_
 #define SKYBOX_H_
+
+// Skybox used in the game, currently having 3 different textures representing different states of the game
 class SkyBox : public GameObject
 {
 protected:

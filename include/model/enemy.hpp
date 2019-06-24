@@ -7,23 +7,27 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+// Possible colors for an enemy to take
 enum class EnemyColor {
     RED,
     BLUE
 };
 
+// Which part of the path to the enemy base the enemy is
 enum class WalkingPhase {
     FIRST,
     SECOND
 };
 
+// Which route is the enemy going to go through, currently only implemented MID, with the other fallbacking to mid
 enum class Route {
     TOP,
     MID,
     BOTTOM
 };
 
-
+// Enemy class, which all the enemies should inherit from, as they contain important information required for the
+// game mechanics
 class Enemy : public Collisive
 {
 protected:

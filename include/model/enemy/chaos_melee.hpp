@@ -2,6 +2,8 @@
 
 #ifndef CHAOS_MELEE_H
 #define CHAOS_MELEE_H
+
+// Implementation of an enemy
 class ChaosMelee : public Enemy
 {
 public:
