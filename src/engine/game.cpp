@@ -39,7 +39,7 @@ Game::~Game()
 }
 
 float Game::character_height = Constants::CHARACTER_STANDING_HEIGHT;
-Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height, 0.0f, 1.0f));
+Camera Game::camera =  Camera(glm::vec4(0.0f, Game::character_height + 0.05f, 0.0f, 1.0f));
 GameState Game::state = GameState::GAME_WAIT;
 std::map<std::string, GameObject *> Game::objects;
 std::map<std::string, Collisive *> Game::collisive_objects;
