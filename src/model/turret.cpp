@@ -15,6 +15,10 @@ bool Turret::can_place()
     if (this->collide(Game::camera.camera_bbox_min, Game::camera.camera_bbox_max))
         return false;
 
+    // Check if has gold
+    if (this->price > Game::gold)
+        return false;
+
     // TODO: If the turret is on a place it can't be placed on the map, cant place
     // if (this->not_in_placeable_place())
     //    return false;

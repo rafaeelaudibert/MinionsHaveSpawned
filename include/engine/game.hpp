@@ -68,6 +68,9 @@ public:
     GLfloat y_speed = 0;                                    // Current character falling velocity
     glm::vec4 aiming_position;                              // Position we are aiming at/placing a turret
 
+    // Gold variable
+    static float gold;                                       // Current player gold
+
     // Time variables
     GLfloat lastFrame = 0.0f;
     GLfloat deltaTime = 0.0f;

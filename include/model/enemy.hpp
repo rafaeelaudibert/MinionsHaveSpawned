@@ -34,10 +34,11 @@ protected:
     Enemy(std::string name,
           EnemyColor color,
           Route route = Route::MID,
+          float gold_reward = 0.0f,
           glm::vec4 position = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
           glm::vec4 orientation = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f),
           float angle = 0,
-          glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f)) : Collisive(name, position, orientation, angle, scale), color(color)
+          glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f)) : Collisive(name, position, orientation, angle, scale), color(color), route(route), gold_reward(gold_reward)
     { };
 
 public:
@@ -55,6 +56,9 @@ public:
     Route route = Route::MID;
     WalkingPhase walking_phase = WalkingPhase::FIRST;
     float walking_phase_step = 0.0f;
+
+    // Gold properties
+    float gold_reward = 0.0f;
 
 
 public:

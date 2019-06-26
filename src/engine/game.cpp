@@ -44,6 +44,7 @@ std::map<std::string, Collisive *> Game::collisive_objects;
 std::map<std::string, Enemy *> Game::enemy_objects;
 std::map<std::string, Turret *> Game::turret_objects;
 Nexus *Game::chaos_nexus, *Game::order_nexus;
+float Game::gold  = Constants::START_GOLD;
 
 // Function called to start all the objects, textures and shaders
 void Game::init()
@@ -204,7 +205,6 @@ void Game::update()
     if(camera.process_movement(CameraMovement::DOWN, this->deltaTime, collisive_objects, *this))
     {
         y_speed = utils::clamping(y_speed + Constants::GRAVITY * this->deltaTime, 100.0f, Constants::MAX_FALLING_SPEED);
-        printf("speed %f\n", y_speed);
     }
     else
     {
@@ -265,8 +265,8 @@ void Game::update()
         if (!it->second->is_dead() && Game::order_nexus->collide(it->second))
         {
                 // Damage the ally nexus
-                printf("[INFO] Minion %s hit the nexus dealing %f damage\n", it->second->name.c_str(), it->second->max_life_points);
-                Game::order_nexus->hit(it->second->max_life_points);
+                printf("[INFO] Minion %s hit the nexus dealing %f damage\n", it->second->name.c_str(), it->second->max_life_points  * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
+                Game::order_nexus->hit(it->second->max_life_points * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
 
                 // Kill the minion with a lot of damage
                 it->second->hit(100000);
@@ -296,6 +296,9 @@ void Game::update()
             this->collisive_objects.erase(this->collisive_objects.find(it->second->name));
             printf("[INFO] Removed it from the collisive_objects map\n");
 
+            // Add the gold to the player
+            Game::gold += it->second->gold_reward;
+
             // Now we can properly free it
             delete it->second;
         }
@@ -308,7 +311,8 @@ void Game::update()
         this->chaos_nexus->hit(this->chaos_nexus->max_life_points / this->enemy_hordes.size());
         printf("[GAME] Stage finished\n");
 
-        // TODO: Give extra money to the player
+        // Give extra money to the player as a reward
+        Game::gold += Constants::GOLD_PER_WAVE;
     }
 
     // Moves the hand with the camera
@@ -501,7 +505,6 @@ void Game::update_hand_turret()
         delete this->hand->turret;
         this->hand->turret = new HowlingOrder("ho_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::HOWLING_ORDER] = GL_FALSE;
-        // this->turret_sprite_index = Turrets::HOWLING_ORDER - Turrets::NONE;  // Configure turret sprite
         printf("[GAME] Selected a HowlingOrder turret\n");
     }
     else if (keys[Turrets::SIEGE_CHAOS] == GL_TRUE)
@@ -535,9 +538,10 @@ void Game::check_place_turret()
     {
         collisive_objects.insert(std::map<std::string, Collisive *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
         turret_objects.insert(std::map<std::string, Turret *>::value_type("turret_" + std::to_string(turret_objects.size() + 1), this->hand->turret));
-        this->hand->turret->placed = true;      // Mark as placed
-        this->hand->turret = nullptr;           // Updated it
-        keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;   // Remove the flag
+        this->hand->turret->placed = true;          // Mark as placed
+        Game::gold -= this->hand->turret->price;    // Pay for the turret
+        this->hand->turret = nullptr;               // Updated it
+        keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;       // Remove the flag
 
         printf("[GAME] Turret current holded on hand created\n");
     }

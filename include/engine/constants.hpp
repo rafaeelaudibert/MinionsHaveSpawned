@@ -23,6 +23,9 @@ namespace Constants {
     const float SPAWNING_TURRET_MAX_DISTANCE = 12.0f;                               // Maximum distance which a player can drop a turret
     const float MINION_DEATH_SPEED = 1.0f;                                          // Speed which the minions goes beneath the ground after dead
     const float SPAWN_RATE = 1.5f;                                                  // How many seconds between each minion spawn
+    const float START_GOLD = 100.0f;                                                // Game gold start quantity
+    const float GOLD_PER_WAVE = 75.0f;                                              // Gold earned each time a wave finishes
+    const float MINION_LIFE_DAMAGE_MULTIPLIER = 2.5f;                               // How many times more is the minion damage on the nexus according to his life
     const glm::vec4 CHAOS_NEXUS_POSITION = glm::vec4(33.0f, 0.0f, -33.25f, 1.0f);   // Order nexus position in game
     const glm::vec4 ORDER_NEXUS_POSITION = glm::vec4(-33.5f, 0.0f, 32.4f, 1.0f);    // Chaos nexus position in game
     const float EPSILON = std::numeric_limits<float>::epsilon();                    // Machine epsilon

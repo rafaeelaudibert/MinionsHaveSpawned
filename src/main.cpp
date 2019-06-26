@@ -29,8 +29,8 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 // Global Constants
-const GLuint SCREEN_WIDTH = 800;       // Width of the screen
-const GLuint SCREEN_HEIGHT = 600;      // Height of the screen
+const GLuint SCREEN_WIDTH = 1920;       // Width of the screen
+const GLuint SCREEN_HEIGHT = 1080;      // Height of the screen
 const GLboolean FULLSCREEN = false;     // Should we render fullscreen or not
 const GLboolean ANTIALIASING = true;    // Should we use antialiasing or not
 const GLuint ANTIALIASING_QUALITY = 4;  // Antialiasing level, if ANTIALIASING is set to true

@@ -73,10 +73,12 @@ void BilgerwaterOrder::update(float delta_time){
         // If can already attack
         if (this->ellapsed_time >= this->recharge_time)
         {
-            if (this->target == nullptr || this->target->is_dead() || matrix::norm(this->target->position - this->shooting_position) > this->AGGRO_RADIUS) {  // It doesn't have a valid target
+            // Turret translated shooting position
+            glm::vec4 translated_shooting_position = matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position;
+
+            if (this->target == nullptr || this->target->is_dead() || matrix::norm(this->target->position - translated_shooting_position) > this->AGGRO_RADIUS) {  // It doesn't have a valid target
 
                 // Find a valid target
-                glm::vec4 translated_shooting_position = matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position;
                 Enemy *closest_enemy = nullptr;
                 float distance = Constants::MAX_NUMBER;
                 for (const auto &object : Game::enemy_objects)

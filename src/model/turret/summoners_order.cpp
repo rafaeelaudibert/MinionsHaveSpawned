@@ -75,10 +75,12 @@ void SummonersOrder::update(float delta_time){
         // If can already attack
         if (this->ellapsed_time >= this->recharge_time)
         {
-            if (this->target == nullptr || this->target->is_dead() || matrix::norm(this->target->position - this->shooting_position) > this->AGGRO_RADIUS) {  // It doesn't have a valid target
+            // Turret translated shooting position
+            glm::vec4 translated_shooting_position = matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position;
+
+            if (this->target == nullptr || this->target->is_dead() || matrix::norm(this->target->position - translated_shooting_position) > this->AGGRO_RADIUS) {  // It doesn't have a valid target
 
                 // Find a valid target
-                glm::vec4 translated_shooting_position = matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position;
                 Enemy *closest_enemy = nullptr;
                 float distance = Constants::MAX_NUMBER;
                 for (const auto &object : Game::enemy_objects)
@@ -99,7 +101,7 @@ void SummonersOrder::update(float delta_time){
                 this->angle = std::atan2(this->target->position.x - this->position.x, this->target->position.z - this->position.z);
 
                 this->ammo = new EnergyBall(this->name + "_energy_ball",
-                                            this->target, 2.5f, 15.0f,
+                                            this->target, 2.5f, 12.5f,
                                             AmmoEffects::NoneEffect(),
                                             matrix::translate_matrix(this->position) * matrix::scale_matrix(this->scale) * matrix::rotate_matrix(this->angle, this->orientation) * this->shooting_position,
                                             glm::vec4(0.0f, 1.0f, 0.0f, 0.0f),

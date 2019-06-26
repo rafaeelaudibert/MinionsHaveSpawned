@@ -1,6 +1,6 @@
 #include "model/ammo.hpp"
 
-float Ammo::AOE_RADIUS = 3.5f;
+float Ammo::AOE_RADIUS = 5.0f;
 
 // Returns true if the ammo has already reached the enemy
 bool Ammo::completed_movement()
