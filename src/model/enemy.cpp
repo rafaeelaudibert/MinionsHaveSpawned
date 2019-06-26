@@ -53,7 +53,7 @@ void Enemy::update(float delta_time)
         switch(this->route)
         {
         case Route::TOP:
-            this->walking_phase_step += delta_time * accumulated_speed * this->speed * 10.0f;
+            this->walking_phase_step += delta_time * accumulated_speed * this->speed * Constants::SIDE_LANE_SPEED_MULTIPLIER;
             if (this->walking_phase_step >= 1.0f && this->walking_phase == WalkingPhase::FIRST) // Need to go to the other walking_phase
             {
                 this->walking_phase = WalkingPhase::SECOND;
@@ -74,7 +74,7 @@ void Enemy::update(float delta_time)
 
             break;
         case Route::BOTTOM:
-            this->walking_phase_step += delta_time * accumulated_speed * this->speed;
+            this->walking_phase_step += delta_time * accumulated_speed * this->speed * Constants::SIDE_LANE_SPEED_MULTIPLIER;
             if (this->walking_phase_step >= 1.0f && this->walking_phase == WalkingPhase::FIRST) // Need to go to the other walking_phase
             {
                 this->walking_phase = WalkingPhase::SECOND;

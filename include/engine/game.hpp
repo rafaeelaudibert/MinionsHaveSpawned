@@ -86,9 +86,9 @@ public:
     static std::map<std::string, Turret *> turret_objects;         // Turrets objects map
 
     /* HORDES OF MINIONS CONTROL */
-    std::vector<std::vector<Enemy *> > enemy_hordes;
-    std::vector<std::vector<Enemy *> >::iterator hordes_outer_iterator;
-    std::vector<Enemy *>::iterator horde_inner_iterator;
+    std::vector<std::vector<std::vector<Enemy *> > > enemy_hordes;
+    std::vector<std::vector<std::vector<Enemy *> > >::iterator hordes_outer_iterator;
+    std::vector<std::vector<Enemy *> >::iterator horde_inner_iterator;
     bool wave_finished = false;
 
     // Hand
@@ -116,6 +116,9 @@ private:
     // Helpers to process game input
     void update_hand_turret();
     void check_place_turret();
+
+    // Create the enemies array
+    std::vector<std::vector<std::vector<Enemy *> > > generate_enemy_hordes();
 };
 
 #endif

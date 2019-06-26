@@ -114,66 +114,26 @@ void Game::init()
     // SiegeChaos("", TurretColor::RED);
 
     // Loading MINION textures, shaders and .objs (only loading red chaos ones, because the blue and order are not used)
-    // OrderMelee("", EnemyColor::RED);
-    // OrderMelee("", EnemyColor::BLUE);
-    // OrderRanged("", EnemyColor::RED);
-    // OrderRanged("", EnemyColor::BLUE);
-    // OrderSiege("", EnemyColor::RED);
-    // OrderSiege("", EnemyColor::BLUE);
-    // OrderSuper("", EnemyColor::RED);
-    // OrderSuper("", EnemyColor::BLUE);
-    ChaosMelee("", EnemyColor::RED);
-    // ChaosMelee("cm", EnemyColor::BLUE);
-    ChaosRanged("", EnemyColor::RED);
-    // ChaosRanged("cr", EnemyColor::BLUE);
-    ChaosSiege("", EnemyColor::RED);
-    // ChaosSiege("csg", EnemyColor::BLUE);
-    ChaosSuper("", EnemyColor::RED);
-    // ChaosSuper("csp", EnemyColor::BLUE);
+    // OrderMelee("", Route::MID, EnemyColor::RED);
+    // OrderMelee("", Route::MID, EnemyColor::BLUE);
+    // OrderRanged("", Route::MID, EnemyColor::RED);
+    // OrderRanged("", Route::MID, EnemyColor::BLUE);
+    // OrderSiege("", Route::MID, EnemyColor::RED);
+    // OrderSiege("", Route::MID, EnemyColor::BLUE);
+    // OrderSuper("", Route::MID, EnemyColor::RED);
+    // OrderSuper("", Route::MID, EnemyColor::BLUE);
+    ChaosMelee("", Route::MID, EnemyColor::RED);
+    // ChaosMelee("", Route::MID, EnemyColor::BLUE);
+    ChaosRanged("", Route::MID, EnemyColor::RED);
+    // ChaosRanged("", Route::MID, EnemyColor::BLUE);
+    ChaosSiege("", Route::MID, EnemyColor::RED);
+    // ChaosSiege("", Route::MID, EnemyColor::BLUE);
+    ChaosSuper("", Route::MID, EnemyColor::RED);
+    // ChaosSuper("", Route::MID, EnemyColor::BLUE);
 
     /* CREATE THE HORDES */
-    this->enemy_hordes = {
-       // HORDE 1 - 160 HP
-       {
-           new ChaosMelee("h1_m1"), new ChaosMelee("h1_m2"), new ChaosRanged("h1_r1"), new ChaosRanged("h1_r2")
-       },
-       // HORDE 2 - 240 HP
-       {
-           new ChaosMelee("h2_m1"), new ChaosMelee("h2_m2"), new ChaosMelee("h2_m3"), new ChaosRanged("h2_r1"), new ChaosRanged("h2_r2"), new ChaosRanged("h2_r3")
-       },
-       // HORDE 3 - 340 HP
-       {
-           new ChaosSiege("h3_sg1"), new ChaosMelee("h3_m1"), new ChaosMelee("h3_m2"), new ChaosMelee("h3_m3"), new ChaosRanged("h3_r1"), new ChaosRanged("h3_r2"), new ChaosRanged("h3_r3")
-       },
-       // HORDE 4 - 450HP
-       {
-           new ChaosMelee("h4_m1"), new ChaosMelee("h4_m2"), new ChaosMelee("h4_m3"), new ChaosRanged("h4_r1"), new ChaosRanged("h4_r2"), new ChaosRanged("h4_r3"), new ChaosMelee("h4_m4"), new ChaosMelee("h4_m5"), new ChaosMelee("h4_m6"), new ChaosRanged("h4_r4"), new ChaosRanged("h4_r5"), new ChaosRanged("h4_r6")
-       },
-       // HORDE 5 - 500HP
-       {
-           new ChaosSiege("h5_sg1"), new ChaosRanged("h5_r1"), new ChaosRanged("h5_r2"), new ChaosRanged("h5_r3"), new ChaosRanged("h5_r4"), new ChaosRanged("h5_r5"), new ChaosSiege("h5_sg2"), new ChaosRanged("h5_r6"), new ChaosRanged("h5_r7"), new ChaosRanged("h5_r8"), new ChaosRanged("h5_r9"), new ChaosRanged("h5_r10")
-       },
-       // HORDE 6 - 700HP
-       {
-           new ChaosSiege("h6_sg1"), new ChaosMelee("h6_m1"), new ChaosMelee("h6_m2"), new ChaosMelee("h6_m3"), new ChaosMelee("h6_m4"), new ChaosMelee("h6_m5"), new ChaosSiege("h6_sg2"), new ChaosMelee("h6_m6"), new ChaosMelee("h6_m7"), new ChaosMelee("h6_m8"), new ChaosMelee("h6_m9"), new ChaosMelee("h6_m10")
-       },
-       // HORDE 7 - 730HP
-       {
-           new ChaosMelee("h7_m1"), new ChaosMelee("h7_m2"), new ChaosMelee("h7_m3"), new ChaosRanged("h7_r1"), new ChaosRanged("h7_r2"), new ChaosRanged("h7_r3"), new ChaosSuper("h7_sp1"), new ChaosMelee("h7_m4"), new ChaosMelee("h7_m5"), new ChaosMelee("h7_m6"), new ChaosRanged("h7_r4"), new ChaosRanged("h7_r5"), new ChaosRanged("h7_r6")
-       },
-       // HORDE 8 - 750HP
-       {
-           new ChaosSiege("h8_sg1"), new ChaosMelee("h8_m1"), new ChaosMelee("h8_m2"), new ChaosMelee("h8_m3"), new ChaosRanged("h8_r1"), new ChaosRanged("h8_r2"), new ChaosRanged("h8_r3"), new ChaosSuper("h8_sp1"), new ChaosMelee("h8_m4"), new ChaosMelee("h8_m5"), new ChaosRanged("h8_r4"), new ChaosRanged("h8_r5")
-       },
-       // HORDE 9 - 1000HP
-       {
-           new ChaosSiege("h9_sg1"), new ChaosSiege("h9_sg2"), new ChaosSiege("h9_sg3"), new ChaosSuper("h9_sp1"), new ChaosSiege("h9_sg4"), new ChaosSiege("h9_sg5"), new ChaosSiege("h9_sg6"), new ChaosSuper("h9_sp2")
-       },
-       // HORDE 10 - 1250HP
-       {
-           new ChaosSuper("h10_sp1"), new ChaosSuper("h10_sp2"), new ChaosSuper("h10_sp3"), new ChaosSuper("h10_sp4"), new ChaosSuper("h10_sp5"),
-       }
-    };
+    this->enemy_hordes = this->generate_enemy_hordes();
+
     this->hordes_outer_iterator = this->enemy_hordes.begin();
 }
 
@@ -264,12 +224,12 @@ void Game::update()
         ++next_it;
         if (!it->second->is_dead() && Game::order_nexus->collide(it->second))
         {
-                // Damage the ally nexus
-                printf("[INFO] Minion %s hit the nexus dealing %f damage\n", it->second->name.c_str(), it->second->max_life_points  * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
-                Game::order_nexus->hit(it->second->max_life_points * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
+            // Damage the ally nexus
+            printf("[INFO] Minion %s hit the nexus dealing %f damage\n", it->second->name.c_str(), it->second->max_life_points  * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
+            Game::order_nexus->hit(it->second->current_life_points * Constants::MINION_LIFE_DAMAGE_MULTIPLIER);
 
-                // Kill the minion with a lot of damage
-                it->second->hit(100000);
+            // Kill the minion with a lot of damage
+            it->second->hit(100000);
         }
 
         // Remove the camera from the minion if he died
@@ -328,13 +288,16 @@ void Game::update()
         this->delta_since_last_spawn += this->deltaTime;
         if (this->delta_since_last_spawn >= Constants::SPAWN_RATE)
         {
-            Enemy *enemy = *horde_inner_iterator; // Grab iterator value
-            this->delta_since_last_spawn -= Constants::SPAWN_RATE;
-            collisive_objects.insert(std::map<std::string, Collisive *>::value_type(enemy->name, enemy));
-            enemy_objects.insert(std::map<std::string, Enemy *>::value_type(enemy->name, enemy));
+
+            this->delta_since_last_spawn -= Constants::SPAWN_RATE; // Update delta_time
+            for(auto enemy : *horde_inner_iterator)
+            {
+                collisive_objects.insert(std::map<std::string, Collisive *>::value_type(enemy->name, enemy));
+                enemy_objects.insert(std::map<std::string, Enemy *>::value_type(enemy->name, enemy));
+                printf("[GAME] Spawned %s\n", enemy->name.c_str());
+            }
 
             this->horde_inner_iterator++; // Update iterator
-            printf("[GAME] Spawned %s\n", enemy->name.c_str());
         }
     }
 
@@ -553,4 +516,209 @@ void Game::check_place_turret()
         this->hand->turret = nullptr;
         printf("[GAME] Deselected any turret\n");
     }
+}
+
+std::vector<std::vector<std::vector<Enemy *> > > Game::generate_enemy_hordes()
+{
+    std::vector<std::vector<std::vector<Enemy *> > > enemies =
+    {
+        // HORDE 1 - 390 HP
+        {
+            {
+                new ChaosMelee("h1_mid_m1", Route::MID)
+            },
+            {
+                new ChaosRanged("h1_mid_r1", Route::MID)
+            },
+            {
+                new ChaosMelee("h1_top_m1", Route::TOP), new ChaosMelee("h1_bottom_m1", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h1_top_r1", Route::TOP), new ChaosRanged("h1_bottom_r1", Route::BOTTOM)
+            }
+        },
+        // HORDE 2 - 520 HP
+        {
+            {
+                new ChaosMelee("h2_mid_m1", Route::MID)
+            },
+            {
+                new ChaosMelee("h2_mid_m2", Route::MID), new ChaosMelee("h2_top_m1", Route::TOP), new ChaosMelee("h2_bottom_m1", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h2_mid_r1", Route::MID)
+            },
+            {
+                new ChaosRanged("h2_mid_r2", Route::MID), new ChaosRanged("h2_top_r1", Route::TOP), new ChaosRanged("h2_bottom_r1", Route::BOTTOM)
+            },
+        },
+        // HORDE 3 - 670 HP
+        {
+            {
+                new ChaosSiege("h3_mid_sg1", Route::MID)
+            },
+            {
+                new ChaosMelee("h3_mid_m1", Route::MID), new ChaosRanged("h3_top_r1", Route::TOP), new ChaosRanged("h3_bottom_r1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h3_mid_m2", Route::MID), new ChaosRanged("h3_top_r2", Route::TOP), new ChaosRanged("h3_bottom_r2", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h3_mid_r1", Route::MID), new ChaosMelee("h3_top_m1", Route::TOP), new ChaosMelee("h3_bottom_m1", Route::BOTTOM)
+            }
+        },
+        // HORDE 4 - 910HP
+        {
+            {
+                new ChaosMelee("h4_mid_m1", Route::MID), new ChaosMelee("h4_top_m1", Route::TOP), new ChaosMelee("h4_mid_m1", Route::TOP)
+            },
+            {
+                new ChaosMelee("h4_mid_m2", Route::MID), new ChaosMelee("h4_top_m2", Route::TOP), new ChaosMelee("h4_mid_m2", Route::TOP)
+            },
+            {
+                new ChaosMelee("h4_mid_m3", Route::MID)
+            },
+            {
+
+            },
+            {
+                new ChaosRanged("h4_mid_r1", Route::MID), new ChaosRanged("h4_top_r1", Route::TOP), new ChaosRanged("h4_mid_r1", Route::TOP)
+            },
+            {
+                new ChaosRanged("h4_mid_r2", Route::MID), new ChaosRanged("h4_top_r2", Route::TOP), new ChaosRanged("h4_mid_r2", Route::TOP)
+            },
+            {
+                new ChaosRanged("h4_mid_r3", Route::MID)
+            }
+        },
+        // HORDE 5 - 1140HP
+        {
+            {
+                new ChaosSiege("h5_mid_sg1", Route::MID), new ChaosSiege("h5_top_sg1", Route::TOP), new ChaosSiege("h5_bottom_sg1", Route::BOTTOM),
+            },
+            {
+                new ChaosRanged("h5_top_r1", Route::TOP), new ChaosRanged("h5_bottom_r1", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h5_top_r2", Route::TOP), new ChaosRanged("h5_bottom_r2", Route::BOTTOM)
+            },
+            {
+                new ChaosSiege("h5_mid_sg2", Route::MID), new ChaosRanged("h5_top_r3", Route::TOP), new ChaosRanged("h5_bottom_r3", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h5_mid_m1", Route::MID), new ChaosMelee("h5_top_m1", Route::TOP), new ChaosMelee("h5_bottom_m1", Route::BOTTOM)
+            }
+        },
+        // HORDE 6 - 1240HP
+        {
+            {
+                new ChaosSiege("h6_top_sg1", Route::TOP), new ChaosSiege("h6_bottom_sg1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h6_top_m1", Route::TOP), new ChaosMelee("h6_bottom_m1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h6_top_m2", Route::TOP), new ChaosMelee("h6_bottom_m2", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h6_top_m3", Route::TOP), new ChaosMelee("h6_bottom_m3", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h6_top_m4", Route::TOP), new ChaosMelee("h6_bottom_m4", Route::BOTTOM)
+            },
+            {
+                new ChaosSiege("h6_top_sg2", Route::TOP), new ChaosSiege("h6_bottom_sg2", Route::BOTTOM)
+            }
+        },
+        // HORDE 7 - 1725HP
+        {
+            {
+                new ChaosMelee("h7_top_m1", Route::TOP), new ChaosMelee("h7_bottom_m1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h7_mid_m1", Route::MID), new ChaosRanged("h7_top_r1", Route::TOP), new ChaosRanged("h7_bottom_r1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h7_mid_m2", Route::MID), new ChaosRanged("h7_top_r2", Route::TOP), new ChaosRanged("h7_bottom_r2", Route::BOTTOM)
+            },
+            {
+                new ChaosSuper("h7_mid_sp1", Route::MID), new ChaosRanged("h7_top_r3", Route::TOP), new ChaosRanged("h7_bottom_r3", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h7_mid_m3", Route::MID), new ChaosMelee("h7_top_m2", Route::TOP), new ChaosMelee("h7_bottom_m2", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h7_mid_m4", Route::MID), new ChaosMelee("h7_top_m3", Route::TOP), new ChaosMelee("h7_bottom_m3", Route::BOTTOM)
+            }
+        },
+        // HORDE 8 - 1915HP
+        {
+            {
+                new ChaosSiege("h8_mid_sg1", Route::MID), new ChaosSiege("h8_top_sg1", Route::TOP), new ChaosSiege("h8_bottom_sg1", Route::BOTTOM)
+            },
+            {
+                new ChaosMelee("h8_mid_m1", Route::MID), new ChaosMelee("h8_top_m1", Route::TOP), new ChaosMelee("h8_bottom_m1", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h8_mid_r1", Route::MID), new ChaosRanged("h8_top_r1", Route::TOP), new ChaosRanged("h8_bottom_r1", Route::BOTTOM)
+            },
+            {
+                new ChaosSuper("h8_mid_sp1", Route::MID), new ChaosSuper("h8_top_sp1", Route::TOP), new ChaosSuper("h8_bottom_sp1", Route::BOTTOM)
+            },
+            {
+                new ChaosRanged("h8_mid_r2", Route::MID)
+            },
+            {
+                new ChaosRanged("h8_mid_r3", Route::MID)
+            }
+        },
+        // HORDE 9 - 2675HP
+        {
+            {
+                new ChaosSiege("h9_mid_sg1", Route::MID)
+            },
+            {
+
+            },
+            {
+                new ChaosSiege("h9_mid_sg2", Route::MID), new ChaosSiege("h9_top_sg1", Route::TOP), new ChaosSiege("h9_bottom_sg1", Route::BOTTOM)
+            },
+            {
+                new ChaosSiege("h9_mid_sg3", Route::MID), new ChaosSiege("h9_top_sg2", Route::TOP), new ChaosSiege("h9_bottom_sg2", Route::BOTTOM)
+            },
+            {
+                new ChaosSuper("h9_top_sp1", Route::TOP), new ChaosSuper("h9_bottom_sp1", Route::BOTTOM)
+            },
+            {
+
+            },
+            {
+                new ChaosSuper("h9_mid_sp1", Route::MID), new ChaosSuper("h9_top_sp2", Route::TOP), new ChaosSuper("h9_bottom_sp2", Route::BOTTOM)
+            }
+        },
+        // HORDE 10 - 3900HP
+        {
+            {
+                new ChaosSuper("h10_mid_sp1", Route::MID)
+            },
+            {
+                new ChaosSuper("h10_mid_sp2", Route::MID)
+            },
+            {
+                new ChaosSuper("h10_mid_sp3", Route::MID)
+            },
+            {
+                new ChaosSuper("h10_mid_sp4", Route::MID), new ChaosSuper("h10_top_sp1", Route::TOP), new ChaosSuper("h10_bottom_sp1", Route::BOTTOM)
+            },
+            {
+                new ChaosSuper("h10_mid_sp5", Route::MID), new ChaosSuper("h10_top_sp2", Route::TOP), new ChaosSuper("h10_bottom_sp2", Route::BOTTOM)
+            },
+            {
+                new ChaosSuper("h10_mid_sp6", Route::MID), new ChaosSuper("h10_top_sp3", Route::TOP), new ChaosSuper("h10_bottom_sp3", Route::BOTTOM)
+            }
+        }
+    };
+
+
+    return enemies;
 }
