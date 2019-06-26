@@ -72,5 +72,5 @@ void main()
 
     // We need to make our gamma color correction, considering a sRGB display.
     // See https://en.wikipedia.org/w/index.php?title=Gamma_correction&oldid=751281772#Windows.2C_Mac.2C_sRGB_and_TV.2Fvideo_standard_gammas
-    color = pow(color, vec4(1.0, 1.0, 1.0, 1.0) / 2.2);
+    // color = pow(color, vec4(1.0, 1.0, 1.0, 1.0) / 2.2);
 }
