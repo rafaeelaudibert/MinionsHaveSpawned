@@ -30,10 +30,10 @@ Shader ResourceManager::get_shader(std::string name)
     return shaders[name];
 }
 
-Texture2D ResourceManager::load_texture(const GLchar *file, std::string name)
+Texture2D ResourceManager::load_texture(const GLchar *file, std::string name, GLboolean alpha)
 {
     if (textures.find(name) == textures.end()) {
-        textures[name] = load_texture_from_file(file);
+        textures[name] = load_texture_from_file(file, alpha);
     } else {
         printf("[GAME] Using already loaded texture\n");
     }
@@ -265,13 +265,13 @@ Shader ResourceManager::load_shader_from_file(const GLchar *vShaderFile, const G
     return shader;
 }
 
-Texture2D ResourceManager::load_texture_from_file(const GLchar *filename)
+Texture2D ResourceManager::load_texture_from_file(const GLchar *filename, GLboolean alpha)
 {
     // Create Texture object
     Texture2D texture;
 
     // Now generate texture, passing the filename
-    texture.generate(filename);
+    texture.generate(filename, alpha);
 
     return texture;
 }

@@ -1,6 +1,4 @@
 #include "engine/game.hpp"
-
-
 #include "engine/matrices.hpp"
 #include "engine/resource_manager.hpp"
 #include "engine/camera.hpp"
@@ -52,15 +50,18 @@ void Game::init()
 {
     printf("[GAME] Game initialization\n");
 
+    // Create the skybox
     SkyBox *skybox = new SkyBox("skybox");
     objects.insert(std::map<std::string, GameObject *>::value_type("skybox", skybox));
     printf("[GAME] Skybox created\n");
 
-    Cube *plane = new Cube("plane", glm::vec4(0.0f, -0.005f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(Constants::MAP_SIZE, 0.01f, Constants::MAP_SIZE), "../../src/textures/full_map.jpg", "full_map");
+    // Create the plane
+    Cube *plane = new Cube("plane", glm::vec4(0.0f, -1.0f, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 0.0f), 0, glm::vec3(Constants::MAP_SIZE, 2.0f, Constants::MAP_SIZE), "../../src/textures/full_map.jpg", "full_map");
     objects.insert(std::map<std::string, GameObject *>::value_type("plane", plane));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("plane", plane));
     printf("[GAME] Plane created\n");
 
+    // Create the walls
     Cube *wall_1 = new Cube("wall_1", glm::vec4(-40.0f, 1.5f, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 0, glm::vec3(0.005f, 3.0f, 80.0f));
     objects.insert(std::map<std::string, GameObject *>::value_type("wall_1", wall_1));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_1", wall_1));
@@ -81,6 +82,7 @@ void Game::init()
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("wall_4", wall_4));
     printf("[GAME] Wall 4 created\n");
 
+    // Create both nexus
     this->order_nexus = new Nexus("nos", NexusColorSide::CHAOS_BLUE, Constants::ORDER_NEXUS_POSITION);
     objects.insert(std::map<std::string, GameObject *>::value_type("nos", this->order_nexus));
     collisive_objects.insert(std::map<std::string, Collisive *>::value_type("nos", this->order_nexus));
@@ -202,6 +204,7 @@ void Game::update()
     if(camera.process_movement(CameraMovement::DOWN, this->deltaTime, collisive_objects, *this))
     {
         y_speed = utils::clamping(y_speed + Constants::GRAVITY * this->deltaTime, 100.0f, Constants::MAX_FALLING_SPEED);
+        printf("speed %f\n", y_speed);
     }
     else
     {
@@ -459,6 +462,7 @@ void Game::render()
         this->hand->render(view, projection);
         this->hand->render_turret(view, projection);
     }
+
 }
 
 // Helper function to update the turret which the hand is holding
@@ -497,6 +501,7 @@ void Game::update_hand_turret()
         delete this->hand->turret;
         this->hand->turret = new HowlingOrder("ho_hand" + std::to_string(turret_objects.size() + 1), TurretColor::BLUE);
         keys[Turrets::HOWLING_ORDER] = GL_FALSE;
+        // this->turret_sprite_index = Turrets::HOWLING_ORDER - Turrets::NONE;  // Configure turret sprite
         printf("[GAME] Selected a HowlingOrder turret\n");
     }
     else if (keys[Turrets::SIEGE_CHAOS] == GL_TRUE)

@@ -13,10 +13,13 @@
 #include "model/turret.hpp"
 #include "model/hand.hpp"
 #include "model/nexus.hpp"
+#include "engine/resource_manager.hpp"
 
 // Represents the current state of the game
 enum GameState
 {
+    GAME_LOADING,
+    GAME_START_DONE,
     GAME_ACTIVE,
     GAME_WAIT,
     GAME_WIN,

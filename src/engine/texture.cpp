@@ -8,7 +8,7 @@ Texture2D::Texture2D()
 { }
 
 
-void Texture2D::generate(const GLchar* filename)
+void Texture2D::generate(const GLchar* filename, const GLboolean alpha)
 {
     // Generate textures
     glGenTextures(1, &this->ID);
@@ -26,7 +26,14 @@ void Texture2D::generate(const GLchar* filename)
     unsigned char *data = stbi_load(filename, &width, &height, &nrChannels, 0);
     if (data)
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        if (alpha)
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        }
+        else
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        }
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else

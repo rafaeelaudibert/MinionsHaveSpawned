@@ -906,7 +906,7 @@
 1554904296 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\ext\scalar_uint_sized.hpp
 	"../detail/setup.hpp"
 
-1561350130 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
+1561522190 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\game.cpp
 	"engine/game.hpp"
 	"engine/matrices.hpp"
 	"engine/resource_manager.hpp"
@@ -935,7 +935,7 @@
 	"model/turret/siege_chaos.hpp"
 	<algorithm>
 
-1561343821 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
+1561521889 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\game.hpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	<string>
@@ -947,6 +947,7 @@
 	"model/turret.hpp"
 	"model/hand.hpp"
 	"model/nexus.hpp"
+	"engine/resource_manager.hpp"
 
 1554904293 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glfw\glfw3.h
 	<stddef.h>
@@ -969,7 +970,7 @@
 	<GL/glext.h>
 	<GL/glu.h>
 
-1561221762 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
+1561516194 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\resource_manager.hpp
 	<map>
 	<string>
 	<vector>
@@ -981,7 +982,7 @@
 	"model/base.hpp"
 	"engine/matrices.hpp"
 
-1560567599 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
+1561516155 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\texture.hpp
 	<glad/glad.h>
 
 1561343830 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\shader.hpp
@@ -1011,7 +1012,7 @@
 1554904294 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\glm\gtc\type_ptr.inl
 	<cstring>
 
-1560567791 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\texture.cpp
+1561516160 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\texture.cpp
 	<iostream>
 	"engine/texture.hpp"
 	"engine/resource_manager.hpp"
@@ -1020,7 +1021,7 @@
 	"engine/shader.hpp"
 	<iostream>
 
-1561230146 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
+1561516176 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\resource_manager.cpp
 	"engine/resource_manager.hpp"
 	"engine/constants.hpp"
 	<iostream>
@@ -1028,7 +1029,7 @@
 	<fstream>
 	<stb_image.h>
 
-1561344477 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
+1561501368 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\main.cpp
 	<glad/glad.h>
 	<GLFW/glfw3.h>
 	"engine\resource_manager.hpp"
@@ -1170,7 +1171,7 @@
 	"engine/matrices.hpp"
 	"model/bunny.hpp"
 
-1561248938 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\cube.cpp
+1561520616 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\cube.cpp
 	"engine/resource_manager.hpp"
 	"engine/matrices.hpp"
 	"model/cube.hpp"
@@ -1429,4 +1430,15 @@
 
 1561265739 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\model\ammo.cpp
 	"model/ammo.hpp"
+
+1561518869 c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\include\engine\sprite.hpp
+	<glad/glad.h>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	"engine/texture.hpp"
+	"engine/shader.hpp"
+
+1561521179 source:c:\users\rafae\onedrive\faculdade\rafael\2019-1\fundamentos de computação gráfica\trabalho final\src\engine\sprite.cpp
+	"engine/sprite.hpp"
+	"engine/matrices.hpp"
 
