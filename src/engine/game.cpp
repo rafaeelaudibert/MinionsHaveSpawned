@@ -313,6 +313,7 @@ void Game::update()
 
         // Give extra money to the player as a reward
         Game::gold += Constants::GOLD_PER_WAVE;
+        printf("[GAME] Current player balance: %.2f\n", this->gold);
     }
 
     // Moves the hand with the camera
@@ -544,6 +545,7 @@ void Game::check_place_turret()
         keys[GLFW_MOUSE_BUTTON_1] = GL_FALSE;       // Remove the flag
 
         printf("[GAME] Turret current holded on hand created\n");
+        printf("[GAME] Current player balance: %.2f\n", this->gold);
     }
     else if (keys[GLFW_MOUSE_BUTTON_2] == GL_TRUE && this->hand->turret != nullptr)     // If uses right button, deselects turret
     {

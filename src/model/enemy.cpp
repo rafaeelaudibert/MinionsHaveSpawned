@@ -44,25 +44,72 @@ void Enemy::update(float delta_time)
         // Hit the damage accumulated in the computation above
         this->hit(accumulated_damage);
 
+        // Configure top position and bot position
+        const glm::vec4 top_position = glm::vec4(Constants::CHAOS_NEXUS_POSITION.x, Constants::CHAOS_NEXUS_POSITION.y, Constants::ORDER_NEXUS_POSITION.z, 1.0f);
+        const glm::vec4 bottom_position = glm::vec4(Constants::ORDER_NEXUS_POSITION.x, Constants::ORDER_NEXUS_POSITION.y, Constants::CHAOS_NEXUS_POSITION.z, 1.0f);
+
+        // Choose route to walk to
+        glm::vec4 new_position;
         switch(this->route)
         {
         case Route::TOP:
+            this->walking_phase_step += delta_time * accumulated_speed * this->speed * 10.0f;
+            if (this->walking_phase_step >= 1.0f && this->walking_phase == WalkingPhase::FIRST) // Need to go to the other walking_phase
+            {
+                this->walking_phase = WalkingPhase::SECOND;
+                this->walking_phase_step -= 1.0f;
+            }
+
+            // In TOP, we need to take care of the walking_phase
+            if (this->walking_phase == WalkingPhase::FIRST)
+            {
+                new_position = Constants::CHAOS_NEXUS_POSITION + (top_position - Constants::CHAOS_NEXUS_POSITION) * this->walking_phase_step;
+                this->angle = std::sin(this->walking_phase_step * 3.14159f * Constants::MINION_GIGGLES) * 0.2f;
+            }
+            else
+            {
+                new_position = top_position + (Constants::ORDER_NEXUS_POSITION - top_position) * this->walking_phase_step;
+                this->angle = -3.14159f / 2.0f + std::sin(this->walking_phase_step * 3.14159f * Constants::MINION_GIGGLES) * 0.2f;
+            }
+
+            break;
         case Route::BOTTOM:
+            this->walking_phase_step += delta_time * accumulated_speed * this->speed;
+            if (this->walking_phase_step >= 1.0f && this->walking_phase == WalkingPhase::FIRST) // Need to go to the other walking_phase
+            {
+                this->walking_phase = WalkingPhase::SECOND;
+                this->walking_phase_step -= 1.0f;
+            }
+
+            // In BOTTOM, we need to take care of the walking_phase
+            if (this->walking_phase == WalkingPhase::FIRST)
+            {
+                new_position = Constants::CHAOS_NEXUS_POSITION + (bottom_position - Constants::CHAOS_NEXUS_POSITION) * this->walking_phase_step;
+                this->angle = -3.14159f / 2.0f + std::sin(this->walking_phase_step * 3.14159f * Constants::MINION_GIGGLES) * 0.2f;
+            }
+            else
+            {
+                new_position = bottom_position + (Constants::ORDER_NEXUS_POSITION - bottom_position) * this->walking_phase_step;
+                this->angle = std::sin(this->walking_phase_step * 3.14159f * Constants::MINION_GIGGLES) * 0.2f;
+            }
+
+            break;
         case Route::MID:
             // In MID doesn't matter the walking phase, we only have one
             this->walking_phase_step += delta_time * accumulated_speed * this->speed;
-            glm::vec4 new_position = Constants::CHAOS_NEXUS_POSITION + (Constants::ORDER_NEXUS_POSITION - Constants::CHAOS_NEXUS_POSITION) * this->walking_phase_step;
-            this->angle = -3.14159f / 8.0f + std::sin(this->walking_phase_step * 3.14159f * 60.0f) * 0.2f; // 20 small giggles
+            new_position = Constants::CHAOS_NEXUS_POSITION + (Constants::ORDER_NEXUS_POSITION - Constants::CHAOS_NEXUS_POSITION) * this->walking_phase_step;
+            this->angle = -3.14159f / 4.0f + std::sin(this->walking_phase_step * 3.14159f * Constants::MINION_GIGGLES) * 0.2f; // 80 small giggles
 
-            glm::vec4 movement = new_position - this->position;
-            this->health_bar->position += movement;
-            this->position += movement;
-
-            if (Game::camera.check_collision(this))
-            {
-                Game::camera.position += movement;
-            }
             break;
+        }
+
+        glm::vec4 movement = new_position - this->position;
+        this->health_bar->position += movement;
+        this->position += movement;
+
+        if (Game::camera.check_collision(this))
+        {
+            Game::camera.position += movement;
         }
     }
     else     // Slowly goes to beneath the ground
